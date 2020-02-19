@@ -16,7 +16,7 @@ class Home extends HomeInterface {
     return (
       <React.Fragment>
         <div
-          className="m-index"
+          className="m-index overflow_hidden"
           data-scrolling-animations="true"
           data-equal-height=".b-auto__main-item"
         >

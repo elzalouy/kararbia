@@ -60,7 +60,7 @@ const Feedbacks = () => {
                 items={1}
               >
                 {feedbacks.map(item => (
-                  <div className="b-review__main">
+                  <div key={feedbacks.indexOf(item)} className="b-review__main">
                     <div className="b-review__main-person">
                       <div className="b-review__main-person-inside"></div>
                     </div>

@@ -1,13 +1,16 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <React.Fragment>
       <div className="b-info">
         <div className="container">
           <div className="row">
-            <div className="col-md-3 col-xs-6">
-              <aside className="b-info__aside" data-aos="zoom-in-left">
+            <div className="col-md-3 col-xs-6 overflow_hidden">
+              <aside
+                className="b-info__aside overflow_hidden"
+                data-aos="zoom-in-left"
+              >
                 <article className="b-info__aside-article">
                   <h3>OPENING HOURS</h3>
                   <div className="b-info__aside-article-item">
@@ -80,7 +83,7 @@ const Footer = () => {
               </div>
             </div>
             <div className="col-md-3 col-xs-6">
-              <div className="b-info__twitter">
+              <div className="b-info__twitter overflow_hidden">
                 <h3>from twitter</h3>
                 <div className="b-info__twitter-article" data-aos="zoom-in-up">
                   <div className="b-info__twitter-article-icon">
@@ -94,8 +97,8 @@ const Footer = () => {
                     <span>20 minutes ago</span>
                   </div>
                 </div>
-                <div className="b-info__twitter-article" data-aos="zoom-in-up">
-                  <div className="b-info__twitter-article-icon">
+                <div className="b-info__twitter-article " data-aos="zoom-in-up">
+                  <div className="b-info__twitter-article-icon overflow_hidden">
                     <span className="fa fa-twitter"></span>
                   </div>
                   <div className="b-info__twitter-article-content">
@@ -106,7 +109,10 @@ const Footer = () => {
                     <span>20 minutes ago</span>
                   </div>
                 </div>
-                <div className="b-info__twitter-article" data-aos="zoom-in-up">
+                <div
+                  className="b-info__twitter-article overflow_hidden"
+                  data-aos="zoom-in-up"
+                >
                   <div className="b-info__twitter-article-icon">
                     <span className="fa fa-twitter"></span>
                   </div>
@@ -120,8 +126,11 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-3 col-xs-6">
-              <address className="b-info__contacts" data-aos="zoom-in-up">
+            <div className="col-md-3 col-xs-6 overflow_hidden">
+              <address
+                className="b-info__contacts overflow_hidden"
+                data-aos="zoom-in-up"
+              >
                 <p>contact us</p>
                 <div className="b-info__contacts-item">
                   <span className="fa fa-map-marker"></span>
@@ -153,12 +162,12 @@ const Footer = () => {
         <div className="container">
           <div className="row">
             <div className="col-xs-4 overflow_hidden">
-              <div className="b-footer__company" data-aos="zoom-in">
-                <div className="b-nav__logo">
+              <div className="b-footer__company">
+                <div className="b-nav__logo_footer">
                   <h3>
-                    <a href="home.html">
+                    <Link to="/">
                       KAR<span>ARABIA</span>
-                    </a>
+                    </Link>
                   </h3>
                 </div>
                 <p>
@@ -171,8 +180,8 @@ const Footer = () => {
               </div>
             </div>
             <div className="col-xs-8 overflow_hidden">
-              <div className="b-footer__content " data-aos="zoom-in">
-                <div className="b-footer__content-social">
+              <div className="b-footer__content overflow_hidden">
+                <div className="b-footer__content-social overflow_hidden">
                   <a href="$">
                     <span className="fa fa-facebook-square"></span>
                   </a>
@@ -192,7 +201,7 @@ const Footer = () => {
                     <span className="fa fa-skype"></span>
                   </a>
                 </div>
-                <nav className="b-footer__content-nav">
+                <nav className="b-footer__content-nav overflow_hidden">
                   <ul>
                     <li>
                       <a href="home.html">Home</a>

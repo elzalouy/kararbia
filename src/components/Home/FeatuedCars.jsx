@@ -86,7 +86,7 @@ class FeaturedCars extends Component {
     const { items } = this.state;
     return (
       <section className="b-featured">
-        <div className="container">
+        <div className="container overflow_hidden">
           <h2 className="s-title " data-aos="zoom-in-up">
             Featured Vehicles
           </h2>

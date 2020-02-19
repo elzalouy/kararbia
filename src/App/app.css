@@ -6,6 +6,44 @@
     margin: 0;
 }
 
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
 .overflow_hidden {
     overflow: hidden;
+}
+
+.static {
+    position: static;
+}
+
+Link {
+    color: transparent !important;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.owl-theme .owl-item {
+    overflow: hidden !important;
+}
+
+.pl-1 {
+    padding-left: 10px;
+}
+
+.hidden {
+    visibility: hidden !important;
+}
+
+@media screen and (max-width: 991px) {
+    .app {
+        margin-top: 57px;
+    }
 }

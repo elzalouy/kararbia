@@ -4,8 +4,8 @@ const About = () => {
   return (
     <section className="b-welcome">
       <div className="container">
-        <div className="row">
-          <div className="col-md-5 col-md-offset-2 col-sm-6 col-xs-12">
+        <div className="row overflow_hidden">
+          <div className="col-md-5 col-md-offset-2 col-sm-6 col-xs-12 overflow_hidden">
             <div className="b-welcome__text" data-aos="fade-right">
               <h2>WORLD'S LEADING CAR DEALER</h2>
               <h3>WELCOME TO KARARBIA</h3>
@@ -41,7 +41,7 @@ const About = () => {
               </ul>
             </div>
           </div>
-          <div className="col-md-5 col-sm-6 col-xs-12">
+          <div className="col-md-5 col-sm-6 col-xs-12 overflow_hidden">
             <div className="b-welcome__services" data-aos="fade-left">
               <div className="row">
                 <div className="col-xs-6 m-padding">

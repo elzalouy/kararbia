@@ -6,12 +6,12 @@ class SortByManu extends Component {
   render() {
     return (
       <section className="b-auto">
-        <div className="container">
-          <h5 className="s-titleBg" data-aos="zoom-in-left">
+        <div className="container overflow_hidden">
+          <h5 className="s-titleBg" data-aos="zoom-in-left overflow_hidden">
             GIVING OUR CUSTOMERS BEST DEALS
           </h5>
           <br />
-          <h2 className="s-title" data-aos="zoom-in-left">
+          <h2 className="s-title" data-aos="zoom-in-left overflow_hidden">
             BEST OFFERS FROM AUTOCLUB
           </h2>
           <div className="row">

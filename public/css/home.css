@@ -147,10 +147,17 @@ a.m-langLink {
 
 /* Nav */
 .b-nav {
-    padding: 30px 0 25px 0;
+    padding: 10px 0 10px 0;
 }
 
 .b-nav__logo {
+    float: left;
+    padding: 8px 0 0 5px;
+    background: url(../images/logo/logo.png) left top no-repeat;
+    text-transform: uppercase;
+}
+
+.b-nav__logo_footer {
     float: left;
     padding: 8px 0 0 5px;
     background: url(../images/logo/logo.png) left top no-repeat;
@@ -163,7 +170,18 @@ a.m-langLink {
     line-height: 20px
 }
 
+.b-nav__logo_footer h3 {
+    margin: 0;
+    font-size: 26px;
+    line-height: 20px
+}
+
 .b-nav__logo h3 a {
+    text-decoration: none;
+    font: 700 26px 'Titillium Web', sans-serif;
+}
+
+.b-nav__logo_footer h3 a {
     text-decoration: none;
     font: 700 26px 'Titillium Web', sans-serif;
 }
@@ -175,22 +193,52 @@ a.m-langLink {
     margin-top: -5px;
 }
 
+
+.b-nav__logo_footer h2 {
+    margin: 0;
+    line-height: 15px;
+    font-size: 11px;
+    margin-top: -5px;
+}
+
 .b-nav__logo h2 a {
     font: 300 11px 'Open Sans', sans-serif;
     text-decoration: none;
 }
 
+.b-nav__logo_footer h2 a {
+    font: 300 11px 'Open Sans', sans-serif;
+    text-decoration: none;
+}
+
 .b-nav__list {
-    float: right;
+    width: 100%;
+}
+
+.b-nav__list_footer {
+    width: 100%;
 }
 
 .b-nav__list ul {
+    float: right;
+    margin-top: 20px;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.b-nav__list_footer ul {
     margin-top: 20px;
     padding-left: 0;
     margin-bottom: 0;
 }
 
 .b-nav__list ul li {
+    float: left;
+    list-style: none;
+    height: 38px;
+}
+
+.b-nav__list_footer ul li {
     float: left;
     list-style: none;
     height: 38px;
@@ -211,6 +259,10 @@ a.m-langLink {
     -moz-transition: all 500ms ease 0s;
     -o-transition: all 500ms ease 0s;
     transition: all 500ms ease 0s;
+}
+
+.navbar-nav-menu>li .left {
+    text-align: left;
 }
 
 .b-nav__list ul li a {
@@ -1833,7 +1885,7 @@ a.m-langLink {
     padding: 40px 0;
 }
 
-.b-footer .b-nav__logo {
+.b-footer .b-nav__logo_footer {
     background: url(../images/logo/logoF.png) left top no-repeat;
     float: none;
 }
