@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Navbar = ({ address, phone, email }) => {
   return (
     <React.Fragment>
-      <header id="this-is-top" className="b-topBar" data-aos="fade-down">
+      <header className="b-topBar" data-aos="fade-down">
         <div className="container">
           <div className="row">
             <div className="col-md-4 col-xs-6">
