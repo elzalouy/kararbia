@@ -5,12 +5,9 @@ const Footer = () => {
     <React.Fragment>
       <div className="b-info">
         <div className="container">
-          <div className="row">
-            <div className="col-md-3 col-xs-6 overflow_hidden">
-              <aside
-                className="b-info__aside overflow_hidden"
-                data-aos="zoom-in-left"
-              >
+          <div className="row w-100">
+            <div className="col-md-3 col-xs-6">
+              <aside className="b-info__aside" data-aos="zoom-in-left">
                 <article className="b-info__aside-article">
                   <h3>OPENING HOURS</h3>
                   <div className="b-info__aside-article-item">

@@ -148,6 +148,13 @@ a.m-langLink {
 /* Nav */
 .b-nav {
     padding: 10px 0 10px 0;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
+.b-nav .row {
+    width: 100% !important;
+    overflow: hidden !important;
 }
 
 .b-nav__logo {
@@ -301,6 +308,11 @@ a.m-langLink {
 }
 
 /* Slider */
+.b-slider {
+    width: auto !important;
+    overflow: hidden !important;
+}
+
 .b-slider img {
     width: 100%;
 }
@@ -667,7 +679,7 @@ a.m-langLink {
     padding: 135px 0 75px 0;
     text-align: center;
     position: relative;
-    box-shadow: 0px 30px 100px -38px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0px 30px 100px -38px rgba(0, 0, 0, 0.3); */
     z-index: 100;
 }
 
@@ -1678,7 +1690,7 @@ a.m-langLink {
     margin-top: -200px;
     border-top: 3px solid #f76d2b;
     padding: 35px 0 35px 0;
-    z-index: 100000;
+    z-index: 1000;
 }
 
 .b-info__aside-article {

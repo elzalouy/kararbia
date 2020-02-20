@@ -8,7 +8,7 @@ import "aos/dist/aos.css";
 import "./app.css";
 class App extends Services {
   render() {
-    AOS.init({ duration: 1000, delay: 1050 });
+    AOS.init({ duration: 1000, delay: 900 });
     return (
       <BrowserRouter>
         <Navbar

@@ -12,8 +12,23 @@
 
 -------------------------------------------------------------------*/
 
+/*1170-greater*/
+@media screen and (min-width:1199px) {
+  .b-top_responsive {
+    display: none;
+  }
+
+  body {
+    scrollbar-width: 0 !important;
+  }
+}
+
 /*992-1170*/
 @media screen and (max-width: 1199px) {
+  .b-top_responsive {
+    display: block;
+  }
+
   .b-topBar {
     display: none !important;
   }
@@ -192,11 +207,10 @@
     position: fixed;
     top: 0;
     width: 100%;
-    height: 100%;
+    height: auto !important;
     z-index: 2000;
     padding: 0;
     margin: 0;
-    display: block;
   }
 
   .b-topBar {
@@ -281,7 +295,7 @@
   }
 
   .b-featured {
-    padding-top: 220px;
+    padding-top: 350px;
   }
 
   .b-welcome {
@@ -462,12 +476,24 @@
 
 /*600-767*/
 @media screen and (max-width: 767px) {
+  .b-nav {
+    overflow: hidden !important;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: auto !important;
+    z-index: 2000;
+    padding: 0;
+    margin: 0;
+  }
+
   .b-nav__list {
-    float: none;
+    width: 100% !important;
+    float: left;
   }
 
   .b-nav__list ul li {
-    float: none;
+    float: left;
     text-align: center;
     height: auto;
   }
@@ -790,12 +816,32 @@
   a.btn.m-btn.m-pay {
     margin-top: 10px;
   }
+
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
 }
 
 /*480-599*/
 @media screen and (max-width: 599px) {
   .b-topBar {
     display: none !important;
+  }
+
+  .b-nav {
+    overflow: hidden !important;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: auto !important;
+    z-index: 2000;
+    padding: 0;
+    margin: 0;
+  }
+
+  .b-nav .row {
+    width: 100% !important;
+    overflow: hidden !important;
   }
 
   .b-nav__logo {
@@ -1089,12 +1135,21 @@
   .b-submit__main {
     margin-left: 0;
   }
+
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
 }
 
 /*320-479*/
 @media screen and (max-width: 479px) {
   .b-slider__info h2 {
     font-size: 20px;
+  }
+
+  .b_nav {
+    width: 100%;
+    overflow: hidden !important;
   }
 
   .b-nav__logo {
@@ -1359,5 +1414,15 @@
 
   .b-article__main-add .row>div {
     width: 100%;
+  }
+
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  ::-webkit-scrollbar {
+    display: none !important;
   }
 }

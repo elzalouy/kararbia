@@ -42,6 +42,11 @@ Link {
     visibility: hidden !important;
 }
 
+.overflowY_hidden {
+    overflow-y: inherit !important;
+    overflow-x: initial !important;
+}
+
 @media screen and (max-width: 991px) {
     .app {
         margin-top: 57px;
