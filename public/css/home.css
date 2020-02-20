@@ -159,6 +159,7 @@ a.m-langLink {
 
 .b-nav__logo {
     float: left;
+    margin-left: 60px;
     padding: 8px 0 0 5px;
     background: url(../images/logo/logo.png) left top no-repeat;
     text-transform: uppercase;
