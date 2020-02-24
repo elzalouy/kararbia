@@ -1,45 +1,42 @@
 import React from "react";
 import HomeInterface from "./HomeInterface";
-import Carousel from "./carousel";
-import Searchvehicles from "./Searchvehicles";
-import FeaturedCars from "./FeatuedCars";
-import Articles from "./articles";
-import SortByManu from "./sortByManu";
-import About from "./About";
-import Numbers from "./Nmuber";
+import Search from "./search";
+import Carousel from "./Carousel";
+import Features from "./Features";
+import RecentCars from "./RecentCars";
 import Feedbacks from "./Feedbacks";
-import LongLogo from "./Longlogo";
-import SignUp from "./SignUp";
-import BuyCar from "./BuyCar";
+import News from "./News";
 class Home extends HomeInterface {
   render() {
     return (
       <React.Fragment>
-        <div
-          className="m-index overflow_hidden"
-          data-scrolling-animations="true"
-          data-equal-height=".b-auto__main-item"
-        >
-          {!this.state.data ? (
-            <div id="page-preloader">
-              <span className="spinner"></span>
+        <Search />
+        <Carousel />
+        <Features />
+        {/* <section>
+          <div className="call-to-action wow fadeIn" data-wow-duration="0.75s">
+            <div className="container">
+              <div className="call-to-action-content">
+                <div className="row">
+                  <div className="col-md-12">
+                    <p>
+                      Ramps meditation wayfarers copper mug four loko locavore{" "}
+                      <em>portland</em> leggings irony umami tumblr
+                    </p>
+                    <div className="secondary-button">
+                      <Link to="#">
+                        Take Now <i className="fa fa-shopping-cart"></i>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          ) : (
-            <React.Fragment>
-              <Carousel cars={this.state.cars} />
-              <Searchvehicles />
-              <FeaturedCars />
-              <About />
-              <Articles />
-              <BuyCar />
-              <SortByManu />
-              <Numbers />
-              <SignUp />
-              <Feedbacks />
-              <LongLogo />
-            </React.Fragment>
-          )}
-        </div>
+          </div>
+        </section> */}
+        <RecentCars />
+        <Feedbacks />
+        <News />
       </React.Fragment>
     );
   }

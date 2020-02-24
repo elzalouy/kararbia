@@ -16,7 +16,7 @@ class Slider extends Component {
           id="myRange"
         />
         <div className="range_vals flex">
-          <span className="min">${value}</span>
+          <span className="min">${value > 0 ? value : min}</span>
           <span className="max">${max}</span>
         </div>
       </React.Fragment>
