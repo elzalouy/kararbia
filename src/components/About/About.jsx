@@ -140,7 +140,7 @@ const About = () => {
       </section>
 
       <section>
-        <div class="our-clients">
+        <div class="our-clients mb-5">
           <div class="container">
             <div class="row">
               <div class="col-md-12">

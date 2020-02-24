@@ -30,7 +30,7 @@ const Blog = () => {
         </div>
       </div>
 
-      <div className="blog-page">
+      <div className="blog-page mb-5">
         <div className="container">
           <div className="row">
             <div className="col-md-8">

@@ -21,7 +21,7 @@ const Register = () => {
                       <a href="index.html">Homepage</a> / <em> Login</em>
                     </p>
                     <h2>
-                      Login <em>Now</em>
+                      Register <em>Now</em>
                     </h2>
                   </div>
 

@@ -17,9 +17,9 @@ const Carousel = () => {
                   Looking For Perffect <em>Car</em>?
                 </h3>
                 <h6 className="secondary-button">
-                  <Link to="#">
+                  <a href="/cars">
                     Find Your Car <i className="fa fa-car"></i>
-                  </Link>
+                  </a>
                 </h6>
               </div>
             </div>
@@ -35,9 +35,9 @@ const Carousel = () => {
                   Looking For Perffect <em>Car</em>?
                 </h3>
                 <h6 className="secondary-button">
-                  <Link to="#">
+                  <a href="/cars">
                     Find Your Car <i className="fa fa-car"></i>
-                  </Link>
+                  </a>
                 </h6>
               </div>
             </div>
@@ -53,9 +53,9 @@ const Carousel = () => {
                   Looking For Perffect <em>Car</em>?
                 </h3>
                 <h6 className="secondary-button">
-                  <Link to="#">
+                  <a href="/cars">
                     Find Your Car <i className="fa fa-car"></i>
-                  </Link>
+                  </a>
                 </h6>
               </div>
             </div>

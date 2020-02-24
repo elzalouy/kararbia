@@ -407,7 +407,6 @@ class CarList extends Component {
                                 <div className="col-md-12">
                                   <input
                                     type="text"
-                                    onFocus="this.value=''"
                                     value="Type keywords..."
                                     onChange={this.handleChange}
                                   />

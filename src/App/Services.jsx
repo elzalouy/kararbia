@@ -9,6 +9,7 @@ import Blog from "../components/Blog/Blog";
 import About from "../components/About/About";
 import Login from "../components/User/Login";
 import Register from "../components/User/Register";
+import ContactUs from "../components/Contact/Caontact";
 class Services extends Component {
   state = {
     Routes: [
@@ -39,6 +40,10 @@ class Services extends Component {
       {
         route: "/about",
         Route: <Route path="/about" component={About} key="about" />
+      },
+      {
+        route: "/contact",
+        Route: <Route path="/contact" component={ContactUs} key="contact" />
       },
       {
         route: "/login",
