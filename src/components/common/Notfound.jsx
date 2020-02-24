@@ -1,16 +1,16 @@
 import React from "react";
-import notfoundfImg from "../../images/backgrounds/404.png";
-import notfoundImg2 from "../../images/backgrounds/404Bg.jpg";
-import pageHeadImg from "../../images/backgrounds/pageHead.jpg";
+import notfoundfImg from "../../images/404.png";
+import notfoundImg2 from "../../images/404Bg.jpg";
+// import pageHeadImg from "../../images/pageHead.jpg";
 const NotFound = () => {
   return (
     <div className="" data-scrolling-animations="true">
-      <section
+      {/* <section
         className="b-pageHeader"
         style={{
           background: `url(${pageHeadImg}) center`
         }}
-      ></section>
+      ></section> */}
       <section className="container">
         <div className="justify-content-center align-items-center row">
           <div className="col-12 text-center">
