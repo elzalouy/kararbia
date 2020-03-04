@@ -1,24 +1,26 @@
 import React from "react";
-
+import getWords from "../../utils/GetWords.js";
 const About = () => {
+  let { words } = getWords();
   return (
     <React.Fragment>
-      <div class="page-heading wow fadeIn" data-wow-duration="0.5s">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
+      <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
               <div
-                class="heading-content-bg wow fadeIn"
+                className="heading-content-bg wow fadeIn"
                 data-wow-delay="0.75s"
                 data-wow-duration="1s"
               >
-                <div class="row">
-                  <div class="heading-content col-md-12">
+                <div className="row">
+                  <div className="heading-content col-md-12">
                     <p>
-                      <a href="index.html">Homepage</a> / <em> About Us</em>
+                      <a href="index.html">{words["homepage"]}</a> /{" "}
+                      <em> {words["about us"]}</em>
                     </p>
                     <h2>
-                      About <em>Us</em>
+                      {words["about"]} <em>{words["us"]}</em>
                     </h2>
                   </div>
                 </div>
@@ -29,16 +31,16 @@ const About = () => {
       </div>
 
       <div
-        class="services-first about-services wow fadeIn"
+        className="services-first about-services wow fadeIn"
         data-wow-delay="0.5s"
         data-wow-duration="1s"
       >
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="service-item">
-                <i class="fa fa-car"></i>
-                <div class="text-content">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4">
+              <div className="service-item">
+                <i className="fa fa-car"></i>
+                <div className="text-content">
                   <h6>Sell &amp; Buy Cars</h6>
                   <p>
                     Irony actually meditation, occupy mumblecore wayfarers
@@ -47,10 +49,10 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="service-item">
-                <i class="fa fa-gear"></i>
-                <div class="text-content">
+            <div className="col-md-4">
+              <div className="service-item">
+                <i className="fa fa-gear"></i>
+                <div className="text-content">
                   <h6>Buy Defect Cars</h6>
                   <p>
                     Irony actually meditation, occupy mumblecore wayfarers
@@ -59,10 +61,10 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="service-item">
-                <i class="fa fa-truck"></i>
-                <div class="text-content">
+            <div className="col-md-4">
+              <div className="service-item">
+                <i className="fa fa-truck"></i>
+                <div className="text-content">
                   <h6>Road Assistance</h6>
                   <p>
                     Irony actually meditation, occupy mumblecore wayfarers
@@ -71,10 +73,10 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="service-item">
-                <i class="fa fa-search"></i>
-                <div class="text-content">
+            <div className="col-md-4">
+              <div className="service-item">
+                <i className="fa fa-search"></i>
+                <div className="text-content">
                   <h6>Car Dealer Research</h6>
                   <p>
                     Irony actually meditation, occupy mumblecore wayfarers
@@ -83,10 +85,10 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="service-item">
-                <i class="fa fa-globe"></i>
-                <div class="text-content">
+            <div className="col-md-4">
+              <div className="service-item">
+                <i className="fa fa-globe"></i>
+                <div className="text-content">
                   <h6>World Wide Known</h6>
                   <p>
                     Irony actually meditation, occupy mumblecore wayfarers
@@ -95,10 +97,10 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="service-item">
-                <i class="fa fa-users"></i>
-                <div class="text-content">
+            <div className="col-md-4">
+              <div className="service-item">
+                <i className="fa fa-users"></i>
+                <div className="text-content">
                   <h6>Best Dealers</h6>
                   <p>
                     Irony actually meditation, occupy mumblecore wayfarers
@@ -112,14 +114,14 @@ const About = () => {
       </div>
 
       <section>
-        <div class="more-about-us">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6">
+        <div className="more-about-us">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
                 <img src="http://placehold.it/555x310" alt="" />
               </div>
-              <div class="col-md-6">
-                <div class="right-content">
+              <div className="col-md-6">
+                <div className="right-content">
                   <span>Lorem ipsum consectetur.</span>
                   <h4>Who we are, what we do?</h4>
                   <p>
@@ -140,61 +142,61 @@ const About = () => {
       </section>
 
       <section>
-        <div class="our-clients mb-5">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="section-heading">
-                  <div class="icon">
-                    <i class="fa fa-users"></i>
+        <div className="our-clients mb-5">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="section-heading">
+                  <div className="icon">
+                    <i className="fa fa-users"></i>
                   </div>
-                  <div class="text-content">
+                  <div className="text-content">
                     <h2>Our Happy Clients</h2>
                     <span>Here are our happy clients</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div id="owl-clients" class="owl-carousel owl-theme">
-                  <div class="item">
+            <div className="row">
+              <div className="col-md-12">
+                <div id="owl-clients" className="owl-carousel owl-theme">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
-                  <div class="item">
+                  <div className="item">
                     <img src="http://placehold.it/180x120" alt="" />
                   </div>
                 </div>

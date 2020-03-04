@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-
+import getWords from "../../utils/GetWords.js";
 const Bogs = () => {
+  let { words } = getWords();
   return (
     <React.Fragment>
       <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
@@ -16,12 +17,10 @@ const Bogs = () => {
                 <div className="row">
                   <div className="heading-content col-md-12">
                     <p>
-                      <a href="index.html">Homepage</a> / <em> Blog</em> /{" "}
-                      <em> Clasic</em>
+                      <a href="index.html">{words["homepage"]}</a> /{" "}
+                      <em> {words["blog"]}</em>
                     </p>
-                    <h2>
-                      Blog <em>Classic</em>
-                    </h2>
+                    <h2>{words["blogs"]}</h2>
                   </div>
                 </div>
               </div>

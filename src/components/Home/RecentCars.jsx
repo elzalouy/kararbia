@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import getWords from "../../utils/GetWords.js";
 
 const RecentCars = () => {
+  let { words } = getWords();
   return (
     <section>
       <div className="recent-cars">
@@ -14,8 +15,8 @@ const RecentCars = () => {
                     <i className="fa fa-car"></i>
                   </div>
                   <div className="text-content">
-                    <h2>Recent Cars</h2>
-                    <span>Check our recent posts</span>
+                    <h2>{words["recent cars"]}</h2>
+                    <span>{words["Check our recent cars"]}</span>
                   </div>
                 </div>
               </div>
@@ -25,18 +26,18 @@ const RecentCars = () => {
                 <div className="car-item wow fadeIn" data-wow-duration="0.75s">
                   <div className="thumb-content">
                     <div className="car-banner">
-                      <Link to="single_car.html">For Rent</Link>
+                      <a href="/car">For Rent</a>
                     </div>
                     <div className="thumb-inner">
-                      <Link to="single_car.html">
+                      <a href="/car">
                         <img src="http://placehold.it/370x260" alt="" />
-                      </Link>
+                      </a>
                     </div>
                   </div>
                   <div className="down-content">
-                    <Link to="single_car.html">
+                    <a href="/cars">
                       <h4>Perfect Sport Car</h4>
-                    </Link>
+                    </a>
                     <span>$1.200</span>
                     <p>
                       Leggings edison bulb hexagon, hashtag coloring book
@@ -75,18 +76,18 @@ const RecentCars = () => {
                 <div className="car-item wow fadeIn" data-wow-duration="0.75s">
                   <div className="thumb-content">
                     <div className="car-banner">
-                      <Link to="single_car.html">For Sale</Link>
+                      <a href="/car">For Sale</a>
                     </div>
                     <div className="thumb-inner">
-                      <Link to="single_car.html">
+                      <a href="/car">
                         <img src="http://placehold.it/370x260" alt="" />
-                      </Link>
+                      </a>
                     </div>
                   </div>
                   <div className="down-content">
-                    <Link to="single_car.html">
+                    <a href="/car">
                       <h4>Perfect Sport Car</h4>
-                    </Link>
+                    </a>
                     <span>$49.950</span>
                     <p>
                       Leggings edison bulb hexagon, hashtag coloring book
@@ -125,18 +126,18 @@ const RecentCars = () => {
                 <div className="car-item wow fadeIn" data-wow-duration="0.75s">
                   <div className="thumb-content">
                     <div className="car-banner">
-                      <Link to="single_car.html">For Rent</Link>
+                      <a href="/car">For Rent</a>
                     </div>
                     <div className="thumb-inner">
-                      <Link to="single_car.html">
+                      <a href="/car">
                         <img src="http://placehold.it/370x260" alt="" />
-                      </Link>
+                      </a>
                     </div>
                   </div>
                   <div className="down-content">
-                    <Link to="single_car.html">
+                    <a href="/car">
                       <h4>Perfect Sport Car</h4>
-                    </Link>
+                    </a>
                     <span>$1.500</span>
                     <p>
                       Leggings edison bulb hexagon, hashtag coloring book
@@ -175,18 +176,18 @@ const RecentCars = () => {
                 <div className="car-item wow fadeIn" data-wow-duration="0.75s">
                   <div className="thumb-content">
                     <div className="car-banner">
-                      <Link to="single_car.html">For Rent</Link>
+                      <a href="/car">For Rent</a>
                     </div>
                     <div className="thumb-inner">
-                      <Link to="single_car.html">
+                      <a href="/car">
                         <img src="http://placehold.it/370x260" alt="" />
-                      </Link>
+                      </a>
                     </div>
                   </div>
                   <div className="down-content">
-                    <Link to="single_car.html">
+                    <a href="/car">
                       <h4>Perfect Sport Car</h4>
-                    </Link>
+                    </a>
                     <span>$1.550</span>
                     <p>
                       Leggings edison bulb hexagon, hashtag coloring book
@@ -225,18 +226,18 @@ const RecentCars = () => {
                 <div className="car-item wow fadeIn" data-wow-duration="0.75s">
                   <div className="thumb-content">
                     <div className="car-banner">
-                      <Link to="single_car.html">For Sale</Link>
+                      <a href="/car">For Sale</a>
                     </div>
                     <div className="thumb-inner">
-                      <Link to="single_car.html">
+                      <a href="/car">
                         <img src="http://placehold.it/370x260" alt="" />
-                      </Link>
+                      </a>
                     </div>
                   </div>
                   <div className="down-content">
-                    <Link to="single_car.html">
+                    <a href="/car">
                       <h4>Perfect Sport Car</h4>
-                    </Link>
+                    </a>
                     <span>$30.000</span>
                     <p>
                       Leggings edison bulb hexagon, hashtag coloring book
@@ -275,18 +276,18 @@ const RecentCars = () => {
                 <div className="car-item wow fadeIn" data-wow-duration="0.75s">
                   <div className="thumb-content">
                     <div className="car-banner">
-                      <Link to="single_car.html">For Rent</Link>
+                      <a href="/car">For Rent</a>
                     </div>
                     <div className="thumb-inner">
-                      <Link to="single_car.html">
+                      <a href="/car">
                         <img src="http://placehold.it/370x260" alt="" />
-                      </Link>
+                      </a>
                     </div>
                   </div>
                   <div className="down-content">
-                    <Link to="single_car.html">
+                    <a href="/car">
                       <h4>Perfect Sport Car</h4>
-                    </Link>
+                    </a>
                     <span>$1.500</span>
                     <p>
                       Leggings edison bulb hexagon, hashtag coloring book

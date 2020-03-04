@@ -1,6 +1,91 @@
 ::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;
     opacity: 1;
-    /* Firefox */
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #f4c23d;
+    border-radius: 10px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.add-icon-overflow {
+    position: relative;
+    margin-top: -20px !important;
+}
+
+.add-icon {
+    color: #1e1e1e;
+    background-color: #f4c23d;
+    border-radius: 50%;
+    font-size: 18px;
+    width: 44px;
+    height: 44px;
+    display: inline-block;
+    line-height: 44px;
+    text-align: center;
+}
+
+.add-icon:hover {
+    background-color: #b68500;
+    color: #1e1e1e;
+}
+
+.brd-1 {
+    border-radius: 5px !important;
+}
+
+.shadow {
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.04);
+}
+
+.brd-0 {
+    border-radius: 0 !important;
+}
+
+.rtl {
+    direction: rtl !important;
+}
+
+.ltr {
+    direction: ltr !important;
+}
+
+.circled_button {
+    transition: all .5s;
+}
+
+.circled_button:hover {
+    background-color: #f4c23d !important;
+}
+
+.circled_button.active {
+    background-color: #f4c23d !important;
+}
+
+.brd-100 {
+    border-radius: 100% !important;
+}
+
+.fixed-bottom {
+    position: relative;
+}
+
+.overflow_hidden {
+    overflow: hidden;
+}
+
+.position-relative {
+    position: relative;
 }

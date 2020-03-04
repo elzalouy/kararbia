@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import getWords from "../../utils/GetWords.js";
 const ContactUs = () => {
+  let { words, lang } = getWords();
   return (
     <React.Fragment>
       <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
@@ -15,10 +17,11 @@ const ContactUs = () => {
                 <div className="row">
                   <div className="heading-content col-md-12">
                     <p>
-                      <a href="index.html">Homepage</a> / <em> Contact Us</em>
+                      <a href="/">{words["homepage"]}</a> /{" "}
+                      <em> {words["contact us"]}</em>
                     </p>
                     <h2>
-                      Contact <em>Us</em>
+                      {words["contact"]} <em>{words["us2"]}</em>
                     </h2>
                   </div>
                 </div>
@@ -27,18 +30,9 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
-
-      <div
-        className="contact-us wow fadeIn"
-        data-wow-delay="0.5s"
-        data-wow-duration="1s"
-      >
-        <div id="map"></div>
-      </div>
-
-      <section>
+      <section className="p-0">
         <div
-          className="contact-content wow fadeIn"
+          className="contact-content wow fadeIn mb-5"
           data-wow-delay="0.5s"
           data-wow-duration="1s"
         >
@@ -48,14 +42,14 @@ const ContactUs = () => {
                 <div className="send-message">
                   <div className="sep-section-heading">
                     <h2>
-                      Send Us <em>Message</em>
+                      {words["send"]} {words["us3"]} <em>{words["message"]}</em>
                     </h2>
                   </div>
                   <form
                     id="contact_form"
                     action="#"
                     method="POST"
-                    enctype="multipart/form-data"
+                    encType="multipart/form-data"
                   >
                     <div className="row">
                       <div className=" col-md-4 col-sm-4 col-xs-6">
@@ -64,7 +58,6 @@ const ContactUs = () => {
                           className="blog-search-field"
                           name="s"
                           placeholder="Your name..."
-                          value=""
                         />
                       </div>
                       <div className="col-md-4 col-sm-4 col-xs-6">
@@ -73,7 +66,6 @@ const ContactUs = () => {
                           className="blog-search-field"
                           name="s"
                           placeholder="Your email..."
-                          value=""
                         />
                       </div>
                       <div className="col-md-4 col-sm-4 col-xs-12">
@@ -82,7 +74,6 @@ const ContactUs = () => {
                           className="subject"
                           name="s"
                           placeholder="Subject..."
-                          value=""
                         />
                       </div>
                     </div>
@@ -112,7 +103,15 @@ const ContactUs = () => {
                 <div className="contact-info">
                   <div className="sep-section-heading">
                     <h2>
-                      Contact <em>Informations</em>
+                      {lang === "eng" ? (
+                        <React.Fragment>
+                          {words["contact"]} <em>{words["information"]}</em>
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          <em>{words["information"]}</em> {words["contact"]}
+                        </React.Fragment>
+                      )}
                     </h2>
                   </div>
                   <p>

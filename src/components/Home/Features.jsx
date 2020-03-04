@@ -1,6 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Link } from "react-router-dom";
+import getWords from "../../utils/GetWords.js";
+
 const Features = () => {
+  let { words } = getWords();
   return (
     <section>
       <div className="features-search-section">
@@ -81,16 +84,16 @@ const Features = () => {
                     <i className="fa fa-search"></i>
                   </div>
                   <div className="text-content">
-                    <h2>Quick Search</h2>
-                    <span>We made a quick search just for you</span>
+                    <h2>{words["quick search"]}</h2>
+                    <span>{words["quick search subtitle"]}</span>
                   </div>
                 </div>
                 <div className="search-form">
                   <div className="row">
                     <div className="col-md-12">
-                      <div className="input-select">
+                      <div>
                         <select name="brand" id="brand">
-                          <option value="-1">Select Band</option>
+                          <option value="-1">{words["select brand"]}</option>
                           <option>Wolkswagen</option>
                           <option>Audi</option>
                           <option>Bmw</option>
@@ -102,7 +105,7 @@ const Features = () => {
                     <div className="col-md-12">
                       <div className="input-select">
                         <select name="mark" id="mark">
-                          <option value="-1">Select Mark</option>
+                          <option value="-1">{words["select model"]}</option>
                           <option>Audi A3</option>
                           <option>Audi A4</option>
                           <option>Audi A5</option>
@@ -114,7 +117,7 @@ const Features = () => {
                     <div className="col-md-6">
                       <div className="input-select">
                         <select name="min-price" id="min-price">
-                          <option value="-1">Min Price</option>
+                          <option value="-1">{words["min price"]}</option>
                           <option>$500</option>
                           <option>$1.000</option>
                           <option>$1.500</option>
@@ -126,7 +129,7 @@ const Features = () => {
                     <div className="col-md-6">
                       <div className="input-select">
                         <select name="max-price" id="max-price">
-                          <option value="-1">Max Price</option>
+                          <option value="-1">{words["max price"]}</option>
                           <option>$5.000</option>
                           <option>$7.500</option>
                           <option>$10.000</option>
@@ -137,9 +140,9 @@ const Features = () => {
                     </div>
                     <div className="col-md-12">
                       <div className="secondary-button">
-                        <Link to="#">
-                          Search <i className="fa fa-search"></i>
-                        </Link>
+                        <a href="#">
+                          {words["search"]} <i className="fa fa-search"></i>
+                        </a>
                       </div>
                     </div>
                   </div>

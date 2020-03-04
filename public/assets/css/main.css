@@ -520,6 +520,12 @@ section {
     background: #1e1e1e !important
 }
 
+.scrolled-header #cssmenu>ul>li.profile>img {
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+}
+
 .scrolled-header #cssmenu ul ul li:hover>a,
 .scrolled-header #cssmenu ul ul li a:hover {
     color: #2959ad !important
@@ -2918,6 +2924,7 @@ section.top-slider-features {
 }
 
 .features-search-section .search-content .search-form select {
+    -moz-appearance: none !important;
     margin-bottom: 30px;
     cursor: pointer;
     outline: none;
@@ -2929,7 +2936,7 @@ section.top-slider-features {
     height: 40px;
     padding-left: 10px;
     border: 1px solid #eee;
-    background-color: transparent
+    background-color: transparent !important;
 }
 
 @media (max-width:991px) {

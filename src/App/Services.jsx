@@ -10,6 +10,11 @@ import About from "../components/About/About";
 import Login from "../components/User/Login";
 import Register from "../components/User/Register";
 import ContactUs from "../components/Contact/Caontact";
+import EmailConfirm from "../components/User/confirmedEmail";
+import Logout from "../components/User/Logout";
+import AddCar from "../components/Car/AddCar";
+import { authed, admin } from "../httpServices/auth/auth";
+import VerifyMobile from "../components/User/VerifyMobile";
 class Services extends Component {
   state = {
     Routes: [
@@ -30,6 +35,19 @@ class Services extends Component {
         Route: <Route path="/car" component={SingleCar} key="singlecar" />
       },
       {
+        route: "/addcar",
+        Route: (
+          <Route
+            path="/addcar"
+            render={props => {
+              if (admin()) return <AddCar {...props} />;
+              else return <Redirect to="/" />;
+            }}
+            key="singlecar"
+          />
+        )
+      },
+      {
         route: "/blogs",
         Route: <Route path="/blogs" component={Blogs} key="blogs" />
       },
@@ -46,12 +64,69 @@ class Services extends Component {
         Route: <Route path="/contact" component={ContactUs} key="contact" />
       },
       {
+        route: "/emailConfirm/:token",
+        Route: (
+          <Route
+            path="/emailConfirm/:token"
+            render={props => {
+              if (authed()) return <Redirect to="/home" />;
+              else return <EmailConfirm {...props} />;
+            }}
+            key="emailConfirm"
+          />
+        )
+      },
+      {
+        route: "/verifyMobile",
+        Route: (
+          <Route
+            key="verifyMobile"
+            path="/verifyMobile"
+            render={props => {
+              if (!authed()) return <VerifyMobile {...props} />;
+              else return <Redirect to="/home" />;
+            }}
+          />
+        )
+      },
+      {
         route: "/login",
-        Route: <Route path="/login" component={Login} key="login" />
+        Route: (
+          <Route
+            path="/login"
+            render={props => {
+              if (authed()) return <Redirect to="/home" />;
+              else return <Login {...props} />;
+            }}
+            key="login"
+          />
+        )
+      },
+      {
+        route: "/logout",
+        Route: (
+          <Route
+            path="/logout"
+            render={props => {
+              if (authed()) return <Logout {...props} />;
+              else return <Redirect to="/home" />;
+            }}
+            key="login"
+          />
+        )
       },
       {
         route: "/register",
-        Route: <Route path="/register" component={Register} key="login" />
+        Route: (
+          <Route
+            path="/register"
+            render={props => {
+              if (authed()) return <Redirect to="/home" />;
+              else return <Register {...props} />;
+            }}
+            key="login"
+          />
+        )
       },
       {
         route: "/",
@@ -62,7 +137,6 @@ class Services extends Component {
       }
     ]
   };
-  componentDidMount() {}
 }
 
 export default Services;

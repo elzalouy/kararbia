@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import getWords from "../../utils/GetWords.js";
 const News = () => {
+  let { words } = getWords();
   return (
     <section>
       <div className="latest-news">
@@ -13,8 +14,8 @@ const News = () => {
                     <i className="fa fa-file"></i>
                   </div>
                   <div className="text-content">
-                    <h2>Latest News</h2>
-                    <span>Here are our latest posts</span>
+                    <h2>{words["eng"]}</h2>
+                    <span>{words["here are our latest posts"]}</span>
                   </div>
                 </div>
               </div>
@@ -27,18 +28,18 @@ const News = () => {
               <div className="item wow fadeIn" data-wow-duration="0.75s">
                 <div className="thumb-content">
                   <div className="date-post">
-                    <Link to="single-post.html">14 January</Link>
+                    <a href="single-post.html">14 January</a>
                   </div>
                   <div className="thumb-inner">
-                    <Link to="single-post.html">
+                    <a href="single-post.html">
                       <img src="http://placehold.it/370x260" alt="" />
-                    </Link>
+                    </a>
                   </div>
                 </div>
                 <div className="down-content">
-                  <Link to="single_car.html">
+                  <a href="single_car.html">
                     <h4>Pabst Gastropub Synth Edge</h4>
-                  </Link>
+                  </a>
                   <span>
                     Posted by: <em>Admin</em>
                   </span>
@@ -47,9 +48,9 @@ const News = () => {
                     raw denim helvetica street art pork.
                   </p>
                   <div className="text-button">
-                    <Link to="single-post.html">
+                    <a href="single-post.html">
                       Continue Reading <i className="fa fa-arrow-right"></i>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -58,18 +59,18 @@ const News = () => {
               <div className="item wow fadeIn" data-wow-duration="0.75s">
                 <div className="thumb-content">
                   <div className="date-post">
-                    <Link to="single-post.html">12 January</Link>
+                    <a href="single-post.html">12 January</a>
                   </div>
                   <div className="thumb-inner">
-                    <Link to="single-post.html">
+                    <a href="single-post.html">
                       <img src="http://placehold.it/370x260" alt="" />
-                    </Link>
+                    </a>
                   </div>
                 </div>
                 <div className="down-content">
-                  <Link to="single_car.html">
+                  <a href="single_car.html">
                     <h4>Hammock Echo Park Braid</h4>
-                  </Link>
+                  </a>
                   <span>
                     Posted by: <em>Admin</em>
                   </span>
@@ -78,9 +79,9 @@ const News = () => {
                     raw denim helvetica street art pork.
                   </p>
                   <div className="text-button">
-                    <Link to="single-post.html">
+                    <a href="single-post.html">
                       Continue Reading <i className="fa fa-arrow-right"></i>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -89,18 +90,18 @@ const News = () => {
               <div className="item wow fadeIn" data-wow-duration="0.75s">
                 <div className="thumb-content">
                   <div className="date-post">
-                    <Link to="single-post.html">9 January</Link>
+                    <a href="single-post.html">9 January</a>
                   </div>
                   <div className="thumb-inner">
-                    <Link to="single-post.html">
+                    <a href="single-post.html">
                       <img src="http://placehold.it/370x260" alt="" />
-                    </Link>
+                    </a>
                   </div>
                 </div>
                 <div className="down-content">
-                  <Link to="single_car.html">
+                  <a href="single_car.html">
                     <h4>Waistcoat Wayfarers Selfies</h4>
-                  </Link>
+                  </a>
                   <span>
                     Posted by: <em>Admin</em>
                   </span>
@@ -109,9 +110,9 @@ const News = () => {
                     raw denim helvetica street art pork.
                   </p>
                   <div className="text-button">
-                    <Link to="single-post.html">
+                    <a href="single-post.html">
                       Continue Reading <i className="fa fa-arrow-right"></i>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>

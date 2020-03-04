@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-
+import getWords from "../../utils/GetWords.js";
 const SingleCar = () => {
+  let { lang, words } = getWords();
   return (
     <React.Fragment>
       <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
@@ -15,12 +16,20 @@ const SingleCar = () => {
               >
                 <div className="row">
                   <div className="heading-content col-md-12">
-                    <p>
-                      <a href="/home">Homepage</a> / <em> Cars</em> /{" "}
-                      <em> Car Details</em>
+                    <p className={lang === "eng" ? "" : "text-right"}>
+                      <a href="/home">{words["homepage"]}</a> /{" "}
+                      <em> {words["car"]}</em> / <em> {words["details"]}</em>
                     </p>
-                    <h2>
-                      Car <em>Details</em>
+                    <h2 className={lang === "eng" ? "" : "text-right"}>
+                      {lang === "eng" ? (
+                        <React.Fragment>
+                          {words["car"]} <em>{words["details"]}</em>
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          <em>{words["details"]}</em> {words["car"]}
+                        </React.Fragment>
+                      )}
                     </h2>
                   </div>
                 </div>
@@ -164,7 +173,7 @@ const SingleCar = () => {
                   <div className="similar-info">
                     <div className="primary-button">
                       <a href="#">
-                        Add Offer <i className="fa fa-dollar"></i>
+                        {words["request"]} <i className="fa fa-dollar"></i>
                       </a>
                     </div>
                   </div>
@@ -183,7 +192,15 @@ const SingleCar = () => {
                 <div className="item wow fadeInUp" data-wow-duration="0.5s">
                   <div className="sep-section-heading">
                     <h2>
-                      More <em>Description</em>
+                      {lang === "eng" ? (
+                        <React.Fragment>
+                          {words["more"]} <em>{words["description"]}</em>
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          <em>{words["description"]}</em> {words["more"]}
+                        </React.Fragment>
+                      )}
                     </h2>
                   </div>
                   <p>
@@ -207,7 +224,15 @@ const SingleCar = () => {
                 <div className="item wow fadeInUp" data-wow-duration="0.75s">
                   <div className="sep-section-heading">
                     <h2>
-                      Additional <em>Features</em>
+                      {lang === "eng" ? (
+                        <React.Fragment>
+                          {words["additional"]} <em> {words["features"]}</em>
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          <em>{words["features"]}</em> {words["additional"]}
+                        </React.Fragment>
+                      )}
                     </h2>
                   </div>
                   <div className="info-list">
@@ -276,7 +301,15 @@ const SingleCar = () => {
                 <div className="item">
                   <div className="sep-section-heading">
                     <h2>
-                      Contact <em>Informations</em>
+                      {lang === "eng" ? (
+                        <React.Fragment>
+                          {words["contact"]} <em>{words["information"]}</em>
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          <em>{words["information"]}</em> {words["contact"]}
+                        </React.Fragment>
+                      )}
                     </h2>
                   </div>
                   <p>
@@ -303,7 +336,7 @@ const SingleCar = () => {
         </div>
       </section>
 
-      <section>
+      <section className="pb-5">
         <div
           className="recent-car similar-car wow fadeIn"
           data-wow-duration="1s"
@@ -317,8 +350,8 @@ const SingleCar = () => {
                       <i className="fa fa-car"></i>
                     </div>
                     <div className="text-content">
-                      <h2>Similar Cars</h2>
-                      <span>You may like this too</span>
+                      <h2>{words["similar cars"]}</h2>
+                      <span>{words["You may like this too"]}</span>
                     </div>
                   </div>
                 </div>

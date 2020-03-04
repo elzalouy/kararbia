@@ -1,12 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
+import { admin } from "../../httpServices/auth/auth";
+import getWords from "../../utils/GetWords";
 
 class CarList extends Component {
   state = {};
+  handleChange = () => {};
   render() {
+    let { words, lang } = getWords();
     return (
       <React.Fragment>
-        <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
+        <div
+          className="page-heading align-right wow fadeIn"
+          data-wow-duration="0.5s"
+        >
           <div className="container">
             <div className="row">
               <div className="col-md-12">
@@ -16,14 +23,21 @@ class CarList extends Component {
                   data-wow-duration="1s"
                 >
                   <div className="row">
-                    <div className="heading-content col-md-12">
-                      <p>
-                        <a href="/home">Homepage</a> / <em> Cars</em> /{" "}
-                        <em> Listing</em>
+                    <div className="heading-content  col-md-12">
+                      <p className={lang === "eng" ? "" : "text-right"}>
+                        <a href="/home">{words["homepage"]} </a> /{" "}
+                        <em> {words["cars"]}</em> / <em> {words["listing"]}</em>
                       </p>
-                      <h2>
-                        Cars <em>Grids</em>
-                      </h2>
+                      <div className="row" dir={lang === "eng" ? "ltr" : "rtl"}>
+                        <h2 className="pt-2 text-right">
+                          {words["contact us"]}
+                        </h2>
+                        {admin() && (
+                          <a href="/addcar" className="mt-2 ml-3 mr-3 add-icon">
+                            <i className="fa fa-plus " aria-hidden="true"></i>
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -398,8 +412,8 @@ class CarList extends Component {
                                 <i className="fa fa-search"></i>
                               </div>
                               <div className="text-content">
-                                <h2>Quick Search</h2>
-                                <span>We made a quick search just for you</span>
+                                <h2>{words["quick search"]}</h2>
+                                <span>{words["quick search subtitle"]}</span>
                               </div>
                             </div>
                             <div className="search-form">
@@ -407,14 +421,16 @@ class CarList extends Component {
                                 <div className="col-md-12">
                                   <input
                                     type="text"
-                                    value="Type keywords..."
+                                    placeholder={words["type keyboard"]}
                                     onChange={this.handleChange}
                                   />
                                 </div>
                                 <div className="col-md-12">
                                   <div className="input-select">
                                     <select name="brand" id="brand">
-                                      <option value="-1">Select Brand</option>
+                                      <option value="-1">
+                                        {words["select brand"]}
+                                      </option>
                                       <option>Wolkswagen</option>
                                       <option>Audi</option>
                                       <option>Bmw</option>
@@ -426,7 +442,9 @@ class CarList extends Component {
                                 <div className="col-md-12">
                                   <div className="input-select">
                                     <select name="mark" id="mark">
-                                      <option value="-1">Select Mark</option>
+                                      <option value="-1">
+                                        {words["select model"]}
+                                      </option>
                                       <option>Audi A3</option>
                                       <option>Audi A4</option>
                                       <option>Audi A5</option>
@@ -438,7 +456,9 @@ class CarList extends Component {
                                 <div className="col-md-6">
                                   <div className="input-select">
                                     <select name="min-price" id="min-price">
-                                      <option value="-1">Min Price</option>
+                                      <option value="-1">
+                                        {words["min price"]}
+                                      </option>
                                       <option>$500</option>
                                       <option>$1.000</option>
                                       <option>$1.500</option>
@@ -450,7 +470,9 @@ class CarList extends Component {
                                 <div className="col-md-6">
                                   <div className="input-select">
                                     <select name="max-price" id="max-price">
-                                      <option value="-1">Max Price</option>
+                                      <option value="-1">
+                                        {words["max price"]}
+                                      </option>
                                       <option>$5.000</option>
                                       <option>$7.500</option>
                                       <option>$10.000</option>
@@ -462,7 +484,9 @@ class CarList extends Component {
                                 <div className="col-md-12">
                                   <div className="input-select">
                                     <select name="fuel" id="fuel">
-                                      <option value="-1">Fuel Type</option>
+                                      <option value="-1">
+                                        {words["fuel type"]}
+                                      </option>
                                       <option>Gasoline</option>
                                       <option>Diesel</option>
                                       <option>Energy</option>
@@ -476,7 +500,7 @@ class CarList extends Component {
                                       id="transmission"
                                     >
                                       <option value="-1">
-                                        Transmission Type
+                                        {words["transmission type"]}
                                       </option>
                                       <option>Automatic</option>
                                       <option>Manual</option>
@@ -486,7 +510,9 @@ class CarList extends Component {
                                 <div className="col-md-12">
                                   <div className="input-select">
                                     <select name="body" id="body">
-                                      <option value="-1">Body Type</option>
+                                      <option value="-1">
+                                        {words["body type"]}
+                                      </option>
                                       <option>Mini Car</option>
                                       <option>Coupe</option>
                                       <option>Convertible</option>
@@ -497,7 +523,8 @@ class CarList extends Component {
                                 <div className="col-md-12">
                                   <div className="secondary-button">
                                     <a href="#">
-                                      Search <i className="fa fa-search"></i>
+                                      {words["search"]}{" "}
+                                      <i className="fa fa-search"></i>
                                     </a>
                                   </div>
                                 </div>

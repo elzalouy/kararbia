@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-
+import getWords from "../../utils/GetWords.js";
 const Blog = () => {
+  let { words, lang } = getWords();
   return (
     <React.Fragment>
       <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
@@ -14,14 +15,18 @@ const Blog = () => {
                 data-wow-duration="1s"
               >
                 <div className="row">
-                  <div className="heading-content col-md-12">
+                  <div
+                    className={
+                      lang === "eng"
+                        ? "heading-content col-md-12"
+                        : "heading-content col-md-12 text-right"
+                    }
+                  >
                     <p>
-                      <a href="index.html">Homepage</a> / <em> Blog</em> /{" "}
-                      <em> Single Post</em>
+                      <a href="index.html">{words["homepage"]}</a> /{" "}
+                      <em> {words["blog"]}</em>
                     </p>
-                    <h2>
-                      Single <em>Post</em>
-                    </h2>
+                    <h2>{words["single post"]}</h2>
                   </div>
                 </div>
               </div>
@@ -113,8 +118,8 @@ const Blog = () => {
                 </div>
                 <div className="comments">
                   <div className="sep-section-heading">
-                    <h2>
-                      Comments <em>3</em>
+                    <h2 dir={lang === "eng" ? "ltr" : "rtl"}>
+                      <em>3</em> {words["comments"]}
                     </h2>
                   </div>
                   <div className="comments-content first-comment">
@@ -171,7 +176,15 @@ const Blog = () => {
                 <div className="leave-comment">
                   <div className="sep-section-heading">
                     <h2>
-                      Leave <em>Comment</em>
+                      {lang === "eng" ? (
+                        <React.Fragment>
+                          {words["leave"]} <em>{words["comment"]}</em>
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          {words["leave"]} <em>{words["comment"]}</em>
+                        </React.Fragment>
+                      )}
                     </h2>
                   </div>
                   <div className="submit-comment">
