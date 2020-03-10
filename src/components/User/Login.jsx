@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Handle from "../../middleware/errorHandle";
 import { login } from "../../httpServices/auth/auth";
 import getWords from "../../utils/GetWords";
+import { toast } from "react-toastify";
 class Login extends Component {
   state = {
     user: { email: "", password: "" },
@@ -16,9 +17,9 @@ class Login extends Component {
   handleSubmit = Handle(async () => {
     const state = this.state;
     const { error } = await login(state.user);
-    console.log(error);
     if (!error) window.location.reload();
     if (error.key === "mobile") window.location = "/verifyMobile";
+    else toast.warn(error.message);
     this.setState({ state });
   });
   render() {
