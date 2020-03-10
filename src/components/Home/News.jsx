@@ -32,7 +32,7 @@ const News = () => {
                   </div>
                   <div className="thumb-inner">
                     <a href="single-post.html">
-                      <img src="http://placehold.it/370x260" alt="" />
+                      <img src="https://placehold.it/370x260" alt="" />
                     </a>
                   </div>
                 </div>
@@ -63,7 +63,7 @@ const News = () => {
                   </div>
                   <div className="thumb-inner">
                     <a href="single-post.html">
-                      <img src="http://placehold.it/370x260" alt="" />
+                      <img src="https://placehold.it/370x260" alt="" />
                     </a>
                   </div>
                 </div>
@@ -94,7 +94,7 @@ const News = () => {
                   </div>
                   <div className="thumb-inner">
                     <a href="single-post.html">
-                      <img src="http://placehold.it/370x260" alt="" />
+                      <img src="https://placehold.it/370x260" alt="" />
                     </a>
                   </div>
                 </div>

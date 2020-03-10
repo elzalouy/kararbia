@@ -31,7 +31,7 @@ const Feedbacks = () => {
                 tincidunt facilisis sit amet et dolor <em>"</em>
               </p>
               <div className="author-rate">
-                <img src="http://placehold.it/100x100" alt="" />
+                <img src="https://placehold.it/100x100" alt="" />
                 <h4>Antonio Andreas</h4>
                 <div className="line-dec2"></div>
                 <span>Car Dealer</span>
@@ -62,7 +62,7 @@ const Feedbacks = () => {
                 tincidunt facilisis sit amet et dolor <em>"</em>
               </p>
               <div className="author-rate">
-                <img src="http://placehold.it/100x100" alt="" />
+                <img src="https://placehold.it/100x100" alt="" />
                 <h4>John Robertson</h4>
                 <div className="line-dec2"></div>
                 <span>Sale Agent</span>
@@ -93,7 +93,7 @@ const Feedbacks = () => {
                 tincidunt facilisis sit amet et dolor <em>"</em>
               </p>
               <div className="author-rate">
-                <img src="http://placehold.it/100x100" alt="" />
+                <img src="https://placehold.it/100x100" alt="" />
                 <h4>Matias Lucas</h4>
                 <div className="line-dec2"></div>
                 <span>Mechanic</span>
@@ -124,7 +124,7 @@ const Feedbacks = () => {
                 tincidunt facilisis sit amet et dolor <em>"</em>
               </p>
               <div className="author-rate">
-                <img src="http://placehold.it/100x100" alt="" />
+                <img src="https://placehold.it/100x100" alt="" />
                 <h4>Antonio Andreas</h4>
                 <div className="line-dec2"></div>
                 <span>Car Dealer</span>
@@ -155,7 +155,7 @@ const Feedbacks = () => {
                 tincidunt facilisis sit amet et dolor <em>"</em>
               </p>
               <div className="author-rate">
-                <img src="http://placehold.it/100x100" alt="" />
+                <img src="https://placehold.it/100x100" alt="" />
                 <h4>John Robertson</h4>
                 <div className="line-dec2"></div>
                 <span>Sale Agent</span>
@@ -186,7 +186,7 @@ const Feedbacks = () => {
                 tincidunt facilisis sit amet et dolor <em>"</em>
               </p>
               <div className="author-rate">
-                <img src="http://placehold.it/100x100" alt="" />
+                <img src="https://placehold.it/100x100" alt="" />
                 <h4>Matias Lucas</h4>
                 <div className="line-dec2"></div>
                 <span>Mechanic</span>
@@ -217,7 +217,7 @@ const Feedbacks = () => {
                 tincidunt facilisis sit amet et dolor <em>"</em>
               </p>
               <div className="author-rate">
-                <img src="http://placehold.it/100x100" alt="" />
+                <img src="https://placehold.it/100x100" alt="" />
                 <h4>Antonio Andreas</h4>
                 <div className="line-dec2"></div>
                 <span>Car Dealer</span>
