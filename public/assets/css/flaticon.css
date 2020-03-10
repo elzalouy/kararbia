@@ -3,92 +3,36 @@
     Creation date: 14/12/2018 00:19
     */
 
+@font-face {
+  font-family: "Flaticon";
+  src: url("../fonts/Flaticon.eot");
+  src: url("../fonts/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/Flaticon.woff") format("woff"),
+       url("../fonts/Flaticon.ttf") format("truetype"),
+       url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: "Flaticon";
-    src: url("../fonts/Flaticon.eot");
-    src: url("../fonts/Flaticon.eot?#iefix") format("embedded-opentype"),
-      url("../fonts/Flaticon.woff") format("woff"),
-      url("../fonts/Flaticon.ttf") format("truetype"),
-      url("../fonts/Flaticon.svg#Flaticon") format("svg");
-    font-weight: normal;
-    font-style: normal;
+    src: url("./Flaticon.svg#Flaticon") format("svg");
   }
+}
 
-  @media screen and (-webkit-min-device-pixel-ratio:0) {
-    @font-face {
-      font-family: "Flaticon";
-      src: url("./Flaticon.svg#Flaticon") format("svg");
-    }
-  }
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+  font-size: 20px;
+  font-style: normal;
+}
 
-  [class^="flaticon-"]:before,
-  [class*=" flaticon-"]:before,
-  [class^="flaticon-"]:after,
-  [class*=" flaticon-"]:after {
-    font-family: Flaticon;
-    font-size: 20px;
-    font-style: normal;
-  }
-
-  .flaticon-calendar:before {
-    content: "\f100<div className="col-md-12">
-<div className="input-select mb-5"><input type="password"
-    name="password"
-
-    value= {
-      this.state.user.password
-    }
-
-    onChange= {
-      this.handleChange
-    }
-
-    placeholder= {
-      words["your password"]
-    }
-
-    className="bg-transparent border border-white w-100 p-2 text-white"
-
-    /> {
-      error && <p className="text-white"> {
-        error
-      }
-
-      </p>
-    }
-
-    <div className="pt-2"><a href="/forgotPassword"
-    className="text-white"
-
-    > {
-      words["forgot password"]
-    }
-
-    </a></div></div></div>"; }
-.flaticon-speed:before {
-      content: "\f101";
-    }
-
-    .flaticon-road:before {
-      content: "\f102";
-    }
-
-    .flaticon-fuel:before {
-      content: "\f103";
-    }
-
-    .flaticon-shift:before {
-      content: "\f104";
-    }
-
-    .flaticon-car:before {
-      content: "\f105";
-    }
-
-    .flaticon-art:before {
-      content: "\f106";
-    }
-
-    .flaticon-motor:before {
-      content: "\f107";
-    }
+.flaticon-calendar:before { content: "\f100"; }
+.flaticon-speed:before { content: "\f101"; }
+.flaticon-road:before { content: "\f102"; }
+.flaticon-fuel:before { content: "\f103"; }
+.flaticon-shift:before { content: "\f104"; }
+.flaticon-car:before { content: "\f105"; }
+.flaticon-art:before { content: "\f106"; }
+.flaticon-motor:before { content: "\f107"; }

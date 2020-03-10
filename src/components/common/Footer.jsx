@@ -9,7 +9,7 @@ class Footer extends Component {
       <footer className="mt-0">
         <div className="container">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-4">
               <div className="footer-item">
                 <div className="about-us">
                   <h2>{words["about us"]}</h2>
@@ -21,27 +21,27 @@ class Footer extends Component {
                   <ul>
                     <li>
                       <a href="#">
-                        <i className="fa fa-facebook"></i>
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i className="fa fa-twitter"></i>
+                        <i className="fab fa-twitter"></i>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i className="fa fa-behance"></i>
+                        <i class="fab fa-behance"></i>{" "}
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i className="fa fa-linkedin"></i>
+                        <i className="fab fa-linkedin-in"></i>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i className="fa fa-dribbble"></i>
+                        <i class="fab fa-dribbble    "></i>
                       </a>
                     </li>
                   </ul>
@@ -96,7 +96,7 @@ class Footer extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <div className="footer-item">
                 <div className="our-gallery">
                   <h2>{words["our galary"]}</h2>
@@ -135,19 +135,7 @@ class Footer extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-md-2">
-              <div className="footer-item">
-                <div className="quick-search">
-                  <h2>{words["quick search"]}</h2>
-                  <input
-                    type="text"
-                    className="footer-search"
-                    name="s"
-                    placeholder="Search..."
-                  />
-                </div>
-              </div>
-            </div>
+
             <div className="col-md-12">
               <div className="sub-footer">
                 <p>

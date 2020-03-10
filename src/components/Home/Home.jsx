@@ -11,7 +11,7 @@ class Home extends HomeInterface {
     return (
       <React.Fragment>
         <Search />
-        <Carousel />
+        <Carousel cars={this.state} />
         <Features />
         {/* <section>
           <div className="call-to-action wow fadeIn" data-wow-duration="0.75s">
@@ -34,7 +34,7 @@ class Home extends HomeInterface {
             </div>
           </div>
         </section> */}
-        <RecentCars />
+        <RecentCars cars={this.state.cars} />
         <Feedbacks />
         <News />
       </React.Fragment>

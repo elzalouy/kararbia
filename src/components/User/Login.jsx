@@ -16,9 +16,9 @@ class Login extends Component {
   handleSubmit = Handle(async () => {
     const state = this.state;
     const { error } = await login(state.user);
+    console.log(error);
     if (!error) window.location.reload();
     if (error.key === "mobile") window.location = "/verifyMobile";
-    state.error = error.message;
     this.setState({ state });
   });
   render() {

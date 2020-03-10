@@ -1029,18 +1029,18 @@ only screen and (min-resolution:192dpi) and (max-width:1024px) {
 }
 
 .Modern-Slider .item .img-fill .info {
-    position: absolute;
+    position: absolute !important;
     width: 100%;
     height: 100%;
     top: 0px;
     left: 0px;
     line-height: 75vh;
-    text-align: center
+    text-align: center;
 }
 
 .Modern-Slider .item .info>div {
     display: inline-block !important;
-    vertical-align: middle
+    vertical-align: middle;
 }
 
 .Modern-Slider .NextArrow {
@@ -1055,7 +1055,8 @@ only screen and (min-resolution:192dpi) and (max-width:1024px) {
     border: 0 none;
     margin-top: -22.5px;
     text-align: center;
-    font: 20px/45px FontAwesome;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
     color: #FFF;
     z-index: 5;
     -webkit-transition: all 0.5s;
@@ -1083,7 +1084,8 @@ only screen and (min-resolution:192dpi) and (max-width:1024px) {
     border: 0 none;
     margin-top: -22.5px;
     text-align: center;
-    font: 20px/45px FontAwesome;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
     color: #FFF;
     z-index: 5;
     -webkit-transition: all 0.5s;
@@ -3095,6 +3097,7 @@ section.top-slider-features {
 }
 
 .sidebar-widgets .sidebar-widget .search-content .search-form select {
+    -moz-appearance: none !important;
     margin-bottom: 30px;
     cursor: pointer;
     outline: none;
@@ -3184,7 +3187,7 @@ section.top-slider-features {
     width: 70px;
     height: 70px;
     margin-right: 15px;
-    display: inline
+    display: inline;
 }
 
 .sidebar-widgets .sidebar-widget .recent-posts ul li h6 {

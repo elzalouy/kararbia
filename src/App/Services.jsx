@@ -32,7 +32,7 @@ class Services extends Component {
       },
       {
         route: "/car",
-        Route: <Route path="/car" component={SingleCar} key="singlecar" />
+        Route: <Route path="/car/:id" component={SingleCar} key="singlecar" />
       },
       {
         route: "/addcar",

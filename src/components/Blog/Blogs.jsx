@@ -2,7 +2,7 @@
 import React from "react";
 import getWords from "../../utils/GetWords.js";
 const Bogs = () => {
-  let { words } = getWords();
+  let { words, lang } = getWords();
   return (
     <React.Fragment>
       <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
@@ -15,7 +15,13 @@ const Bogs = () => {
                 data-wow-duration="1s"
               >
                 <div className="row">
-                  <div className="heading-content col-md-12">
+                  <div
+                    className={
+                      lang === "eng"
+                        ? "heading-content col-md-12"
+                        : "heading-content col-md-12 text-right"
+                    }
+                  >
                     <p>
                       <a href="index.html">{words["homepage"]}</a> /{" "}
                       <em> {words["blog"]}</em>

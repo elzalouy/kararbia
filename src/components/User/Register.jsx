@@ -5,6 +5,7 @@ import { addNewUser } from "../../httpServices/user/user";
 import { toast } from "react-toastify";
 import Handle from "../../middleware/errorHandle";
 import getWords from "../../utils/GetWords";
+import CountryCodes from "../common/CountryCodes";
 class Register extends Component {
   state = {
     user: {
@@ -12,7 +13,8 @@ class Register extends Component {
       name: "",
       phone: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      code: ""
     },
     error: {
       email: null,
@@ -20,48 +22,50 @@ class Register extends Component {
       phone: null,
       password: null,
       confirmPassword: null
-    }
+    },
+    code: ""
   };
 
   handleChange = Handle(({ currentTarget: e }) => {
     const state = this.state;
     state.user[e.name] = e.value;
+    if (state.user.password !== state.user.confirmPassword)
+      state.error.confirmPassword = "Password are not confirmed";
+    else state.error.confirmPassword = "";
     this.setState({ state });
   });
-
   handleSubmit = Handle(async () => {
     const state = this.state;
     const error = await validateRegister(state.user);
+    console.log("handleSubmit -> error", error);
     if (error) {
       state.error[error.key] = error.message;
-      if (state.user.password !== state.user.confirmPassword)
-        state.error.confirmPassword = "Password are not confirmed";
     } else {
-      state.error = {
-        email: null,
-        name: null,
-        phone: null,
-        password: null,
-        confirmPassword: null
-      };
-      const result = await addNewUser(state.user);
-      if (result.error)
-        toast.info(result.error.message, {
-          autoClose: true,
-          delay: 500
+      if (!state.error.confirmPassword) {
+        const result = await addNewUser({
+          name: state.user.name,
+          email: state.user.email,
+          phone: "+" + state.user.code + state.user.phone,
+          password: state.user.password,
+          confirmPassword: state.user.confirmPassword
         });
-      else {
-        //not working yet
-        toast.info(result.data, {
-          autoClose: true,
-          delay: 500
-        });
-        window.location = "/home";
+        if (result.error)
+          toast.info(result.error.message, {
+            autoClose: true,
+            delay: 500
+          });
+        else {
+          toast.info(result.data, {
+            autoClose: true,
+            delay: 500
+          });
+          localStorage.setItem("setItem", state.user.phone);
+          window.location = "/verifyMobile";
+        }
       }
     }
     this.setState({ state });
   });
-
   render() {
     let { words } = getWords();
     return (
@@ -138,8 +142,11 @@ class Register extends Component {
                                 )}
                               </div>
                             </div>
-                            <div className="col-md-12">
-                              <div className="input-select mb-3">
+                            <div className="col-4">
+                              <CountryCodes handleChange={this.handleChange} />
+                            </div>
+                            <div className="col-8">
+                              <div className="mb-3">
                                 <input
                                   type="phone"
                                   name="phone"
@@ -190,8 +197,8 @@ class Register extends Component {
                               </div>
                             </div>
                             <div className="col-md-12">
-                              <div className="secondary-button">
-                                <a href="#" onClick={this.handleSubmit}>
+                              <div className="secondary-button cursor-pointer">
+                                <a onClick={this.handleSubmit}>
                                   <i className="fa fa-user"></i> &nbsp;{" "}
                                   {words["register"]}
                                 </a>

@@ -89,3 +89,61 @@
 .position-relative {
     position: relative;
 }
+
+.gray {
+    color: #767b80;
+}
+
+.icon-no-car {
+    font-size: 145px;
+}
+
+.bg-orange {
+    background-color: #f4c23d;
+}
+
+.text-orange {
+    color: #f4c23d;
+}
+
+.overflow-scroll {
+    overflow: scroll !important;
+}
+
+.display-flex {
+    display: flex !important;
+}
+
+.slick-dots {
+    background-color: white !important;
+    display: inline-flex !important;
+    margin-top: -59px !important;
+}
+
+.slick-dots ::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+}
+
+.slick-dots li {
+    margin-right: 60px !important;
+    height: 100%;
+    background-color: transparent !important;
+}
+
+.overflow-x-scroll {
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.overflow-x-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.t-100 {
+    top: 100%;
+}
+
+.f-18 {
+    font-size: 18px !important;
+}

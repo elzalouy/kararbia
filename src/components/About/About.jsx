@@ -1,7 +1,7 @@
 import React from "react";
 import getWords from "../../utils/GetWords.js";
 const About = () => {
-  let { words } = getWords();
+  let { words, lang } = getWords();
   return (
     <React.Fragment>
       <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
@@ -14,9 +14,15 @@ const About = () => {
                 data-wow-duration="1s"
               >
                 <div className="row">
-                  <div className="heading-content col-md-12">
+                  <div
+                    className={
+                      lang === "eng"
+                        ? "heading-content col-md-12"
+                        : "heading-content col-md-12 text-right"
+                    }
+                  >
                     <p>
-                      <a href="index.html">{words["homepage"]}</a> /{" "}
+                      <a href="/">{words["homepage"]}</a> /{" "}
                       <em> {words["about us"]}</em>
                     </p>
                     <h2>
@@ -38,22 +44,27 @@ const About = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <div className="service-item">
+              <div
+                className={
+                  lang === "eng" ? "service-item" : "service-item text-right"
+                }
+              >
                 <i className="fa fa-car"></i>
                 <div className="text-content">
-                  <h6>Sell &amp; Buy Cars</h6>
-                  <p>
-                    Irony actually meditation, occupy mumblecore wayfarers
-                    organic pickled 90's.
-                  </p>
+                  <h6>{words["sell & buy cars"]}</h6>
+                  <p>{words["sell & buy cars > content"]}</p>
                 </div>
               </div>
             </div>
             <div className="col-md-4">
-              <div className="service-item">
+              <div
+                className={
+                  lang === "eng" ? "service-item" : "service-item text-right"
+                }
+              >
                 <i className="fa fa-gear"></i>
                 <div className="text-content">
-                  <h6>Buy Defect Cars</h6>
+                  <h6>Defect Cars</h6>
                   <p>
                     Irony actually meditation, occupy mumblecore wayfarers
                     organic pickled 90's.
@@ -62,7 +73,11 @@ const About = () => {
               </div>
             </div>
             <div className="col-md-4">
-              <div className="service-item">
+              <div
+                className={
+                  lang === "eng" ? "service-item" : "service-item text-right"
+                }
+              >
                 <i className="fa fa-truck"></i>
                 <div className="text-content">
                   <h6>Road Assistance</h6>
@@ -74,7 +89,11 @@ const About = () => {
               </div>
             </div>
             <div className="col-md-4">
-              <div className="service-item">
+              <div
+                className={
+                  lang === "eng" ? "service-item" : "service-item text-right"
+                }
+              >
                 <i className="fa fa-search"></i>
                 <div className="text-content">
                   <h6>Car Dealer Research</h6>
@@ -86,7 +105,11 @@ const About = () => {
               </div>
             </div>
             <div className="col-md-4">
-              <div className="service-item">
+              <div
+                className={
+                  lang === "eng" ? "service-item" : "service-item text-right"
+                }
+              >
                 <i className="fa fa-globe"></i>
                 <div className="text-content">
                   <h6>World Wide Known</h6>
@@ -98,7 +121,11 @@ const About = () => {
               </div>
             </div>
             <div className="col-md-4">
-              <div className="service-item">
+              <div
+                className={
+                  lang === "eng" ? "service-item" : "service-item text-right"
+                }
+              >
                 <i className="fa fa-users"></i>
                 <div className="text-content">
                   <h6>Best Dealers</h6>
@@ -114,7 +141,7 @@ const About = () => {
       </div>
 
       <section>
-        <div className="more-about-us">
+        <div className="more-about-us mb-5">
           <div className="container">
             <div className="row">
               <div className="col-md-6">
@@ -140,7 +167,7 @@ const About = () => {
           </div>
         </div>
       </section>
-
+      {/* 
       <section>
         <div className="our-clients mb-5">
           <div className="container">
@@ -204,7 +231,7 @@ const About = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </React.Fragment>
   );
 };

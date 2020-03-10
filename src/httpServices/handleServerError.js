@@ -21,6 +21,9 @@ module.exports = function(result) {
       };
     if (result.response.status !== 200)
       return { key: "error", message: "error while connecting network" };
-    return null;
+    return {
+      key: "network",
+      message: "Error occured while connecting the server"
+    };
   }
 };

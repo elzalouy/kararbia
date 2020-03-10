@@ -9,6 +9,7 @@ const RegisterSchema = {
     .required()
     .min(8)
     .max(256),
+  code: Joi.string().required(),
   phone: Joi.string().max(24),
   password: Joi.string()
     .required()

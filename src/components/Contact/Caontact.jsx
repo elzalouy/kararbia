@@ -55,7 +55,7 @@ const ContactUs = () => {
                       <div className=" col-md-4 col-sm-4 col-xs-6">
                         <input
                           type="text"
-                          className="blog-search-field"
+                          className="form-control"
                           name="s"
                           placeholder="Your name..."
                         />
@@ -63,7 +63,7 @@ const ContactUs = () => {
                       <div className="col-md-4 col-sm-4 col-xs-6">
                         <input
                           type="text"
-                          className="blog-search-field"
+                          className="form-control"
                           name="s"
                           placeholder="Your email..."
                         />
@@ -71,7 +71,7 @@ const ContactUs = () => {
                       <div className="col-md-4 col-sm-4 col-xs-12">
                         <input
                           type="text"
-                          className="subject"
+                          className="form-control"
                           name="s"
                           placeholder="Subject..."
                         />
@@ -81,7 +81,7 @@ const ContactUs = () => {
                       <div className="col-md-12 col-sm-12">
                         <textarea
                           id="message"
-                          className="input"
+                          className="form-control"
                           name="message"
                           placeholder="Message..."
                         ></textarea>

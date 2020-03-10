@@ -79,8 +79,8 @@
         "engine": "المحرك",
         "drive train": "نظام الدفع",
         "transmission": "نظام النقل",
-        "extrior color": "اللون الخارجي",
-        "intrior color": "اللون الداخلى",
+        "color": "اللون الخارجي",
+        "price": "السعر",
         "passengers": "عدد الركاب",
         "doors": "عدد الابواب",
         "city fuel economy": "توفير الوقود بالمدينة",
@@ -89,7 +89,15 @@
         "status": "الحالة",
         "long description": "وصف طويل",
         "speed": "السرعة",
-        "no photos selected": "لم يتم تحديد صور"
+        "no photos selected": "لم يتم تحديد صور",
+        "brand": "نوع السيارة",
+        "new admin": "مشرف جديد",
+        "remove admin": "ازالة مشرف",
+        "admin panel": "لائحة المشرف",
+        "no admins": "لا يوجد مشرفين حتى الان",
+        "some of our cars": "بعض ما لدينا",
+        "sell & buy cars": "بيع وشراء سيارات",
+        "sell & buy cars > content": "اشترى سيارة بطريقة اسرع واسهل, طريقة بيع وشراء افضل"
     },
     "eng": {
         "homepage": "homepage",
@@ -181,6 +189,15 @@
         "status": "Status",
         "long description": "Long Description",
         "speed": "Speed",
-        "no photos selected": "No Photos Selected"
+        "no photos selected": "No Photos Selected",
+        "price": "Price",
+        "brand": "Brand",
+        "new admin": "New Admin",
+        "remove admin": "Remove Admin",
+        "admin panel": "Admin Panel",
+        "no admins": "There are no admins until now",
+        "some of our cars": "Some Of Our Cars",
+        "sell & buy cars": "Sell & buy Cars",
+        "sell & buy cars > content": "Sell your car quickly and easily, today! Buying Service."
     }
 }

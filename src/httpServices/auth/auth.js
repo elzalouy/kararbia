@@ -1,19 +1,25 @@
 import http from "../httpService";
 import jwtDecode from "jwt-decode";
 import { setToken, removeToken, getToken } from "../localStorage";
+import { toast } from "react-toastify";
 const handleServerError = require("../handleServerError");
 const route = process.env.REACT_APP_Api + "auth/";
 
 export async function login(data) {
-  const response = await http.post(route, {
-    email: data.email,
-    password: data.password
-  });
-  const result = handleServerError(response);
-  if (result) return { data: null, error: result };
-  else {
-    setToken(response.data.token);
-    return { data: response.data.token, error: null };
+  try {
+    const response = await http.post(route, {
+      email: data.email,
+      password: data.password
+    });
+    const result = handleServerError(response);
+    console.log(result);
+    if (result) return { data: null, error: result };
+    else {
+      setToken(response.data.token);
+      return { data: response.data.token, error: null };
+    }
+  } catch (ex) {
+    toast.warn("May be connection is lost.");
   }
 }
 

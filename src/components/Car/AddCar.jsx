@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import cmeraImg from "../../images/camera.svg";
 import getWords from "../../utils/GetWords";
-import PropTypes from "prop-types";
+import Input from "../common/input";
 import "./car.css";
-
+import { validateCar } from "../../httpServices/car/carSchema";
+import { toast } from "react-toastify";
+import { addCar, addCarImages } from "../../httpServices/car/car";
+import handle from "../../middleware/errorHandle";
 const _ = require("lodash");
 class AddCar extends Component {
   upload = React.createRef();
@@ -15,39 +18,39 @@ class AddCar extends Component {
     kilometers: "",
     body_type: "",
     transmission: "",
-    extrior_color: "",
-    intrior_color: "",
+    color: "",
     speed: "",
     doors: "",
     fuel_type: "",
     status: "",
+    price: "",
     extra_features: [],
     images: [],
     imagesPreview: [],
-    feature: ""
+    feature: "",
+    disabled: false
   };
-  handleChange = ({ currentTarget: e }) => {
+  handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state[e.name] = e.value;
     this.setState({ state });
-  };
-  handleAddFeature = () => {
+  });
+  handleAddFeature = handle(() => {
     const state = this.state;
     state.extra_features.push(state.feature);
     state.feature = "";
     this.setState({ state });
-  };
-  handleDeleteFeature = ({ currentTarget: e }) => {
+  });
+  handleDeleteFeature = handle(({ currentTarget: e }) => {
     const state = this.state;
     _.remove(state.extra_features, s => s === e.id);
     this.setState({ state });
-  };
-  handleAddImages = async ({ currentTarget: e }) => {
+  });
+  handleAddImages = handle(async ({ currentTarget: e }) => {
     const state = this.state;
     for (let i = 0; i <= e.files.length; i++) {
       state.images += e.files[i];
     }
-    console.log("handleAddImages -> state.images", e.files[0]);
     if (e.files) {
       state.images = e.files;
       const files = Array.from(e.files);
@@ -72,12 +75,57 @@ class AddCar extends Component {
         }
       );
     }
-  };
-  handleDeleteImage = ({ currentTarget: e }) => {
+  });
+  handleDeleteImage = handle(({ currentTarget: e }) => {
     const state = this.state;
     delete state.images[e.id];
     delete state.imagesPreview[e.id];
     this.setState({ state });
+  });
+  handleSaveCar = handle(async e => {
+    e.preventDefault();
+    const state = this.state;
+    state.disabled = true;
+    this.setState({ state });
+
+    let car = {
+      name: state.name,
+      model: state.model,
+      short_desc: state.short_description,
+      long_desc: state.long_description,
+      kilometers: state.kilometers,
+      body_type: state.body_type,
+      transmission: state.transmission,
+      color: state.color,
+      price: state.price,
+      speed: state.speed,
+      doors: state.doors,
+      fuel_type: state.fuel_type,
+      status: state.status,
+      extra_features: state.extra_features
+    };
+    let validateresult = await validateCar(car);
+    if (validateresult) toast.warn(validateresult.message);
+    else {
+      let result = await addCar(car);
+      if (result.error) toast.warn(result.error.message);
+      else {
+        let images = Array.from(state.images);
+        let iResult = await addCarImages(images, result.data._id);
+        if (iResult.error) toast.warn(iResult.error.message);
+        else {
+          toast.warn("Successfully added");
+          window.location = "/";
+        }
+      }
+    }
+    state.disabled = false;
+    this.setState({ state });
+  });
+  handleCancel = () => {
+    const state = this.state;
+    state.images = state.imagesPreview = [];
+    window.location = "/";
   };
   render() {
     const state = this.state;
@@ -115,7 +163,7 @@ class AddCar extends Component {
           </div>
         </div>
         <section
-          className="container w-100 wow fadeIn border-0 pb-5"
+          className="container w-100 wow fadeIn border-0 pb-5 new-car"
           data-wow-delay="0.5s"
           data-wow-duration="1s"
         >
@@ -127,32 +175,27 @@ class AddCar extends Component {
             }
             dir={lang === "eng" ? "ltr" : "rtl"}
           >
-            <div className="text-center w-100 add-icon-overflow  p-0">
+            <div className="text-center w-100 add-icon-overflow">
               <i className="fa fa-car add-icon" aria-hidden="true"></i>
             </div>
             <div className="col-md-5 pt-5">
-              <label className="form-label p-0 mb-1">{words["car name"]}</label>
-              <input
+              <Input
                 type="text"
-                name="name"
+                word={words["brand"]}
                 value={state.name}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["car name"]}
+                name="name"
+                changeValue={this.handleChange}
               />
             </div>
             <div className="col-md-5 pt-5">
-              <label className="Model p-0 mb-1">{words["model"]}</label>
-              <input
+              <Input
                 type="text"
-                name="model"
+                word={words["model"]}
                 value={state.model}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["model"]}
+                name="model"
+                changeValue={this.handleChange}
               />
             </div>
-
             <div className="col-md-10 pt-3">
               <label className="form-label p-0 mb-1">
                 {words["short description"]}
@@ -182,128 +225,94 @@ class AddCar extends Component {
               />
             </div>
             <div className="col-md-5 pt-3">
-              <label className="form-label p-0 mb-1">
-                {words["kilometers"]}
-              </label>
-              <input
+              <Input
                 type="text"
-                name="kilometers"
+                word={words["kilometers"]}
                 value={state.kilometers}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["kilometers"]}
+                name="kilometers"
+                changeValue={this.handleChange}
               />
             </div>
             <div className="col-md-5 pt-3">
-              <label className="form-label p-0 mb-1">
-                {words["body type"]}
-              </label>
-              <input
+              <Input
                 type="text"
-                name="body_type"
+                word={words["body type"]}
                 value={state.body_type}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["body type"]}
+                name="body_type"
+                changeValue={this.handleChange}
               />
             </div>
             <div className="col-md-5 pt-3">
-              <label className="form-label p-0 mb-1">
-                {words["transmission"]}
-              </label>
-              <input
+              <Input
                 type="text"
-                name="transmission"
+                word={words["transmission"]}
                 value={state.transmission}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["transmission"]}
+                name="transmission"
+                changeValue={this.handleChange}
               />
             </div>
             <div className="col-md-5 pt-3">
-              <label className="form-label p-0 mb-1">
-                {words["extrior color"]}
-              </label>
-              <input
+              <Input
                 type="text"
-                name="extrior_color"
-                value={state.extrior_color}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["extrior color"]}
+                word={words["extrior color"]}
+                value={state.color}
+                name="color"
+                changeValue={this.handleChange}
               />
             </div>
             <div className="col-md-5 pt-3">
-              <label className="form-label p-0 mb-1">
-                {words["intrior color"]}
-              </label>
-              <input
-                type="text"
-                name="intrior_color"
-                value={state.intrior_color}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["intrior color"]}
+              <Input
+                type="number"
+                word={words["price"]}
+                value={state.price}
+                name="price"
+                changeValue={this.handleChange}
               />
             </div>
             <div className="col-md-5 pt-3">
-              <label className="form-label p-0 mb-1">{words["speed"]}</label>
-              <input
+              <Input
                 type="text"
-                name="speed"
+                word={words["speed"]}
                 value={state.speed}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["speed"]}
+                name="speed"
+                changeValue={this.handleChange}
               />
             </div>
             <div className="col-md-5 pt-3">
-              <label className="form-label p-0 mb-1">{words["doors"]}</label>
-              <input
+              <Input
                 type="text"
-                name="doors"
+                word={words["doors"]}
                 value={state.doors}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["doors"]}
+                name="doors"
+                changeValue={this.handleChange}
               />
             </div>
             <div className="col-md-5 pt-3">
-              <label className="form-label p-0 mb-1">
-                {words["fuel type"]}
-              </label>
-              <input
+              <Input
                 type="text"
-                name="fuel_type"
+                word={words["fuel type"]}
                 value={state.fuel_type}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["fuel type"]}
+                name="fuel_type"
+                changeValue={this.handleChange}
               />
             </div>
             <div className="col-md-5 pt-3">
-              <label className="form-label p-0 mb-1">{words["status"]}</label>
-              <input
+              <Input
                 type="text"
-                name="status"
+                word={words["status"]}
                 value={state.status}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["status"]}
+                name="status"
+                changeValue={this.handleChange}
               />
             </div>
 
             <div className="col-md-4 pt-3">
-              <label className="form-label p-0 mb-1">
-                {words["extra features"]}
-              </label>
-              <input
+              <Input
                 type="text"
-                name="feature"
+                word={words["extra features"]}
                 value={state.feature}
-                onChange={this.handleChange}
-                className="form-control brd-0"
-                placeholder={words["extra features"]}
+                name="feature"
+                changeValue={this.handleChange}
               />
             </div>
             <div className="col-md-1 pt-4">
@@ -316,7 +325,7 @@ class AddCar extends Component {
             <div className="col-10 pt-5">
               <div className="row mx-2">
                 {state.extra_features.map(item => (
-                  <div className="feature">
+                  <div className="feature" key={item}>
                     {item}
                     <button
                       onClick={this.handleDeleteFeature}
@@ -340,7 +349,7 @@ class AddCar extends Component {
                   <div className="row justify-content-center  align-item-center">
                     {state.imagesPreview.map(item => {
                       return (
-                        <React.Fragment>
+                        <React.Fragment key={state.imagesPreview.indexOf(item)}>
                           <div className="position-relative">
                             <img
                               src={item}
@@ -386,8 +395,31 @@ class AddCar extends Component {
                 ></i>
               </div>
             </div>
-            <div className="col-12 pr-5 mr-5 text-right">
-              <i className="fa fa-check-circle save" aria-hidden="true"></i>
+            <div className="col-12">
+              <div className="row justify-content-center aling-items-center">
+                <div className="col-sm-8"></div>
+                <div className="col-2 text-right">
+                  <button
+                    className="save bg-transparent border-0"
+                    onClick={this.handleSaveCar}
+                    disabled={state.disabled}
+                  >
+                    <i
+                      className="fa fa-check-circle p-0 m-0"
+                      aria-hidden="true"
+                    ></i>
+                  </button>
+                </div>
+                <div className="col-2 text-left">
+                  <button
+                    className="close bg-warn pt-2"
+                    onClick={this.handleCancel}
+                    disabled={state.disabled}
+                  >
+                    <i className="fa fa-times m-0 p-0" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -395,24 +427,5 @@ class AddCar extends Component {
     );
   }
 }
-AddCar.propTypes = {
-  name: PropTypes.string.isRequired,
-  model: PropTypes.string.isRequired,
-  short_description: PropTypes.string.isRequired,
-  long_description: PropTypes.string.isRequired,
-  kilometers: PropTypes.string.isRequired,
-  body_type: PropTypes.string.isRequired,
-  transmission: PropTypes.string.isRequired,
-  extrior_color: PropTypes.string.isRequired,
-  intrior_color: PropTypes.string.isRequired,
-  speed: PropTypes.string.isRequired,
-  doors: PropTypes.string.isRequired,
-  fuel_type: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
-  extra_features: PropTypes.array.isRequired,
-  images: PropTypes.array.isRequired,
-  feature: PropTypes.string.isRequired,
-  imagesPreview: PropTypes.array.isRequired
-};
 
 export default AddCar;
