@@ -12,7 +12,9 @@ const Carousel = ({ cars }) => {
         <div className="item">
           <div className="img-fill">
             <img src={slide1} alt="" />
-            <div className={cars.length <= 2 ? "info pt-5 mt-5" : "info"}>
+            <div
+              className={cars && cars.length <= 2 ? "info pt-5 mt-5" : "info"}
+            >
               <div>
                 <h5>{words["home carousel subtitle"]}</h5>
                 <h3>
@@ -31,7 +33,9 @@ const Carousel = ({ cars }) => {
         <div className="item">
           <div className="img-fill">
             <img src={slide2} alt="" />
-            <div className={cars.length <= 2 ? "info pt-5 mt-5" : "info"}>
+            <div
+              className={cars && cars.length <= 2 ? "info pt-5 mt-5" : "info"}
+            >
               <div>
                 <h5>{words["home carousel subtitle"]}</h5>
                 <h3>
@@ -50,7 +54,9 @@ const Carousel = ({ cars }) => {
         <div className="item">
           <div className="img-fill">
             <img src={slide3} alt="" />
-            <div className={cars.length <= 2 ? "info pt-5 mt-5" : "info"}>
+            <div
+              className={cars && cars.length <= 2 ? "info pt-5 mt-5" : "info"}
+            >
               <div>
                 <h5>{words["home carousel subtitle"]}</h5>
                 <h3>
