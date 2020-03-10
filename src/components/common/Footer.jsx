@@ -21,7 +21,7 @@ class Footer extends Component {
                   <ul>
                     <li>
                       <a href="#">
-                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        <i className="fab fa-facebook-f" aria-hidden="true"></i>
                       </a>
                     </li>
                     <li>
@@ -31,7 +31,7 @@ class Footer extends Component {
                     </li>
                     <li>
                       <a href="#">
-                        <i class="fab fa-behance"></i>{" "}
+                        <i className="fab fa-behance"></i>{" "}
                       </a>
                     </li>
                     <li>
@@ -41,7 +41,7 @@ class Footer extends Component {
                     </li>
                     <li>
                       <a href="#">
-                        <i class="fab fa-dribbble    "></i>
+                        <i className="fab fa-dribbble    "></i>
                       </a>
                     </li>
                   </ul>

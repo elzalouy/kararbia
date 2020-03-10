@@ -12,7 +12,6 @@ export async function login(data) {
       password: data.password
     });
     const result = handleServerError(response);
-    console.log(result);
     if (result) return { data: null, error: result };
     else {
       setToken(response.data.token);
