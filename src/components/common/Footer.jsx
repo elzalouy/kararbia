@@ -103,32 +103,32 @@ class Footer extends Component {
                   <ul>
                     <li>
                       <a href="#">
-                        <img src="http://placehold.it/70x70" alt="" />
+                        <img src="https://placehold.it/70x70" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="http://placehold.it/70x70" alt="" />
+                        <img src="https://placehold.it/70x70" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="http://placehold.it/70x70" alt="" />
+                        <img src="https://placehold.it/70x70" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="http://placehold.it/70x70" alt="" />
+                        <img src="https://placehold.it/70x70" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="http://placehold.it/70x70" alt="" />
+                        <img src="https://placehold.it/70x70" alt="" />
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <img src="http://placehold.it/70x70" alt="" />
+                        <img src="https://placehold.it/70x70" alt="" />
                       </a>
                     </li>
                   </ul>
