@@ -50,12 +50,12 @@ class Navbar extends Component {
                       </a>
                       <ul className="">
                         <li>
-                          <Link onClick={this.setLanguage} id="eng">
+                          <Link to="" onClick={this.setLanguage} id="eng">
                             English
                           </Link>
                         </li>
                         <li>
-                          <Link onClick={this.setLanguage} id="arabic">
+                          <Link to="" onClick={this.setLanguage} id="arabic">
                             العربية
                           </Link>
                         </li>

@@ -62,6 +62,8 @@ class VerifyMobile extends Component {
     else {
       window.localStorage.removeItem("phone");
       window.localStorage.removeItem("status");
+      window.localStorage.removeItem("channel");
+      window.localStorage.removeItem("sid");
       window.location = "/";
     }
   };
@@ -115,7 +117,9 @@ class VerifyMobile extends Component {
                           <div className="row">
                             {this.state.status === "send" && (
                               <div className="col-4 p-0 m-0">
-                                <CountryCodes />
+                                <CountryCodes
+                                  handleChange={this.handleChange}
+                                />
                               </div>
                             )}
                             <div
