@@ -6,13 +6,14 @@ import Reloader from "../components/common/preloader";
 import Services from "./Services";
 import Footer from "../components/common/Footer";
 import AOS from "aos";
-import { admin } from "../httpServices/auth/auth";
+import { admin, authed } from "../httpServices/auth/auth";
 import RemoveAdmin from "../components/User/removeAdmin";
 import AddAdmin from "../components/User/addAdmin";
 import "react-toastify/dist/ReactToastify.css";
 import "aos/dist/aos.css";
 import "./app.css";
 import "@fortawesome/fontawesome-free/css/all.css";
+import ChangePassword from "../components/User/ChangePassword";
 class App extends Services {
   render() {
     AOS.init();
@@ -27,6 +28,7 @@ class App extends Services {
             <AddAdmin />
           </React.Fragment>
         )}
+        {authed() && <ChangePassword />}
         <Switch>{this.state.Routes.map(item => item.Route)}</Switch>
         <Footer />
       </BrowserRouter>

@@ -56,7 +56,7 @@ class AddAdmin extends Component {
               className="modal-header border-0"
               dir={lang === "eng" ? "ltr" : "rtl"}
             >
-              <h1 className="modal-title text-orange">{words["new admin"]}</h1>
+              <h3 className="modal-title text-orange">{words["new admin"]}</h3>
             </div>
             <div className="modal-body border-0">
               {this.state.addAdminId.length === 0 ? (

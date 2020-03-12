@@ -97,7 +97,8 @@
         "no admins": "لا يوجد مشرفين حتى الان",
         "some of our cars": "بعض ما لدينا",
         "sell & buy cars": "بيع وشراء سيارات",
-        "sell & buy cars > content": "اشترى سيارة بطريقة اسرع واسهل, طريقة بيع وشراء افضل"
+        "sell & buy cars > content": "اشترى سيارة بطريقة اسرع واسهل, طريقة بيع وشراء افضل",
+        "change password": "تغيير كلمة السر"
     },
     "eng": {
         "homepage": "homepage",
@@ -198,6 +199,7 @@
         "no admins": "There are no admins until now",
         "some of our cars": "Some Of Our Cars",
         "sell & buy cars": "Sell & buy Cars",
-        "sell & buy cars > content": "Sell your car quickly and easily, today! Buying Service."
+        "sell & buy cars > content": "Sell your car quickly and easily, today! Buying Service.",
+        "change password": "Change Password"
     }
 }

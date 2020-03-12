@@ -45,60 +45,72 @@ class Navbar extends Component {
                 <div id="cssmenu" className="align-right">
                   <ul>
                     <li className="active">
-                      <a href="#">
+                      <a>
                         <i className="fa fa-globe"></i>
                       </a>
                       <ul className="">
                         <li>
-                          <Link to="#" onClick={this.setLanguage} id="eng">
+                          <Link onClick={this.setLanguage} id="eng">
                             English
                           </Link>
                         </li>
                         <li>
-                          <Link to="#" onClick={this.setLanguage} id="arabic">
+                          <Link onClick={this.setLanguage} id="arabic">
                             العربية
                           </Link>
                         </li>
                       </ul>
                     </li>
                     {user && (
-                      <li className="active">
-                        <a href="#">{user.name}</a>
-                        <ul>
-                          {admin() && (
-                            <React.Fragment>
-                              <li className="active">
-                                <a>{words["admin panel"]}</a>
-                                <ul>
-                                  <li>
-                                    <a
-                                      type="button"
-                                      data-toggle="modal"
-                                      data-target="#addadmin"
-                                      aria-hidden="false"
-                                    >
-                                      {words["new admin"]}
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a
-                                      type="button"
-                                      data-toggle="modal"
-                                      data-target="#removeadmin"
-                                      aria-hidden="false"
-                                    >
-                                      {words["remove admin"]}
-                                    </a>
-                                  </li>
-                                </ul>
-                              </li>
-                            </React.Fragment>
-                          )}
-                          <li>
-                            <a href="/logout">{words["logout"]}</a>
-                          </li>
-                        </ul>
-                      </li>
+                      <React.Fragment>
+                        <li className="active">
+                          <a href="#">{user.name}</a>
+                          <ul>
+                            {admin() && (
+                              <React.Fragment>
+                                <li className="active">
+                                  <a>{words["admin panel"]}</a>
+                                  <ul>
+                                    <li>
+                                      <a
+                                        type="button"
+                                        data-toggle="modal"
+                                        data-target="#addadmin"
+                                        aria-hidden="false"
+                                      >
+                                        {words["new admin"]}
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a
+                                        type="button"
+                                        data-toggle="modal"
+                                        data-target="#removeadmin"
+                                        aria-hidden="false"
+                                      >
+                                        {words["remove admin"]}
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </React.Fragment>
+                            )}
+                            <li className="active">
+                              <a
+                                type="button"
+                                data-toggle="modal"
+                                data-target="#changepassword"
+                                aria-hidden="false"
+                              >
+                                {words["change password"]}
+                              </a>
+                            </li>
+                            <li>
+                              <a href="/logout">{words["logout"]}</a>
+                            </li>
+                          </ul>
+                        </li>
+                      </React.Fragment>
                     )}
 
                     <li>
@@ -137,7 +149,6 @@ class Navbar extends Component {
             </div>
           </header>
         </React.Fragment>
-        <React.Fragment></React.Fragment>
       </React.Fragment>
     );
   }

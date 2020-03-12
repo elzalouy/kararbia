@@ -58,9 +58,9 @@ class RemoveAdmin extends Component {
               className="modal-header border-0"
               dir={lang === "eng" ? "ltr" : "rtl"}
             >
-              <h1 className="modal-title text-orange">
+              <h3 className="modal-title text-orange">
                 {words["remove admin"]}
-              </h1>
+              </h3>
             </div>
             <div className="modal-body border-0">
               {this.state.removeAdminId.length === 0 ? (
