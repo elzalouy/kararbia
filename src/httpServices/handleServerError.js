@@ -7,6 +7,8 @@ module.exports = function(result) {
     if (result.response.status === 401 && result.response.data.mobile) {
       return { key: "mobile", message: result.response.data.mobile };
     }
+    if (result.response.status === 401 && result.response.data.email)
+      return { key: "email", message: result.response.data.email };
     if (result.response.status === 401)
       return {
         key: "unauthorized",
