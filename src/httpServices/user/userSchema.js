@@ -29,3 +29,21 @@ export async function validateRegister(data) {
     message: result.error.details[0].message
   };
 }
+export async function validateNewPassword(data) {
+  const schema = {
+    newPassword: Joi.string()
+      .min(6)
+      .max(1024)
+      .required(),
+    confirmPassword: Joi.string()
+      .max(1024)
+      .min(5)
+      .required()
+  };
+  const result = Joi.validate(data, schema);
+  if (!result.error) return null;
+  return {
+    key: result.error.details[0].context.key,
+    message: result.error.details[0].message
+  };
+}

@@ -2788,7 +2788,8 @@ section.top-slider-features .slider-top-features .owl-dots {
     border-bottom: 3px solid transparent;
     -webkit-transition: all 0.5s;
     -o-transition: all 0.5s;
-    transition: all 0.5s
+    transition: all 0.5s;
+    z-index: 0 !important;
 }
 
 .service-item:hover {
@@ -2802,7 +2803,8 @@ section.top-slider-features .slider-top-features .owl-dots {
 
 @media (max-width:991px) {
     .service-item {
-        margin-bottom: 30px
+        margin-bottom: 30px;
+        z-index: 0 !important;
     }
 }
 
@@ -2846,12 +2848,14 @@ section.top-slider-features {
 
 @media (max-width:991px) {
     .features-search-section {
-        margin-top: 30px
+        margin-top: 30px;
+        z-index: 0 !important;
     }
 }
 
 .features-search-section .service-item {
-    margin-bottom: 30px
+    margin-bottom: 30px;
+    z-index: 0 !important;
 }
 
 .features-search-section .search-content {
@@ -2861,21 +2865,25 @@ section.top-slider-features {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
     padding: 0px 30px 30px 30px;
     width: 100%;
-    border-top: 3px solid #f4c23d
+    border-top: 3px solid #f4c23d;
+    z-index: 0 !important;
 }
 
 @media (max-width:991px) {
     .features-search-section .search-content {
-        margin-top: 25px
+        margin-top: 25px;
+        z-index: 0 !important;
     }
 }
 
 .features-search-section .search-content .search-heading {
-    text-align: center
+    text-align: center;
+    z-index: 0 !important;
 }
 
 .features-search-section .search-content .search-heading .icon {
-    margin-top: -22px
+    margin-top: -22px;
+    z-index: 0 !important;
 }
 
 .features-search-section .search-content .search-heading .icon i {
@@ -2889,7 +2897,8 @@ section.top-slider-features {
     line-height: 44px;
     text-align: center;
     position: relative;
-    margin-bottom: 40px
+    margin-bottom: 40px;
+    z-index: 0 !important;
 }
 
 .features-search-section .search-content .search-heading .icon i:after {
@@ -2922,7 +2931,8 @@ section.top-slider-features {
 }
 
 .features-search-section .search-content .search-form {
-    margin-top: 30px
+    margin-top: 30px;
+    z-index: 0 !important;
 }
 
 .features-search-section .search-content .search-form select {
@@ -2943,7 +2953,8 @@ section.top-slider-features {
 
 @media (max-width:991px) {
     .features-search-section .search-content .search-form select {
-        margin-bottom: 15px
+        margin-bottom: 15px;
+        z-index: 0 !important;
     }
 }
 

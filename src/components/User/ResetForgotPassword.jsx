@@ -1,30 +1,41 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
-import Handle from "../../middleware/errorHandle";
-import { login } from "../../httpServices/auth/auth";
 import getWords from "../../utils/GetWords";
+import { resetForgotPassword } from "../../httpServices/user/user";
+import { validateNewPassword } from "../../httpServices/user/userSchema";
 import { toast } from "react-toastify";
-class Login extends Component {
-  state = {
-    user: { email: "", password: "" },
-    error: ""
+class ResetForgotPassword extends Component {
+  state = { newPassword: "", confirmPassword: "", error: "" };
+  componentDidMount() {}
+  handleChange = ({ currentTarget: e }) => {
+    const state = this.state;
+    state[e.name] = e.value;
+    this.setState({ state });
   };
-  handleChange = Handle(({ currentTarget: e }) => {
+  handleSubmit = async () => {
+    const token = this.props.match.params.token;
     const state = this.state;
-    state.user[e.name] = e.value;
+    if (state.newPassword !== state.confirmPassword) {
+      state.error = "Password are not confirmed";
+    } else {
+      let result = await validateNewPassword({
+        newPassword: state.newPassword,
+        confirmPassword: state.confirmPassword
+      });
+      if (result) state.error = result.message;
+      else {
+        result = await resetForgotPassword(state.newPassword, token);
+        if (result.error) toast.warn(result.error.message);
+        else {
+          window.location.replace("/login");
+        }
+      }
+    }
     this.setState({ state });
-  });
-  handleSubmit = Handle(async () => {
-    const state = this.state;
-    const { error } = await login(state.user);
-    if (!error) window.location.reload();
-    if (error.key === "mobile") window.location = "/verifyMobile";
-    else toast.warn(error.message);
-    this.setState({ state });
-  });
+  };
   render() {
+    const { words, lang } = getWords();
     const { error } = this.state;
-    let { lang, words } = getWords();
     return (
       <React.Fragment>
         <div
@@ -46,10 +57,10 @@ class Login extends Component {
                     <div className="heading-content col-md-6">
                       <p>
                         <a href="/home">{words["homepage"]}</a> /{" "}
-                        <em> {words["login"]}</em>
+                        <em> {words["reset forgot password"]}</em>
                       </p>
                       <h2>
-                        {words["login"]} <em>{words["now"]}</em>
+                        {words["reset forgot"]} <em>{words["password"]}</em>
                       </h2>
                     </div>
 
@@ -63,20 +74,20 @@ class Login extends Component {
                             <i className="fa fa-user" aria-hidden="true"></i>
                           </div>
                           <div className="text-content">
-                            <h2>{words["login"]}</h2>
+                            <h2>{words["reset forgot password"]}</h2>
                           </div>
                         </div>
                         <div className="search-form">
                           <div className="row">
                             <div className="col-md-12">
-                              <div className="input-select">
+                              <div className="input-select mb-5">
                                 <input
-                                  type="email"
-                                  name="email"
-                                  value={this.state.user.email}
+                                  type="password"
+                                  name="newPassword"
+                                  value={this.state.newPassword}
                                   onChange={this.handleChange}
-                                  placeholder={words["your email"]}
-                                  className="bg-transparent border border-white w-100 mb-3 p-2 text-white"
+                                  placeholder={words["new password"]}
+                                  className="bg-transparent border border-white w-100 p-2 text-white"
                                 />
                               </div>
                             </div>
@@ -84,25 +95,16 @@ class Login extends Component {
                               <div className="input-select mb-5">
                                 <input
                                   type="password"
-                                  name="password"
-                                  value={this.state.user.password}
+                                  name="confirmPassword"
+                                  value={this.state.confirmPassword}
                                   onChange={this.handleChange}
-                                  placeholder={words["your password"]}
+                                  placeholder={words["confirm passworod"]}
                                   className="bg-transparent border border-white w-100 p-2 text-white"
                                 />
                                 {error && <p className="text-white">{error}</p>}
-                                <div className="pt-2">
-                                  <a
-                                    className="text-white cursor-pointer"
-                                    data-toggle="modal"
-                                    data-target="#forgotPassword"
-                                    aria-hidden="false"
-                                  >
-                                    {words["forgot password"]}
-                                  </a>
-                                </div>
                               </div>
                             </div>
+
                             <div className="col-md-12">
                               <div className="secondary-button">
                                 <a
@@ -129,4 +131,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default ResetForgotPassword;

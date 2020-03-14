@@ -37,7 +37,6 @@ class Register extends Component {
   handleSubmit = Handle(async () => {
     const state = this.state;
     const error = await validateRegister(state.user);
-    console.log("handleSubmit -> error", error);
     if (error) {
       state.error[error.key] = error.message;
     } else {
@@ -59,7 +58,7 @@ class Register extends Component {
             autoClose: true,
             delay: 500
           });
-          localStorage.setItem("setItem", state.user.phone);
+          localStorage.setItem("phone", state.user.phone);
           window.location = "/verifyMobile";
         }
       }

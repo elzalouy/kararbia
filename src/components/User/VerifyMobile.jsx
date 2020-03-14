@@ -58,17 +58,13 @@ class VerifyMobile extends Component {
   handleSubmitConfirm = async () => {
     const state = this.state;
     const result = await mobileCheckCode(state.confirmCode);
-    if (result.error && result.error.key === "email") {
-      toast.warn(result.error.message);
-      window.location = "/";
-    }
     if (result.error) toast.warn(result.error.message);
     else {
       window.localStorage.removeItem("phone");
       window.localStorage.removeItem("status");
       window.localStorage.removeItem("channel");
       window.localStorage.removeItem("sid");
-      window.location = "/";
+      window.location = "/login";
     }
   };
   render() {

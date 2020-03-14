@@ -132,13 +132,13 @@ export async function changePassword(data, token) {
   return { data: response.data, error: null };
 }
 
-export async function ForgotPassword(email) {
+export async function forgotPassword(email) {
   const response = await http.get(route + "resetPassword/" + email);
   const result = handleServerError(response);
   if (result) return { data: null, error: result };
   return { data: response.data, error: null };
 }
-export async function ResetForgotPassword(newPassword, token) {
+export async function resetForgotPassword(newPassword, token) {
   const response = await http.post(route + "ResetPassword", {
     newPassword: newPassword,
     token: token
@@ -164,6 +164,5 @@ export async function mobileCheckCode(code) {
   );
   const result = handleServerError(response);
   if (result) return { data: null, error: result };
-  setToken(response.data.token);
   return { data: "done", error: null };
 }

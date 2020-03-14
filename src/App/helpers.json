@@ -98,7 +98,12 @@
         "some of our cars": "بعض ما لدينا",
         "sell & buy cars": "بيع وشراء سيارات",
         "sell & buy cars > content": "اشترى سيارة بطريقة اسرع واسهل, طريقة بيع وشراء افضل",
-        "change password": "تغيير كلمة السر"
+        "change password": "تغيير كلمة السر",
+        "reset forgot password": "اعادة تعيين كلمة السر المنسية",
+        "reset forgot": "اعادة تعيين",
+        "password": "كلمة السر",
+        "new password": "كلمة سر جديدة",
+        "change content": "تغيير المحتوى"
     },
     "eng": {
         "homepage": "homepage",
@@ -200,6 +205,11 @@
         "some of our cars": "Some Of Our Cars",
         "sell & buy cars": "Sell & buy Cars",
         "sell & buy cars > content": "Sell your car quickly and easily, today! Buying Service.",
-        "change password": "Change Password"
+        "change password": "Change Password",
+        "reset forgot password": "Reset Forgot Password",
+        "reset forgot": "Reset Forgot",
+        "password": "Password",
+        "new password": "New Password",
+        "change content": "Change Content"
     }
 }

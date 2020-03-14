@@ -14,6 +14,7 @@ import "aos/dist/aos.css";
 import "./app.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import ChangePassword from "../components/User/ChangePassword";
+import ForgotPassword from "../components/User/ForgotPassword";
 class App extends Services {
   render() {
     AOS.init();
@@ -29,6 +30,7 @@ class App extends Services {
           </React.Fragment>
         )}
         {authed() && <ChangePassword />}
+        {!authed() && <ForgotPassword />}
         <Switch>{this.state.Routes.map(item => item.Route)}</Switch>
         <Footer />
       </BrowserRouter>

@@ -10,11 +10,11 @@ import About from "../components/About/About";
 import Login from "../components/User/Login";
 import Register from "../components/User/Register";
 import ContactUs from "../components/Contact/Caontact";
-import EmailConfirm from "../components/User/confirmedEmail";
 import Logout from "../components/User/Logout";
 import AddCar from "../components/Car/AddCar";
 import { authed, admin } from "../httpServices/auth/auth";
 import VerifyMobile from "../components/User/VerifyMobile";
+import ResetForgotPassword from "../components/User/ResetForgotPassword";
 class Services extends Component {
   state = {
     Routes: [
@@ -64,19 +64,6 @@ class Services extends Component {
         Route: <Route path="/contact" component={ContactUs} key="contact" />
       },
       {
-        route: "/emailConfirm/:token",
-        Route: (
-          <Route
-            path="/emailConfirm/:token"
-            render={props => {
-              if (authed()) return <Redirect to="/home" />;
-              else return <EmailConfirm {...props} />;
-            }}
-            key="emailConfirm"
-          />
-        )
-      },
-      {
         route: "/verifyMobile",
         Route: (
           <Route
@@ -86,6 +73,19 @@ class Services extends Component {
               if (!authed()) return <VerifyMobile {...props} />;
               else return <Redirect to="/home" />;
             }}
+          />
+        )
+      },
+      {
+        route: "/ResetPassword/:token",
+        Route: (
+          <Route
+            path="/ResetPassword/:token"
+            render={props => {
+              if (!authed()) return <ResetForgotPassword {...props} />;
+              else return <Redirect to="/home" />;
+            }}
+            key="resetforgotpassword"
           />
         )
       },
