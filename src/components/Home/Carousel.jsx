@@ -3,8 +3,7 @@ import slide1 from "../../images/slider1.jpeg";
 import slide2 from "../../images/slider2.jpeg";
 import slide3 from "../../images/slider3.jpeg";
 import getWords from "../../utils/GetWords";
-import handle from "../../middleware/errorHandle";
-const Carousel = handle(({ cars }) => {
+const Carousel = ({ cars }) => {
   let { words } = getWords();
   cars = cars.cars;
   return (
@@ -112,6 +111,6 @@ const Carousel = handle(({ cars }) => {
       )}
     </React.Fragment>
   );
-});
+};
 
 export default Carousel;

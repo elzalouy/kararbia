@@ -2,8 +2,7 @@
 import React from "react";
 import "./common.css";
 import getWords from "../../utils/GetWords";
-import handle from "../../middleware/errorHandle";
-const ContentDrop = handle(({ itemKey, handleEdit }) => {
+const ContentDrop = ({ itemKey, handleEdit }) => {
   let { lang } = getWords();
   return (
     <div
@@ -38,6 +37,6 @@ const ContentDrop = handle(({ itemKey, handleEdit }) => {
       </div>
     </div>
   );
-});
+};
 
 export default ContentDrop;

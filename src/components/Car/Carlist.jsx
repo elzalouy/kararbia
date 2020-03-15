@@ -24,6 +24,7 @@ class CarList extends Component {
     transmission: "",
     body_type: ""
   };
+
   async componentDidMount() {
     const state = this.state;
     let result = await getCars();
@@ -34,26 +35,29 @@ class CarList extends Component {
       this.setState({ state });
     }
   }
+
   handleChangePage = handle(page => {
     this.setState({ currentPage: page });
   });
-  getPagedData = handle(() => {
+
+  getPagedData = () => {
     const { pageSize, currentPage, filtered: cars } = this.state;
     let Filtered = [];
     Filtered = paginate(cars, currentPage, pageSize);
     return { totalCount: cars ? cars.length : 0, all: Filtered };
-  });
+  };
+
   handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state[e.name] = e.value;
     this.setState({ state });
   });
+
   handleSearch = handle(() => {
     const state = this.state;
     let price = state.cars.map(item => {
       return item.price;
     });
-
     price = _.uniq(price);
     price = _.sortBy(price);
     state.minprice = state.minprice.length === 0 ? 0 : state.minprice;
@@ -76,6 +80,7 @@ class CarList extends Component {
     });
     this.setState({ state });
   });
+
   render() {
     const { all: cars } = this.getPagedData();
     let { words, lang } = getWords();
@@ -126,7 +131,7 @@ class CarList extends Component {
               <div className="row">
                 <div className="col-md-8">
                   <div className="row align-items-center">
-                    {cars.length > 0 ? (
+                    {cars && cars.length > 0 ? (
                       cars.map(item => (
                         <React.Fragment key={item._id}>
                           <div className="col-md-6">
@@ -194,7 +199,7 @@ class CarList extends Component {
                     <div className="col-md-12 mb-5">
                       <Pagination
                         itemsCount={
-                          cars && cars.length && this.state.cars.length
+                          cars && cars.length ? this.state.cars.length : 0
                         }
                         pageSize={this.state.pageSize}
                         currentPage={this.state.currentPage}

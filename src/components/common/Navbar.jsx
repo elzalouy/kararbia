@@ -5,7 +5,6 @@ import { authed, admin } from "../../httpServices/auth/auth";
 import { getUserByToken } from "../../httpServices/user/user";
 import { Link } from "react-router-dom";
 import getWords from "../../utils/GetWords.js";
-import isAdmin from "../../middleware/admin";
 import handle from "../../middleware/errorHandle";
 import { toast } from "react-toastify";
 

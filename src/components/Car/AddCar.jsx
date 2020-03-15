@@ -122,11 +122,11 @@ class AddCar extends Component {
     state.disabled = false;
     this.setState({ state });
   });
-  handleCancel = () => {
+  handleCancel = handle(() => {
     const state = this.state;
     state.images = state.imagesPreview = [];
     window.location = "/";
-  };
+  });
   render() {
     const state = this.state;
     let { words, lang } = getWords();

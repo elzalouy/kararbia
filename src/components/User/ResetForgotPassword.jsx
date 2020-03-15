@@ -9,11 +9,11 @@ import handle from "../../middleware/errorHandle";
 class ResetForgotPassword extends Component {
   state = { newPassword: "", confirmPassword: "", error: "" };
   componentDidMount() {}
-  handleChange = ({ currentTarget: e }) => {
+  handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state[e.name] = e.value;
     this.setState({ state });
-  };
+  });
   handleSubmit = handle(async () => {
     const token = this.props.match.params.token;
     const state = this.state;

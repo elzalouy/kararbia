@@ -1,8 +1,7 @@
 import React from "react";
 import getWords from "../../utils/GetWords.js";
-import handle from "../../middleware/errorHandle";
 
-const RecentCars = handle(({ cars }) => {
+const RecentCars = ({ cars }) => {
   let { words } = getWords();
   return (
     <section>
@@ -92,6 +91,6 @@ const RecentCars = handle(({ cars }) => {
       </div>
     </section>
   );
-});
+};
 
 export default RecentCars;

@@ -1,7 +1,6 @@
 import React from "react";
-import handle from "../../middleware/errorHandle";
 
-const Search = handle(() => {
+const Search = () => {
   return (
     <div id="search">
       <button type="button" className="close">
@@ -15,6 +14,6 @@ const Search = handle(() => {
       </form>
     </div>
   );
-});
+};
 
 export default Search;

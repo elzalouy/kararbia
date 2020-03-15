@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Slider from "react-slick";
-import handle from "../../../middleware/errorHandle";
-const Gallary = handle(({ images }) => {
+const Gallary = ({ images }) => {
   if (!images) return null;
   var settings = {
     dots: true,
@@ -44,6 +43,6 @@ const Gallary = handle(({ images }) => {
       ))}
     </Slider>
   );
-});
+};
 
 export default Gallary;
