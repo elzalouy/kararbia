@@ -9,6 +9,8 @@ import { validateServiceSchema } from "../../httpServices/redis/redisSchema";
 import { toast } from "react-toastify";
 import { addRedis, getRedis } from "../../httpServices/redis/redis.js";
 import { admin } from "../../httpServices/auth/auth";
+import handle from "../../middleware/errorHandle";
+
 class Features extends Component {
   state = {
     content: [],
@@ -21,27 +23,31 @@ class Features extends Component {
     }
   };
   async componentDidMount() {
-    const content = await getRedis();
-    if (content.error) toast.warn(content.error.message);
-    else {
-      const state = this.state;
-      state.content = content.data;
-      this.setState({ state });
+    try {
+      const content = await getRedis();
+      if (content.error) toast.warn(content.error.message);
+      else {
+        const state = this.state;
+        state.content = content.data;
+        this.setState({ state });
+      }
+    } catch (ex) {
+      toast.warn(ex);
     }
   }
-  handleEdit = ({ currentTarget: e }) => {
+  handleEdit = handle(({ currentTarget: e }) => {
     const state = this.state;
     state.currentEditKey = e.id;
     state.value = state.content.find(s => s.key === state.currentEditKey).value;
     this.setState({ state });
-  };
+  });
 
-  handleChange = async ({ currentTarget: e }) => {
+  handleChange = handle(async ({ currentTarget: e }) => {
     const state = this.state;
     state.value[e.name] = e.value;
     this.setState({ state });
-  };
-  handleSubmit = async () => {
+  });
+  handleSubmit = handle(async () => {
     const state = this.state;
     let content = { key: state.currentEditKey, value: state.value };
     console.log("handleSubmit -> content", content);
@@ -52,7 +58,7 @@ class Features extends Component {
       if (addresult.error) toast.warn(addresult.error.message);
       else window.location.reload();
     }
-  };
+  });
   render() {
     let { words, lang } = getWords();
     const { content, currentEditKey, value } = this.state;

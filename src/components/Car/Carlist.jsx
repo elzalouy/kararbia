@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Pagination from "../common/pagination";
 import { paginate } from "../../utils/paginate";
 import CarSearch from "./CarSearch";
+import handle from "../../middleware/errorHandle";
 const _ = require("lodash");
 class CarList extends Component {
   state = {
@@ -33,21 +34,21 @@ class CarList extends Component {
       this.setState({ state });
     }
   }
-  handleChangePage = page => {
+  handleChangePage = handle(page => {
     this.setState({ currentPage: page });
-  };
-  getPagedData = () => {
+  });
+  getPagedData = handle(() => {
     const { pageSize, currentPage, filtered: cars } = this.state;
     let Filtered = [];
     Filtered = paginate(cars, currentPage, pageSize);
     return { totalCount: cars ? cars.length : 0, all: Filtered };
-  };
-  handleChange = ({ currentTarget: e }) => {
+  });
+  handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state[e.name] = e.value;
     this.setState({ state });
-  };
-  handleSearch = () => {
+  });
+  handleSearch = handle(() => {
     const state = this.state;
     let price = state.cars.map(item => {
       return item.price;
@@ -74,7 +75,7 @@ class CarList extends Component {
         return s;
     });
     this.setState({ state });
-  };
+  });
   render() {
     const { all: cars } = this.getPagedData();
     let { words, lang } = getWords();

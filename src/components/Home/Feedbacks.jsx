@@ -1,6 +1,7 @@
 import React from "react";
+import handle from "../../middleware/errorHandle";
 
-const Feedbacks = () => {
+const Feedbacks = handle(() => {
   return (
     <section>
       <div className="testimonials">
@@ -228,6 +229,6 @@ const Feedbacks = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Feedbacks;

@@ -8,13 +8,17 @@ import Gallary from "../common/Gallary/Gallary.jsx";
 class SingleCar extends Component {
   state = { car: {} };
   async componentDidMount() {
-    const state = this.state;
-    const id = this.props.match.params.id;
-    const { error, data } = await getCarById(id);
-    if (error) toast.warn(error.message);
-    else {
-      state.car = data;
-      this.setState({ state });
+    try {
+      const state = this.state;
+      const id = this.props.match.params.id;
+      const { error, data } = await getCarById(id);
+      if (error) toast.warn(error.message);
+      else {
+        state.car = data;
+        this.setState({ state });
+      }
+    } catch (ex) {
+      toast.warn(ex);
     }
   }
   render() {

@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import getWords from "../../utils/GetWords.js";
-const ContactUs = () => {
+import handle from "../../middleware/errorHandle";
+const ContactUs = handle(() => {
   let { words, lang } = getWords();
   return (
     <React.Fragment>
@@ -139,6 +140,6 @@ const ContactUs = () => {
       </section>
     </React.Fragment>
   );
-};
+});
 
 export default ContactUs;

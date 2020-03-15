@@ -6,6 +6,8 @@ import smsimg from "../../images/sms.svg";
 import { mobileConfirm, mobileCheckCode } from "../../httpServices/user/user";
 import { toast } from "react-toastify";
 import CountryCodes from "../common/CountryCodes";
+import handle from "../../middleware/errorHandle";
+
 class VerifyMobile extends Component {
   state = {
     error: "",
@@ -16,21 +18,25 @@ class VerifyMobile extends Component {
     confirmCode: ""
   };
   componentDidMount() {
-    const state = this.state;
-    if (window.localStorage.getItem("phone")) state.status = "confirm";
-    this.setState({ state });
+    try {
+      const state = this.state;
+      if (window.localStorage.getItem("phone")) state.status = "confirm";
+      this.setState({ state });
+    } catch (ex) {
+      toast.warn(ex);
+    }
   }
-  handleChange = ({ currentTarget: e }) => {
+  handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state[e.name] = e.value;
     this.setState({ state });
-  };
-  handleChangeChannel = ({ currentTarget: e }) => {
+  });
+  handleChangeChannel = handle(({ currentTarget: e }) => {
     const state = this.state;
     state.channel = e.id;
     this.setState({ state });
-  };
-  handleSubmitSend = async () => {
+  });
+  handleSubmitSend = handle(async () => {
     const state = this.state;
     let phone = `+${state.code}${state.phone}`;
     let channel = state.channel;
@@ -45,8 +51,8 @@ class VerifyMobile extends Component {
       this.setState({ state });
       toast.warn("The code had sent successfully.");
     }
-  };
-  handleResendCode = () => {
+  });
+  handleResendCode = handle(() => {
     window.localStorage.removeItem("status");
     window.localStorage.removeItem("phone");
     window.localStorage.removeItem("channel");
@@ -54,8 +60,8 @@ class VerifyMobile extends Component {
     const state = this.state;
     state.status = "send";
     this.setState({ state });
-  };
-  handleSubmitConfirm = async () => {
+  });
+  handleSubmitConfirm = handle(async () => {
     const state = this.state;
     const result = await mobileCheckCode(state.confirmCode);
     if (result.error) toast.warn(result.error.message);
@@ -66,7 +72,7 @@ class VerifyMobile extends Component {
       window.localStorage.removeItem("sid");
       window.location = "/login";
     }
-  };
+  });
   render() {
     let { words, lang } = getWords();
     return (

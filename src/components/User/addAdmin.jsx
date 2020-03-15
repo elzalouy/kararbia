@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { AddNewAdmin, getUserByName } from "../../httpServices/user/user";
 import { getToken } from "../../httpServices/localStorage";
 import getWords from "../../utils/GetWords";
+import handle from "../../middleware/errorHandle";
+
 import "./user.css";
 class AddAdmin extends Component {
   state = {
@@ -12,31 +14,37 @@ class AddAdmin extends Component {
     addAdminId: "",
     user: {}
   };
-  handleAddAdmin = isAdmin(async () => {
-    const state = this.state;
-    const result = await AddNewAdmin(state.addAdminId, getToken());
-    if (result.error) toast.warn(result.error.message);
-    else window.location.reload();
-  });
-  handleSelectAdmin = isAdmin(async ({ currentTarget: e }) => {
-    const state = this.state;
-    state.addAdminId = e.id;
-    state.user = state.searchedUsers.find(s => s._id === e.id);
-    this.setState({ state });
-  });
-  handleSearchAdmin = isAdmin(async ({ currentTarget: e }) => {
-    const state = this.state;
-    let result = await getUserByName(e.value);
-    if (result.error) toast.warn(result.error.message);
-    else state.searchedUsers = result.data;
-    this.setState({ state });
-  });
-  handleRemoveSelected = () => {
+  handleAddAdmin = handle(
+    isAdmin(async () => {
+      const state = this.state;
+      const result = await AddNewAdmin(state.addAdminId, getToken());
+      if (result.error) toast.warn(result.error.message);
+      else window.location.reload();
+    })
+  );
+  handleSelectAdmin = handle(
+    isAdmin(async ({ currentTarget: e }) => {
+      const state = this.state;
+      state.addAdminId = e.id;
+      state.user = state.searchedUsers.find(s => s._id === e.id);
+      this.setState({ state });
+    })
+  );
+  handleSearchAdmin = handle(
+    isAdmin(async ({ currentTarget: e }) => {
+      const state = this.state;
+      let result = await getUserByName(e.value);
+      if (result.error) toast.warn(result.error.message);
+      else state.searchedUsers = result.data;
+      this.setState({ state });
+    })
+  );
+  handleRemoveSelected = handle(() => {
     const state = this.state;
     state.user = {};
     state.addAdminId = "";
     this.setState({ state });
-  };
+  });
   render() {
     let { words, lang } = getWords();
     return (

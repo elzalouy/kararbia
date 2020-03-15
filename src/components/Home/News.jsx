@@ -1,6 +1,7 @@
 import React from "react";
 import getWords from "../../utils/GetWords.js";
-const News = () => {
+import handle from "../../middleware/errorHandle";
+const News = handle(() => {
   let { words } = getWords();
   return (
     <section>
@@ -122,6 +123,6 @@ const News = () => {
       </div>
     </section>
   );
-};
+});
 
 export default News;

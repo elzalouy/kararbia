@@ -1,12 +1,17 @@
 import { Component } from "react";
 import { getCars } from "../../httpServices/car/car";
+import { toast } from "react-toastify";
 class HomeInterface extends Component {
   state = { cars: [] };
   async componentDidMount() {
-    const state = this.state;
-    let { data } = await getCars();
-    state.cars = data;
-    this.setState(state);
+    try {
+      const state = this.state;
+      let { data } = await getCars();
+      state.cars = data;
+      this.setState(state);
+    } catch (ex) {
+      toast.warn(ex);
+    }
   }
 }
 

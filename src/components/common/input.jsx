@@ -1,6 +1,6 @@
 import React from "react";
-
-const Input = ({ type, word, value, name, changeValue }) => {
+import handle from "../../middleware/errorHandle";
+const Input = handle(({ type, word, value, name, changeValue }) => {
   return (
     <React.Fragment>
       <label className="p-0 mb-1">{word}</label>
@@ -14,6 +14,6 @@ const Input = ({ type, word, value, name, changeValue }) => {
       />
     </React.Fragment>
   );
-};
+});
 
 export default Input;

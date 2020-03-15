@@ -1,6 +1,6 @@
 import React from "react";
-
-const CountryCodes = ({ handleChange }) => {
+import handle from "../../middleware/errorHandle";
+const CountryCodes = handle(({ handleChange }) => {
   return (
     <select name="code" dir="ltr" className="m-0" onChange={handleChange}>
       <option value="44" defaultValue>
@@ -225,6 +225,6 @@ const CountryCodes = ({ handleChange }) => {
       </optgroup>
     </select>
   );
-};
+});
 
 export default CountryCodes;

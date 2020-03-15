@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import getWords from "../../utils/GetWords";
+import handle from "../../middleware/errorHandle";
 const _ = require("lodash");
-const CarSearch = ({ cars, handleChange, handleSearch }) => {
+const CarSearch = handle(({ cars, handleChange, handleSearch }) => {
   let { words } = getWords();
   let models,
     brand,
@@ -184,6 +185,6 @@ const CarSearch = ({ cars, handleChange, handleSearch }) => {
       </div>
     </div>
   );
-};
+});
 
 export default CarSearch;

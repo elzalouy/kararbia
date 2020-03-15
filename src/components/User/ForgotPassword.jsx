@@ -2,19 +2,21 @@ import React, { Component } from "react";
 import getWords from "../../utils/GetWords";
 import { forgotPassword } from "../../httpServices/user/user";
 import { toast } from "react-toastify";
+import handle from "../../middleware/errorHandle";
+
 class ForgotPassword extends Component {
   state = { email: "" };
-  handleChange = ({ currentTarget: e }) => {
+  handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state.email = e.value;
     this.setState({ state });
-  };
-  handleSubmit = async () => {
+  });
+  handleSubmit = handle(async () => {
     const state = this.state;
     let result = await forgotPassword(state.email);
     if (result.error) toast.warn(result.error.message);
     else toast.warn(result.data);
-  };
+  });
   render() {
     let { lang, words } = getWords();
     return (

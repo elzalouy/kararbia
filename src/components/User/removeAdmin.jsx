@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { getAdmins, removeAdmin } from "../../httpServices/user/user";
 import { getToken } from "../../httpServices/localStorage";
 import getWords from "../../utils/GetWords";
+import handle from "../../middleware/errorHandle";
 
 class RemoveAdmin extends Component {
   state = {
@@ -14,30 +15,40 @@ class RemoveAdmin extends Component {
     user: {}
   };
   async componentDidMount() {
-    const state = this.state;
-    const result = await getAdmins(getToken());
-    if (result.error) return null;
-    else state.admins = state.searchedAdmins = result.data;
-    this.setState({ state });
+    try {
+      const state = this.state;
+      const result = await getAdmins(getToken());
+      if (result.error) return null;
+      else state.admins = state.searchedAdmins = result.data;
+      this.setState({ state });
+    } catch (ex) {
+      toast.warn(ex);
+    }
   }
-  handleRemoveAdmin = isAdmin(async () => {
-    const state = this.state;
-    const result = await removeAdmin(state.removeAdminId, getToken());
-    if (result.error) toast.warn(result.error.message);
-    else window.location.reload();
-  });
-  handleSelectAdmin = isAdmin(async ({ currentTarget: e }) => {
-    const state = this.state;
-    state.removeAdminId = e.id;
-    state.user = state.searchedAdmins.find(s => s._id === e.id);
-    this.setState({ state });
-  });
-  handleSearchAdmin = isAdmin(async ({ currentTarget: e }) => {
-    const state = this.state;
-    let searched = state.searchedAdmins.filter(s => s.name.includes(e.value));
-    state.searchedAdmins = searched;
-    this.setState({ state });
-  });
+  handleRemoveAdmin = handle(
+    isAdmin(async () => {
+      const state = this.state;
+      const result = await removeAdmin(state.removeAdminId, getToken());
+      if (result.error) toast.warn(result.error.message);
+      else window.location.reload();
+    })
+  );
+  handleSelectAdmin = handle(
+    isAdmin(async ({ currentTarget: e }) => {
+      const state = this.state;
+      state.removeAdminId = e.id;
+      state.user = state.searchedAdmins.find(s => s._id === e.id);
+      this.setState({ state });
+    })
+  );
+  handleSearchAdmin = handle(
+    isAdmin(async ({ currentTarget: e }) => {
+      const state = this.state;
+      let searched = state.searchedAdmins.filter(s => s.name.includes(e.value));
+      state.searchedAdmins = searched;
+      this.setState({ state });
+    })
+  );
 
   render() {
     let { words, lang } = getWords();

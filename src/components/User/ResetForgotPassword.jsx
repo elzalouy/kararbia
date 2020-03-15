@@ -4,6 +4,8 @@ import getWords from "../../utils/GetWords";
 import { resetForgotPassword } from "../../httpServices/user/user";
 import { validateNewPassword } from "../../httpServices/user/userSchema";
 import { toast } from "react-toastify";
+import handle from "../../middleware/errorHandle";
+
 class ResetForgotPassword extends Component {
   state = { newPassword: "", confirmPassword: "", error: "" };
   componentDidMount() {}
@@ -12,7 +14,7 @@ class ResetForgotPassword extends Component {
     state[e.name] = e.value;
     this.setState({ state });
   };
-  handleSubmit = async () => {
+  handleSubmit = handle(async () => {
     const token = this.props.match.params.token;
     const state = this.state;
     if (state.newPassword !== state.confirmPassword) {
@@ -32,7 +34,7 @@ class ResetForgotPassword extends Component {
       }
     }
     this.setState({ state });
-  };
+  });
   render() {
     const { words, lang } = getWords();
     const { error } = this.state;

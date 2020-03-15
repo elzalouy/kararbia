@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import getWords from "../../utils/GetWords";
 import { getToken } from "../../httpServices/localStorage";
 import { changePassword } from "../../httpServices/user/user";
+import handle from "../../middleware/errorHandle";
 
 class ChangePassword extends Component {
   state = {
@@ -10,12 +11,12 @@ class ChangePassword extends Component {
     confirmPassword: "",
     error: ""
   };
-  handleChange = ({ currentTarget: e }) => {
+  handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state[e.name] = e.value;
     this.setState({ state });
-  };
-  handleSubmit = async () => {
+  });
+  handleSubmit = handle(async () => {
     const state = this.state;
     if (state.newPassword === state.confirmPassword) {
       let result = await changePassword(
@@ -30,7 +31,7 @@ class ChangePassword extends Component {
       state.error = "the new password are confirmed with confirm password";
     }
     this.setState({ state });
-  };
+  });
   render() {
     const { words, lang } = getWords();
     return (

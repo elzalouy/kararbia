@@ -6,30 +6,34 @@ import { getUserByToken } from "../../httpServices/user/user";
 import { Link } from "react-router-dom";
 import getWords from "../../utils/GetWords.js";
 import isAdmin from "../../middleware/admin";
+import handle from "../../middleware/errorHandle";
+import { toast } from "react-toastify";
 
 class Navbar extends Component {
   state = { user: null, lang: "", searchWord: "" };
   async componentDidMount() {
-    const state = this.state;
-    if (authed()) state.user = await getUserByToken();
-    this.setState({ state });
+    try {
+      const state = this.state;
+      if (authed()) state.user = await getUserByToken();
+      this.setState({ state });
+    } catch (ex) {
+      toast.warn(ex);
+    }
   }
-  handleChange = ({ currentTarget: e }) => {
+  handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state[e.name] = e.value;
     this.setState({ state });
-  };
-  setLanguage = ({ currentTarget: e }) => {
+  });
+  setLanguage = handle(({ currentTarget: e }) => {
     const state = this.state;
     let lang = e.id;
     window.localStorage.setItem("lang", lang);
     state.lang = lang;
     this.setState({ state });
     window.location.reload();
-  };
+  });
 
-  handleRemoveAdmin = isAdmin(async () => {});
-  handleSearchUser = isAdmin(async ({ currentTarget: e }) => {});
   render() {
     const { user } = this.state;
     const { words } = getWords();
