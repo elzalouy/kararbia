@@ -38,7 +38,8 @@ class CarList extends Component {
   };
   getPagedData = () => {
     const { pageSize, currentPage, filtered: cars } = this.state;
-    let Filtered = paginate(cars, currentPage, pageSize);
+    let Filtered = [];
+    Filtered = paginate(cars, currentPage, pageSize);
     return { totalCount: cars ? cars.length : 0, all: Filtered };
   };
   handleChange = ({ currentTarget: e }) => {
@@ -202,7 +203,9 @@ class CarList extends Component {
                   </div>
                 </div>
                 <CarSearch
-                  cars={cars && cars.length && this.state.cars}
+                  cars={
+                    this.state.cars && this.state.cars.length && this.state.cars
+                  }
                   handleChange={this.handleChange}
                   handleSearch={this.handleSearch}
                 />
