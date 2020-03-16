@@ -1,12 +1,26 @@
+import { toast } from "react-toastify";
+
 export function setToken(value) {
-  localStorage.setItem("x-auth-token", value);
+  try {
+    localStorage.setItem("x-auth-token", value);
+  } catch (ex) {
+    toast.warn(ex);
+  }
 }
 export function getToken() {
-  if (localStorage.getItem("x-auth-token"))
-    return localStorage.getItem("x-auth-token");
-  return null;
+  try {
+    if (localStorage.getItem("x-auth-token"))
+      return localStorage.getItem("x-auth-token");
+    return null;
+  } catch (ex) {
+    toast.warn(ex);
+  }
 }
 export function removeToken() {
-  if (localStorage.getItem("x-auth-token"))
-    localStorage.removeItem("x-auth-token");
+  try {
+    if (localStorage.getItem("x-auth-token"))
+      localStorage.removeItem("x-auth-token");
+  } catch (ex) {
+    toast.warn(ex);
+  }
 }

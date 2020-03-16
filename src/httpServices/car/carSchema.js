@@ -1,4 +1,5 @@
 import Joi from "joi-browser";
+import { toast } from "react-toastify";
 
 const carSchema = {
   name: Joi.string()
@@ -54,10 +55,14 @@ const carSchema = {
 };
 
 export function validateCar(data) {
-  const result = Joi.validate(data, carSchema);
-  if (!result.error) return null;
-  return {
-    key: result.error.details[0].context.key,
-    message: result.error.details[0].message
-  };
+  try {
+    const result = Joi.validate(data, carSchema);
+    if (!result.error) return null;
+    return {
+      key: result.error.details[0].context.key,
+      message: result.error.details[0].message
+    };
+  } catch (ex) {
+    toast.warn(ex);
+  }
 }

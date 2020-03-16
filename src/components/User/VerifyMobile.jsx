@@ -17,15 +17,7 @@ class VerifyMobile extends Component {
     status: "send",
     confirmCode: ""
   };
-  componentDidMount() {
-    try {
-      const state = this.state;
-      if (window.localStorage.getItem("phone")) state.status = "confirm";
-      this.setState({ state });
-    } catch (ex) {
-      toast.warn(ex);
-    }
-  }
+  componentDidMount() {}
   handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state[e.name] = e.value;

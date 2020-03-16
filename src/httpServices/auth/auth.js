@@ -18,17 +18,21 @@ export async function login(data) {
       return { data: response.data.token, error: null };
     }
   } catch (ex) {
-    toast.warn("May be connection is lost.");
+    toast.warn(ex);
   }
 }
 
 export function owner(id) {
-  let token = getToken();
-  if (token) {
-    let user = jwtDecode(token);
-    if (user && user._id === id) return true;
+  try {
+    let token = getToken();
+    if (token) {
+      let user = jwtDecode(token);
+      if (user && user._id === id) return true;
+    }
+    return false;
+  } catch (ex) {
+    toast.warn(ex);
   }
-  return false;
 }
 
 export function logout() {
@@ -36,23 +40,31 @@ export function logout() {
 }
 
 export function authed() {
-  let token = getToken();
-  if (token) {
-    let user = jwtDecode(token);
-    if (user) {
-      return true;
+  try {
+    let token = getToken();
+    if (token) {
+      let user = jwtDecode(token);
+      if (user) {
+        return true;
+      }
     }
+    return false;
+  } catch (ex) {
+    toast.warn(ex);
   }
-  return false;
 }
 
 export function admin() {
-  let token = getToken();
-  if (token) {
-    let user = jwtDecode(token);
-    if (user && user.isAdmin) {
-      return true;
+  try {
+    let token = getToken();
+    if (token) {
+      let user = jwtDecode(token);
+      if (user && user.isAdmin) {
+        return true;
+      }
     }
+    return false;
+  } catch (ex) {
+    toast.warn(ex);
   }
-  return false;
 }
