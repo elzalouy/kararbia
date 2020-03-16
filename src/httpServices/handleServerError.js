@@ -1,7 +1,7 @@
 module.exports = function(result) {
   if (result.response) {
-    if (result.response.status === 401 && result.response.data.phone) {
-      return { key: "phone", message: result.response.data.phone };
+    if (result.response.status === 401 && result.response.data.mobile) {
+      return { key: "mobile", message: result.response.data.mobile };
     }
     if (result.response.status === 400)
       return { key: "user error", message: result.response.data };
