@@ -58,7 +58,6 @@ class Register extends Component {
             autoClose: true,
             delay: 500
           });
-          localStorage.setItem("phone", state.user.phone);
           window.location = "/verifyMobile";
         }
       }
