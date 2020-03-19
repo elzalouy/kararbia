@@ -18,7 +18,7 @@ class Login extends Component {
     const state = this.state;
     const { error } = await login(state.user);
     if (!error) window.location.reload();
-    if (error.key === "mobile") window.location = "/verifyMobile";
+    // if (error.key === "mobile") window.location = "/verifyMobile";
     else toast.warn(error.message);
     this.setState({ state });
   });

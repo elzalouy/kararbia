@@ -103,7 +103,10 @@
         "reset forgot": "اعادة تعيين",
         "password": "كلمة السر",
         "new password": "كلمة سر جديدة",
-        "change content": "تغيير المحتوى"
+        "change content": "تغيير المحتوى",
+        "extra features title": "العنوان الرئيسي",
+        "feature key": "اسم الميزة",
+        "feature value": "قيمة الميزة"
     },
     "eng": {
         "homepage": "homepage",
@@ -210,6 +213,9 @@
         "reset forgot": "Reset Forgot",
         "password": "Password",
         "new password": "New Password",
-        "change content": "Change Content"
+        "change content": "Change Content",
+        "extra features title": "Extra Feature Title",
+        "feature key": "Feature Key",
+        "feature value": "Feature Value"
     }
 }

@@ -13,7 +13,7 @@ import ContactUs from "../components/Contact/Caontact";
 import Logout from "../components/User/Logout";
 import AddCar from "../components/Car/AddCar";
 import { authed, admin } from "../httpServices/auth/auth";
-import VerifyMobile from "../components/User/VerifyMobile";
+// import VerifyMobile from "../components/User/VerifyMobile";
 import ResetForgotPassword from "../components/User/ResetForgotPassword";
 class Services extends Component {
   state = {
@@ -63,19 +63,19 @@ class Services extends Component {
         route: "/contact",
         Route: <Route path="/contact" component={ContactUs} key="contact" />
       },
-      {
-        route: "/verifyMobile",
-        Route: (
-          <Route
-            key="verifyMobile"
-            path="/verifyMobile"
-            render={props => {
-              if (!authed()) return <VerifyMobile {...props} />;
-              else return <Redirect to="/home" />;
-            }}
-          />
-        )
-      },
+      // {
+      //   route: "/verifyMobile",
+      //   Route: (
+      //     <Route
+      //       key="verifyMobile"
+      //       path="/verifyMobile"
+      //       render={props => {
+      //         if (!authed()) return <VerifyMobile {...props} />;
+      //         else return <Redirect to="/home" />;
+      //       }}
+      //     />
+      //   )
+      // },
       {
         route: "/ResetPassword/:token",
         Route: (

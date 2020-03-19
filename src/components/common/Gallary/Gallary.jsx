@@ -14,9 +14,10 @@ const Gallary = ({ images }) => {
     autoplaySpeed: 2000,
     customPaging: function(i) {
       return (
-        <a>
+        <a className="bg-gray">
           <img
             src={`${images[i].url}`}
+            className="bg-gray"
             style={{
               width: "80px",
               height: "80px"
@@ -26,17 +27,17 @@ const Gallary = ({ images }) => {
         </a>
       );
     },
-    dotsClass: "col-12 mx-0 px-0 slick-dots overflow-x-scroll mb-5",
+    dotsClass: "col-12 mx-0 px-0  bg-gray slick-dots overflow-x-scroll mb-5",
     arrows: false
   };
   return (
-    <Slider {...settings} className="row container slider">
+    <Slider {...settings} className="row container slider bg-gray">
       {images.map(item => (
         <div className="mb-1" key={item._id}>
           <img
             src={item.url}
             alt=""
-            className="active"
+            className="active bg-gray"
             style={{ width: "100%", height: "400px" }}
           />
         </div>

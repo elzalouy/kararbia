@@ -46,6 +46,10 @@
     border-radius: 5px !important;
 }
 
+.brd-2 {
+    border-radius: 10px !important;
+}
+
 .shadow {
     text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.04);
 }
@@ -90,6 +94,10 @@
     position: relative;
 }
 
+.bg-gray {
+    background-color: #f8f8f8;
+}
+
 .gray {
     color: #767b80;
 }
@@ -104,6 +112,10 @@
 
 .text-orange {
     color: #f4c23d;
+}
+
+.btn-warning {
+    background-color: #f4c23d;
 }
 
 .overflow-scroll {

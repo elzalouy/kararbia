@@ -5,16 +5,16 @@ import { addNewUser } from "../../httpServices/user/user";
 import { toast } from "react-toastify";
 import Handle from "../../middleware/errorHandle";
 import getWords from "../../utils/GetWords";
-import CountryCodes from "../common/CountryCodes";
+// import CountryCodes from "../common/CountryCodes";
 class Register extends Component {
   state = {
     user: {
       email: "",
       name: "",
-      phone: "",
+      // phone: "",
       password: "",
-      confirmPassword: "",
-      code: ""
+      confirmPassword: ""
+      // code: ""
     },
     error: {
       email: null,
@@ -22,8 +22,8 @@ class Register extends Component {
       phone: null,
       password: null,
       confirmPassword: null
-    },
-    code: ""
+    }
+    // code: ""
   };
 
   handleChange = Handle(({ currentTarget: e }) => {
@@ -39,6 +39,7 @@ class Register extends Component {
     const error = await validateRegister(state.user);
     if (error) {
       state.error[error.key] = error.message;
+      console.log(error);
     } else {
       if (!state.error.confirmPassword) {
         const result = await addNewUser({
@@ -54,11 +55,14 @@ class Register extends Component {
             delay: 500
           });
         else {
-          toast.info(result.data, {
-            autoClose: true,
-            delay: 500
-          });
-          window.location = "/verifyMobile";
+          toast.info(
+            "We have sent a confirmation mail, Check you email please.",
+            {
+              autoClose: true,
+              delay: 500
+            }
+          );
+          window.location = "/register";
         }
       }
     }
@@ -140,7 +144,7 @@ class Register extends Component {
                                 )}
                               </div>
                             </div>
-                            <div className="col-4">
+                            {/* <div className="col-4">
                               <CountryCodes handleChange={this.handleChange} />
                             </div>
                             <div className="col-8">
@@ -159,7 +163,7 @@ class Register extends Component {
                                   </p>
                                 )}
                               </div>
-                            </div>
+                            </div> */}
                             <div className="col-md-12">
                               <div className="input-select mb-3">
                                 <input
@@ -187,7 +191,7 @@ class Register extends Component {
                                   onChange={this.handleChange}
                                   className="bg-transparent border border-white w-100 p-2 text-white"
                                 />
-                                {this.state.error.confirmPassword && (
+                                {this.state.error && (
                                   <p className="text-warning">
                                     {this.state.error.confirmPassword}
                                   </p>

@@ -93,3 +93,34 @@
 .new-car .add-icon {
     padding-top: 12px !important;
 }
+
+.section-title {
+    text-align: center;
+    margin-top: -35px;
+    font-size: 25px;
+    background-color: #f4c23d;
+    border-radius: 4px;
+}
+
+.key-value {
+    border-color: #2959ad !important;
+    border-width: 2px !important;
+}
+
+.key {
+    background-color: #2959ad;
+    transform: skewX(-33deg);
+    margin-left: 12px;
+    width: auto;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.key p {
+    transform: skewX(33deg);
+}
+
+.value {
+    margin-left: 20px;
+    width: auto;
+}

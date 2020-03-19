@@ -1,9 +1,10 @@
 import React from "react";
-const Input = ({ type, word, value, name, changeValue }) => {
+const Input = ({ type, word, value, name, changeValue, ...props }) => {
   return (
     <React.Fragment>
       <label className="p-0 mb-1">{word}</label>
       <input
+        {...props}
         type={type}
         name={name}
         value={value}
