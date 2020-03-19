@@ -62,7 +62,14 @@ class Register extends Component {
               delay: 500
             }
           );
-          window.location = "/register";
+          state.user = {
+            email: "",
+            name: "",
+            // phone: "",
+            password: "",
+            confirmPassword: ""
+            // code: ""
+          };
         }
       }
     }
