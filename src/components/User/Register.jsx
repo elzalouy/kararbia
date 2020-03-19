@@ -19,7 +19,6 @@ class Register extends Component {
     error: {
       email: null,
       name: null,
-      phone: null,
       password: null,
       confirmPassword: null
     }

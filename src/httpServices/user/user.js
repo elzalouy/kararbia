@@ -197,29 +197,30 @@ export async function resetForgotPassword(newPassword, token) {
   }
 }
 
-export async function mobileConfirm(number, channel) {
-  try {
-    const response = await http.get(
-      route + "mobileConfirm/" + number + "/" + channel
-    );
-    const result = handleServerError(response);
-    if (result) return { data: null, error: result };
-    return { data: response.data, error: null };
-  } catch (ex) {
-    toast.warn(ex);
-  }
-}
-export async function mobileCheckCode(code) {
-  try {
-    let number = window.localStorage.getItem("phone");
-    let sid = window.localStorage.getItem("sid");
-    const response = await http.get(
-      `${route}mobileCode/${number}/${code}/${sid}`
-    );
-    const result = handleServerError(response);
-    if (result) return { data: null, error: result };
-    return { data: "done", error: null };
-  } catch (ex) {
-    toast.warn(ex);
-  }
-}
+// export async function mobileConfirm(number, channel) {
+//   try {
+//     const response = await http.get(
+//       route + "mobileConfirm/" + number + "/" + channel
+//     );
+//     const result = handleServerError(response);
+//     if (result) return { data: null, error: result };
+//     return { data: response.data, error: null };
+//   } catch (ex) {
+//     toast.warn(ex);
+//   }
+// }
+
+// export async function mobileCheckCode(code) {
+//   try {
+//     let number = window.localStorage.getItem("phone");
+//     let sid = window.localStorage.getItem("sid");
+//     const response = await http.get(
+//       `${route}mobileCode/${number}/${code}/${sid}`
+//     );
+//     const result = handleServerError(response);
+//     if (result) return { data: null, error: result };
+//     return { data: "done", error: null };
+//   } catch (ex) {
+//     toast.warn(ex);
+//   }
+// }
