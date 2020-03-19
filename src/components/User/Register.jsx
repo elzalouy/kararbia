@@ -45,7 +45,7 @@ class Register extends Component {
         const result = await addNewUser({
           name: state.user.name,
           email: state.user.email,
-          phone: "+" + state.user.code + state.user.phone,
+          // phone: "+" + state.user.code + state.user.phone,
           password: state.user.password,
           confirmPassword: state.user.confirmPassword
         });
