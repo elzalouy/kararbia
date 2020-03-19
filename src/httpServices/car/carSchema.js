@@ -75,7 +75,6 @@ const carSchema = {
 export function validateKeyValue(data) {
   try {
     const result = Joi.validate(data, KeyValueSchema);
-    console.log(result);
     if (!result.error) return null;
     else
       return {

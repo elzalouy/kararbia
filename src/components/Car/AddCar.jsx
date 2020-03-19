@@ -71,8 +71,9 @@ class AddCar extends Component {
   });
   handleAddItem = handle(async () => {
     const state = this.state;
-    let index = state.feature.items.indexOf(s => s.key === "");
-    _.remove(state.feature.items, state.feature.items[index]);
+    let item = state.feature.items.find(s => s.key === "");
+    let index = state.feature.items.indexOf(item);
+    if (index >= 0) _.remove(state.feature.items, state.feature.items[index]);
     state.feature.items.push(state.item);
     state.item = { key: "", value: "" };
     this.setState({ state });
