@@ -48,6 +48,11 @@ class AddCar extends Component {
       extra_features: ""
     }
   };
+  componentDidMount() {
+    if (this.props.match.path === "/editcar/:id") {
+      const state = this.state;
+    }
+  }
   handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state[e.name] = e.value;

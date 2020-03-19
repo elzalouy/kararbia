@@ -48,6 +48,18 @@ class Services extends Component {
         )
       },
       {
+        route: "/editcar",
+        Route: (
+          <Route
+            path="/editcar/:id"
+            render={props => {
+              if (admin()) return <AddCar {...props} />;
+              else return <Redirect to="/" />;
+            }}
+          />
+        )
+      },
+      {
         route: "/blogs",
         Route: <Route path="/blogs" component={Blogs} key="blogs" />
       },
