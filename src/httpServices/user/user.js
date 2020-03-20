@@ -33,13 +33,9 @@ export async function addNewUser(user) {
       name: user.name,
       email: user.email,
       password: user.password
-      // phone: user.phone
     });
     const result = handleServerError(response);
     if (result) return { data: null, error: result };
-    else {
-      localStorage.setItem("confirmed", false);
-    }
     return { data: "confirmed", error: null };
   } catch (ex) {
     toast.warn(ex);

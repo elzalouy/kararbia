@@ -31,16 +31,16 @@ const RecentCars = ({ cars }) => {
                     <div className="car-item">
                       <div className="thumb-content">
                         <div className="car-banner">
-                          <a href="/car">{item.status}</a>
+                          <a href={`/car/${item._id}`}>{item.status}</a>
                         </div>
                         <div className="thumb-inner">
-                          <a href="/car">
+                          <a href={`/car/${item._id}`}>
                             <img src={item.images[0].url} alt="" />
                           </a>
                         </div>
                       </div>
                       <div className="down-content">
-                        <a href="/cars">
+                        <a href={`/car/${item._id}`}>
                           <h4>
                             {item.name} - {item.model}
                           </h4>
@@ -51,25 +51,25 @@ const RecentCars = ({ cars }) => {
                           <li>
                             <div className="item">
                               <i className="flaticon flaticon-calendar"></i>
-                              <p>2018</p>
+                              <p>{item.body_type}</p>
                             </div>
                           </li>
                           <li>
                             <div className="item">
                               <i className="flaticon flaticon-speed"></i>
-                              <p>160p/h</p>
+                              <p>{item.speed}</p>
                             </div>
                           </li>
                           <li>
                             <div className="item">
                               <i className="flaticon flaticon-road"></i>
-                              <p>26.00km</p>
+                              <p>{item.kilometers}</p>
                             </div>
                           </li>
                           <li>
                             <div className="item">
                               <i className="flaticon flaticon-fuel"></i>
-                              <p>Petrol</p>
+                              <p>{item.fuel_type}</p>
                             </div>
                           </li>
                         </ul>
