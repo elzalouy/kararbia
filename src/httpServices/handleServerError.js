@@ -1,5 +1,8 @@
 module.exports = function(result) {
   try {
+    if (!result)
+      return { key: "server error", message: "Network not established" };
+
     if (result.response) {
       if (result.response.status === 401 && result.response.data.mobile) {
         return { key: "mobile", message: result.response.data.mobile };
