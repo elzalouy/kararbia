@@ -5,7 +5,6 @@ import slide3 from "../../images/slider3.jpeg";
 import getWords from "../../utils/GetWords";
 const Carousel = ({ cars }) => {
   let { words } = getWords();
-  cars = cars.cars;
   return (
     <React.Fragment>
       <div className="Modern-Slider w-100 overflow_hidden">

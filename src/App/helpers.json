@@ -106,7 +106,9 @@
         "change content": "تغيير المحتوى",
         "extra features title": "العنوان الرئيسي",
         "feature key": "اسم الميزة",
-        "feature value": "قيمة الميزة"
+        "feature value": "قيمة الميزة",
+        "edit": "تعديل",
+        "delete": "مسح"
     },
     "eng": {
         "homepage": "homepage",
@@ -216,6 +218,8 @@
         "change content": "Change Content",
         "extra features title": "Extra Feature Title",
         "feature key": "Feature Key",
-        "feature value": "Feature Value"
+        "feature value": "Feature Value",
+        "edit": "Edit",
+        "delete": "Delete"
     }
 }

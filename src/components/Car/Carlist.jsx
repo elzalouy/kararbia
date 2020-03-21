@@ -2,13 +2,14 @@
 import React, { Component } from "react";
 import { admin } from "../../httpServices/auth/auth";
 import getWords from "../../utils/GetWords";
-import { getCars } from "../../httpServices/car/car";
+import { getCars, deleteCar } from "../../httpServices/car/car";
 import { toast } from "react-toastify";
 import Pagination from "../common/pagination";
 import { paginate } from "../../utils/paginate";
 import CarSearch from "./CarSearch";
 import handle from "../../middleware/errorHandle";
 const _ = require("lodash");
+const queryString = require("query-string");
 class CarList extends Component {
   state = {
     cars: [],
@@ -32,7 +33,13 @@ class CarList extends Component {
     else {
       state.cars = result.data;
       state.filtered = result.data;
+      let params = queryString.parse(this.props.location.search);
+      state.brand = params.brand ? params.brand : state.brand;
+      state.model = params.model ? params.model : state.model;
+      state.minprice = params.minprice ? params.minprice : state.minprice;
+      state.maxprice = params.maxprice ? params.maxprice : state.maxprice;
       this.setState({ state });
+      await this.handleSearch();
     }
   }
 
@@ -53,7 +60,7 @@ class CarList extends Component {
     this.setState({ state });
   });
 
-  handleSearch = handle(() => {
+  handleSearch = () => {
     const state = this.state;
     let price = state.cars.map(item => {
       return item.price;
@@ -65,9 +72,9 @@ class CarList extends Component {
       state.maxprice.length === 0 ? price[price.length - 1] : state.maxprice;
     state.filtered = _.filter(state.cars, s => {
       if (
-        (s.name.includes(state.search_word) ||
-          s.long_desc.includes(state.search_word) ||
-          s.short_desc.includes(state.search_word)) &&
+        (toString(s.name).includes(state.search_word, 0) ||
+          toString(s.long_desc).includes(state.search_word, 0) ||
+          s.short_desc.includes(state.search_word, 0)) &&
         s.model.includes(state.model, 0) &&
         s.name.includes(state.brand, 0) &&
         s.price >= state.minprice &&
@@ -79,8 +86,17 @@ class CarList extends Component {
         return s;
     });
     this.setState({ state });
-  });
-
+  };
+  handleDeleteCar = async ({ currentTarget: e }) => {
+    let result = window.confirm("Are you sure? Delete this car!");
+    if (result) {
+      result = await deleteCar(e.id);
+      if (result.error) toast.warn(result.error.message);
+      else {
+        window.location.reload();
+      }
+    }
+  };
   render() {
     const { all: cars } = this.getPagedData();
     let { words, lang } = getWords();
@@ -154,10 +170,41 @@ class CarList extends Component {
                                 <a href={`/car/${item._id}`}>
                                   <h4>{`${item.name} - ${item.model}`}</h4>
                                 </a>
+                                {admin() && (
+                                  <div className="text-right mt-02">
+                                    <span
+                                      className="fa fa-ellipsis-h ellipsis f-18 cursor-pointer "
+                                      aria-hidden="true"
+                                      type="button"
+                                      id="dropdownMenuButton"
+                                      data-toggle="dropdown"
+                                      aria-haspopup="true"
+                                      aria-expanded="false"
+                                    ></span>
+                                    <div
+                                      className="dropdown-menu"
+                                      aria-labelledby="dropdownMenuButton"
+                                    >
+                                      <a
+                                        className="dropdown-item cursor-pointer"
+                                        href={`/editcar/${item._id}`}
+                                      >
+                                        {words["edit"]}
+                                      </a>
+                                      <a
+                                        className="dropdown-item cursor-pointer"
+                                        onClick={this.handleDeleteCar}
+                                        id={item._id}
+                                      >
+                                        {words["delete"]}
+                                      </a>
+                                    </div>
+                                  </div>
+                                )}
                                 <span>{item.price}$</span>
-                                <div className="line-dec"></div>
+                                <div className="line-dec text-center"></div>
                                 <p>{item.short_desc}</p>
-                                <ul className="car-info">
+                                <ul className="car-info text-center">
                                   <li>
                                     <div className="item">
                                       <i className="flaticon flaticon-calendar"></i>
@@ -212,6 +259,7 @@ class CarList extends Component {
                   cars={
                     this.state.cars && this.state.cars.length && this.state.cars
                   }
+                  state={this.status}
                   handleChange={this.handleChange}
                   handleSearch={this.handleSearch}
                 />

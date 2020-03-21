@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import getWords from "../../utils/GetWords.js";
+import { admin } from "../../httpServices/auth/auth.js";
 
-const RecentCars = ({ cars }) => {
+const RecentCars = ({ cars, handleDeleteCar }) => {
   let { words } = getWords();
   return (
     <section>
@@ -45,6 +47,37 @@ const RecentCars = ({ cars }) => {
                             {item.name} - {item.model}
                           </h4>
                         </a>
+                        {admin() && (
+                          <div className="text-right mt-02">
+                            <span
+                              className="fa fa-ellipsis-h ellipsis f-18 cursor-pointer "
+                              aria-hidden="true"
+                              type="button"
+                              id="dropdownMenuButton"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            ></span>
+                            <div
+                              className="dropdown-menu"
+                              aria-labelledby="dropdownMenuButton"
+                            >
+                              <a
+                                className="dropdown-item cursor-pointer"
+                                href={`/editcar/${item._id}`}
+                              >
+                                {words["edit"]}
+                              </a>
+                              <a
+                                className="dropdown-item cursor-pointer"
+                                onClick={handleDeleteCar}
+                                id={item._id}
+                              >
+                                {words["delete"]}
+                              </a>
+                            </div>
+                          </div>
+                        )}
                         <span>${item.price}</span>
                         <p>{item.short_desc}</p>
                         <ul className="car-info">

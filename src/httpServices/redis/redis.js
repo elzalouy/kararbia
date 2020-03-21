@@ -32,3 +32,14 @@ export async function getRedis() {
     toast.warn(ex);
   }
 }
+
+export async function getRedisItem(item) {
+  try {
+    const response = await http.get(route + "get/" + item);
+    const result = handleServerError(response);
+    if (result) return { data: null, error: response };
+    else return { data: response.data, error: null };
+  } catch (ex) {
+    toast.warn(ex);
+  }
+}

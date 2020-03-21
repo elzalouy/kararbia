@@ -1,6 +1,6 @@
 import React from "react";
 
-const KeyValueItem = ({ items, currentItem }) => {
+const KeyValueItem = ({ items, currentItem, handleChooseFeature }) => {
   return (
     <React.Fragment>
       {items &&
@@ -8,7 +8,9 @@ const KeyValueItem = ({ items, currentItem }) => {
         items.map(item => (
           <div
             key={item.title}
-            className="col-xl-5 shadow brd-2 my-3 mx-2 p-3"
+            id={item._id ? item._id : items.indexOf(item)}
+            onClick={handleChooseFeature}
+            className="cursor-pointer col-xl-5 shadow brd-2 my-3 mx-2 p-3"
             dir="ltr"
           >
             <div className="row jsutify-content-center align-items-center mb-3">

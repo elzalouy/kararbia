@@ -62,3 +62,34 @@ export async function getCarById(id) {
     toast.warn(ex);
   }
 }
+export async function editCar(car, id) {
+  try {
+    let token = getToken();
+    const headers = {
+      "Content-Type": "application/json",
+      "x-auth-token": token
+    };
+    const response = await http.put(route + id, car, { headers: headers });
+    const result = handleServerError(response);
+    if (result) return { data: null, error: result };
+    else return { data: response.data, error: null };
+  } catch (ex) {
+    toast.warn(ex);
+  }
+}
+
+export async function deleteCar(id) {
+  try {
+    let token = getToken();
+    const headers = {
+      "Content-Type": "application/json",
+      "x-auth-token": token
+    };
+    const response = await http.delete(route + id, { headers: headers });
+    const result = handleServerError(response);
+    if (result) return { data: null, error: result };
+    else return { data: response.data, error: null };
+  } catch (ex) {
+    toast.warn(ex);
+  }
+}

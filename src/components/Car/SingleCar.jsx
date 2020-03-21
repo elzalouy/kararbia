@@ -6,6 +6,7 @@ import { getCarById } from "../../httpServices/car/car.js";
 import { toast } from "react-toastify";
 import Gallary from "../common/Gallary/Gallary.jsx";
 import KeyValueItem from "./KeyValueItem.jsx";
+import { admin } from "../../httpServices/auth/auth.js";
 class SingleCar extends Component {
   state = { car: {} };
   async componentDidMount() {
@@ -56,6 +57,11 @@ class SingleCar extends Component {
                             </React.Fragment>
                           )}
                         </h2>
+                        {admin() && (
+                          <a className="mt-2 ml-3 mr-3 add-icon">
+                            <i className="fa fa-plus " aria-hidden="true"></i>
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>

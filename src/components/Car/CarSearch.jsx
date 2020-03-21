@@ -2,7 +2,7 @@
 import React from "react";
 import getWords from "../../utils/GetWords";
 const _ = require("lodash");
-const CarSearch = ({ cars, handleChange, handleSearch }) => {
+const CarSearch = ({ cars, handleChange, handleSearch, state }) => {
   let { words } = getWords();
   let models,
     brand,
@@ -68,7 +68,7 @@ const CarSearch = ({ cars, handleChange, handleSearch }) => {
                         <select name="brand" id="brand" onChange={handleChange}>
                           <option
                             value={
-                              cars && cars.length > 0 && price[price.length - 1]
+                              cars && cars.length > 0 && brand[brand.length - 1]
                             }
                           >
                             {words["select brand"]}

@@ -48,11 +48,7 @@ class AddCar extends Component {
       extra_features: ""
     }
   };
-  componentDidMount() {
-    if (this.props.match.path === "/editcar/:id") {
-      const state = this.state;
-    }
-  }
+  componentDidMount() {}
   handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state[e.name] = e.value;
@@ -303,7 +299,7 @@ class AddCar extends Component {
               <div className="col-md-5 pt-3">
                 <Input
                   type="text"
-                  word={words["extrior color"]}
+                  word={words["color"]}
                   value={state.color}
                   name="color"
                   changeValue={this.handleChange}
