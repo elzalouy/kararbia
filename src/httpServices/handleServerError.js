@@ -21,11 +21,6 @@ module.exports = function(result) {
           key: "server error",
           message: "May be the network is not established."
         };
-    } else {
-      return {
-        key: "server error",
-        message: "May be the network is not established."
-      };
     }
   } catch (ex) {
     return {
