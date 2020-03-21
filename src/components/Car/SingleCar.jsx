@@ -57,11 +57,11 @@ class SingleCar extends Component {
                             </React.Fragment>
                           )}
                         </h2>
-                        {admin() && (
+                        {/* {admin() && (
                           <a className="mt-2 ml-3 mr-3 add-icon">
                             <i className="fa fa-plus " aria-hidden="true"></i>
                           </a>
-                        )}
+                        )} */}
                       </div>
                     </div>
                   </div>
