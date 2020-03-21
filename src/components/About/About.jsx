@@ -61,27 +61,27 @@ class About extends Component {
     let buysel =
       content && content.length > 0
         ? content.find(s => s.key === "Sell & Buy Cars")
-        : "";
+        : { key: "", value: "" };
     let defectCars =
       content && content.length > 0
         ? content.find(s => s.key === "Defect Cars")
-        : "";
+        : { key: "", value: "" };
     let roadAsstistant =
       content && content.length > 0
         ? content.find(s => s.key === "Road Assistant")
-        : "";
+        : { key: "", value: "" };
     let carDealerResearch =
       content && content.length > 0
         ? content.find(s => s.key === "Car Dealer Research")
-        : "";
+        : { key: "", value: "" };
     let bestDealers =
       content && content.length > 0
         ? content.find(s => s.key === "Best Dealers")
-        : "";
+        : { key: "", value: "" };
     let worldWideKnown =
       content && content.length > 0
         ? content.find(s => s.key === "World Wide Known")
-        : "";
+        : { key: "", value: "" };
     return (
       <React.Fragment>
         <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
