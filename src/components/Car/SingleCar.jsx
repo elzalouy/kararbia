@@ -6,7 +6,6 @@ import { getCarById } from "../../httpServices/car/car.js";
 import { toast } from "react-toastify";
 import Gallary from "../common/Gallary/Gallary.jsx";
 import KeyValueItem from "./KeyValueItem.jsx";
-import { admin } from "../../httpServices/auth/auth.js";
 class SingleCar extends Component {
   state = { car: {} };
   async componentDidMount() {
@@ -14,7 +13,7 @@ class SingleCar extends Component {
       const state = this.state;
       const id = this.props.match.params.id;
       const { error, data } = await getCarById(id);
-      if (error) toast.warn(error.message);
+      if (error) window.location = "/404";
       else {
         state.car = data;
         this.setState({ state });
