@@ -60,8 +60,9 @@ class CarList extends Component {
     this.setState({ state });
   });
 
-  handleSearch = () => {
+  handleSearch = handle(() => {
     const state = this.state;
+
     let price = state.cars.map(item => {
       return item.price;
     });
@@ -86,8 +87,8 @@ class CarList extends Component {
         return s;
     });
     this.setState({ state });
-  };
-  handleDeleteCar = async ({ currentTarget: e }) => {
+  });
+  handleDeleteCar = handle(async ({ currentTarget: e }) => {
     let result = window.confirm("Are you sure? Delete this car!");
     if (result) {
       result = await deleteCar(e.id);
@@ -96,7 +97,7 @@ class CarList extends Component {
         window.location.reload();
       }
     }
-  };
+  });
   render() {
     const { all: cars } = this.getPagedData();
     let { words, lang } = getWords();

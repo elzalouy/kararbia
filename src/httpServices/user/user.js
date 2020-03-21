@@ -36,6 +36,7 @@ export async function addNewUser(user) {
     });
     const result = handleServerError(response);
     if (result) return { data: null, error: result };
+    console.log(result);
     return { data: "confirmed", error: null };
   } catch (ex) {
     toast.warn(ex);

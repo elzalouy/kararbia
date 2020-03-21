@@ -58,13 +58,30 @@ class About extends Component {
   render() {
     let { words, lang } = getWords();
     const { content, currentEditKey, value } = this.state;
-    if (!content || content.length === 0) return null;
-    let buysel = content.find(s => s.key === "Sell & Buy Cars");
-    let defectCars = content.find(s => s.key === "Defect Cars");
-    let roadAsstistant = content.find(s => s.key === "Road Assistant");
-    let carDealerResearch = content.find(s => s.key === "Car Dealer Research");
-    let bestDealers = content.find(s => s.key === "Best Dealers");
-    let worldWideKnown = content.find(s => s.key === "World Wide Known");
+    let buysel =
+      content && content.length > 0
+        ? content.find(s => s.key === "Sell & Buy Cars")
+        : "";
+    let defectCars =
+      content && content.length > 0
+        ? content.find(s => s.key === "Defect Cars")
+        : "";
+    let roadAsstistant =
+      content && content.length > 0
+        ? content.find(s => s.key === "Road Assistant")
+        : "";
+    let carDealerResearch =
+      content && content.length > 0
+        ? content.find(s => s.key === "Car Dealer Research")
+        : "";
+    let bestDealers =
+      content && content.length > 0
+        ? content.find(s => s.key === "Best Dealers")
+        : "";
+    let worldWideKnown =
+      content && content.length > 0
+        ? content.find(s => s.key === "World Wide Known")
+        : "";
     return (
       <React.Fragment>
         <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
@@ -99,299 +116,301 @@ class About extends Component {
           </div>
         </div>
 
-        <div
-          className="services-first about-services wow fadeIn"
-          data-wow-delay="0.5s"
-          data-wow-duration="1s"
-        >
-          <div className="container">
-            <div className="row">
-              <div className="col-md-4">
-                <div
-                  className={
-                    lang === "eng"
-                      ? "service-item wow fadeIn"
-                      : "service-item wow fadeIn text-right"
-                  }
-                  dir={lang === "eng" ? "ltr" : "rtl"}
-                  data-wow-duration="0.75s"
-                >
-                  <div className="custom-control-inline row d-flex flex-row">
+        {content && content.length > 0 ? (
+          <React.Fragment>
+            <div
+              className="services-first about-services wow fadeIn"
+              data-wow-delay="0.5s"
+              data-wow-duration="1s"
+            >
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-4">
                     <div
                       className={
                         lang === "eng"
-                          ? "col text-left"
-                          : "col p-0 m-0 text-right mr-01"
+                          ? "service-item wow fadeIn"
+                          : "service-item wow fadeIn text-right"
                       }
+                      dir={lang === "eng" ? "ltr" : "rtl"}
+                      data-wow-duration="0.75s"
                     >
-                      <i className="fa fa-car"></i>
+                      <div className="custom-control-inline row d-flex flex-row">
+                        <div
+                          className={
+                            lang === "eng"
+                              ? "col text-left"
+                              : "col p-0 m-0 text-right mr-01"
+                          }
+                        >
+                          <i className="fa fa-car"></i>
+                        </div>
+                        {admin() && (
+                          <ContentDrop
+                            handleEdit={this.handleEdit}
+                            itemKey={buysel.key}
+                          />
+                        )}
+                      </div>
+                      <div className="text-content">
+                        <h6>
+                          {lang === "eng"
+                            ? buysel.value["short_english"]
+                            : buysel.value["short_arabic"]}
+                        </h6>
+                        <p>
+                          {lang === "eng"
+                            ? buysel.value["long_english"]
+                            : buysel.value["long_arabic"]}
+                        </p>
+                      </div>
                     </div>
-                    {admin() && (
-                      <ContentDrop
-                        handleEdit={this.handleEdit}
-                        itemKey={buysel.key}
-                      />
-                    )}
                   </div>
-                  <div className="text-content">
-                    <h6>
-                      {lang === "eng"
-                        ? buysel.value["short_english"]
-                        : buysel.value["short_arabic"]}
-                    </h6>
-                    <p>
-                      {lang === "eng"
-                        ? buysel.value["long_english"]
-                        : buysel.value["long_arabic"]}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div
-                  className={
-                    lang === "eng"
-                      ? "service-item wow fadeIn"
-                      : "service-item wow fadeIn text-right"
-                  }
-                  dir={lang === "eng" ? "ltr" : "rtl"}
-                  data-wow-duration="0.75s"
-                >
-                  <div className="custom-control-inline row d-flex flex-row">
+                  <div className="col-md-4">
                     <div
                       className={
                         lang === "eng"
-                          ? "col text-left"
-                          : "col p-0 m-0 text-right mr-01"
+                          ? "service-item wow fadeIn"
+                          : "service-item wow fadeIn text-right"
                       }
+                      dir={lang === "eng" ? "ltr" : "rtl"}
+                      data-wow-duration="0.75s"
                     >
-                      <i className="fa fa-gear"></i>
+                      <div className="custom-control-inline row d-flex flex-row">
+                        <div
+                          className={
+                            lang === "eng"
+                              ? "col text-left"
+                              : "col p-0 m-0 text-right mr-01"
+                          }
+                        >
+                          <i className="fa fa-gear"></i>
+                        </div>
+                        {admin() && (
+                          <ContentDrop
+                            handleEdit={this.handleEdit}
+                            itemKey={defectCars.key}
+                          />
+                        )}
+                      </div>
+                      <div className="text-content">
+                        <h6>
+                          {lang === "eng"
+                            ? defectCars.value["short_english"]
+                            : defectCars.value["short_arabic"]}
+                        </h6>
+                        <p>
+                          {lang === "eng"
+                            ? defectCars.value["long_english"]
+                            : defectCars.value["long_arabic"]}
+                        </p>
+                      </div>
                     </div>
-                    {admin() && (
-                      <ContentDrop
-                        handleEdit={this.handleEdit}
-                        itemKey={defectCars.key}
-                      />
-                    )}
                   </div>
-                  <div className="text-content">
-                    <h6>
-                      {lang === "eng"
-                        ? defectCars.value["short_english"]
-                        : defectCars.value["short_arabic"]}
-                    </h6>
-                    <p>
-                      {lang === "eng"
-                        ? defectCars.value["long_english"]
-                        : defectCars.value["long_arabic"]}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div
-                  className={
-                    lang === "eng"
-                      ? "service-item wow fadeIn"
-                      : "service-item wow fadeIn text-right"
-                  }
-                  dir={lang === "eng" ? "ltr" : "rtl"}
-                  data-wow-duration="0.75s"
-                >
-                  <div className="custom-control-inline row d-flex flex-row">
+                  <div className="col-md-4">
                     <div
                       className={
                         lang === "eng"
-                          ? "col text-left"
-                          : "col p-0 m-0 text-right mr-01"
+                          ? "service-item wow fadeIn"
+                          : "service-item wow fadeIn text-right"
                       }
+                      dir={lang === "eng" ? "ltr" : "rtl"}
+                      data-wow-duration="0.75s"
                     >
-                      <i className="fa fa-truck"></i>
+                      <div className="custom-control-inline row d-flex flex-row">
+                        <div
+                          className={
+                            lang === "eng"
+                              ? "col text-left"
+                              : "col p-0 m-0 text-right mr-01"
+                          }
+                        >
+                          <i className="fa fa-truck"></i>
+                        </div>
+                        {admin() && (
+                          <ContentDrop
+                            handleEdit={this.handleEdit}
+                            itemKey={roadAsstistant.key}
+                          />
+                        )}
+                      </div>
+                      <div className="text-content">
+                        <h6>
+                          {lang === "eng"
+                            ? roadAsstistant.value["short_english"]
+                            : roadAsstistant.value["short_arabic"]}
+                        </h6>
+                        <p>
+                          {lang === "eng"
+                            ? roadAsstistant.value["long_english"]
+                            : roadAsstistant.value["long_arabic"]}
+                        </p>
+                      </div>
                     </div>
-                    {admin() && (
-                      <ContentDrop
-                        handleEdit={this.handleEdit}
-                        itemKey={roadAsstistant.key}
-                      />
-                    )}
                   </div>
-                  <div className="text-content">
-                    <h6>
-                      {lang === "eng"
-                        ? roadAsstistant.value["short_english"]
-                        : roadAsstistant.value["short_arabic"]}
-                    </h6>
-                    <p>
-                      {lang === "eng"
-                        ? roadAsstistant.value["long_english"]
-                        : roadAsstistant.value["long_arabic"]}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div
-                  className={
-                    lang === "eng"
-                      ? "service-item wow fadeIn"
-                      : "service-item wow fadeIn text-right"
-                  }
-                  dir={lang === "eng" ? "ltr" : "rtl"}
-                  data-wow-duration="0.75s"
-                >
-                  <div className="custom-control-inline row d-flex flex-row">
+                  <div className="col-md-4">
                     <div
                       className={
                         lang === "eng"
-                          ? "col text-left"
-                          : "col p-0 m-0 text-right mr-01"
+                          ? "service-item wow fadeIn"
+                          : "service-item wow fadeIn text-right"
                       }
+                      dir={lang === "eng" ? "ltr" : "rtl"}
+                      data-wow-duration="0.75s"
                     >
-                      <i className="fa fa-search"></i>
+                      <div className="custom-control-inline row d-flex flex-row">
+                        <div
+                          className={
+                            lang === "eng"
+                              ? "col text-left"
+                              : "col p-0 m-0 text-right mr-01"
+                          }
+                        >
+                          <i className="fa fa-search"></i>
+                        </div>
+                        {admin() && (
+                          <ContentDrop
+                            handleEdit={this.handleEdit}
+                            itemKey={carDealerResearch.key}
+                          />
+                        )}
+                      </div>
+                      <div className="text-content">
+                        <h6>
+                          {lang === "eng"
+                            ? carDealerResearch.value["short_english"]
+                            : carDealerResearch.value["short_arabic"]}
+                        </h6>
+                        <p>
+                          {lang === "eng"
+                            ? carDealerResearch.value["long_english"]
+                            : carDealerResearch.value["long_arabic"]}
+                        </p>
+                      </div>
                     </div>
-                    {admin() && (
-                      <ContentDrop
-                        handleEdit={this.handleEdit}
-                        itemKey={carDealerResearch.key}
-                      />
-                    )}
                   </div>
-                  <div className="text-content">
-                    <h6>
-                      {lang === "eng"
-                        ? carDealerResearch.value["short_english"]
-                        : carDealerResearch.value["short_arabic"]}
-                    </h6>
-                    <p>
-                      {lang === "eng"
-                        ? carDealerResearch.value["long_english"]
-                        : carDealerResearch.value["long_arabic"]}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div
-                  className={
-                    lang === "eng"
-                      ? "service-item wow fadeIn"
-                      : "service-item wow fadeIn text-right"
-                  }
-                  dir={lang === "eng" ? "ltr" : "rtl"}
-                  data-wow-duration="0.75s"
-                >
-                  <div className="custom-control-inline row d-flex flex-row">
+                  <div className="col-md-4">
                     <div
                       className={
                         lang === "eng"
-                          ? "col text-left"
-                          : "col p-0 m-0 text-right mr-01"
+                          ? "service-item wow fadeIn"
+                          : "service-item wow fadeIn text-right"
                       }
+                      dir={lang === "eng" ? "ltr" : "rtl"}
+                      data-wow-duration="0.75s"
                     >
-                      <i className="fa fa-globe"></i>
+                      <div className="custom-control-inline row d-flex flex-row">
+                        <div
+                          className={
+                            lang === "eng"
+                              ? "col text-left"
+                              : "col p-0 m-0 text-right mr-01"
+                          }
+                        >
+                          <i className="fa fa-globe"></i>
+                        </div>
+                        {admin() && (
+                          <ContentDrop
+                            handleEdit={this.handleEdit}
+                            itemKey={worldWideKnown.key}
+                          />
+                        )}
+                      </div>
+                      <div className="text-content">
+                        <h6>
+                          {lang === "eng"
+                            ? worldWideKnown.value["short_english"]
+                            : worldWideKnown.value["short_arabic"]}
+                        </h6>
+                        <p>
+                          {lang === "eng"
+                            ? worldWideKnown.value["long_english"]
+                            : worldWideKnown.value["long_arabic"]}
+                        </p>
+                      </div>
                     </div>
-                    {admin() && (
-                      <ContentDrop
-                        handleEdit={this.handleEdit}
-                        itemKey={worldWideKnown.key}
-                      />
-                    )}
                   </div>
-                  <div className="text-content">
-                    <h6>
-                      {lang === "eng"
-                        ? worldWideKnown.value["short_english"]
-                        : worldWideKnown.value["short_arabic"]}
-                    </h6>
-                    <p>
-                      {lang === "eng"
-                        ? worldWideKnown.value["long_english"]
-                        : worldWideKnown.value["long_arabic"]}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div
-                  className={
-                    lang === "eng"
-                      ? "service-item wow fadeIn"
-                      : "service-item wow fadeIn text-right"
-                  }
-                  dir={lang === "eng" ? "ltr" : "rtl"}
-                  data-wow-duration="0.75s"
-                >
-                  <div className="custom-control-inline row d-flex flex-row">
+                  <div className="col-md-4">
                     <div
                       className={
                         lang === "eng"
-                          ? "col text-left"
-                          : "col p-0 m-0 text-right mr-01"
+                          ? "service-item wow fadeIn"
+                          : "service-item wow fadeIn text-right"
                       }
+                      dir={lang === "eng" ? "ltr" : "rtl"}
+                      data-wow-duration="0.75s"
                     >
-                      <i className="fa fa-users"></i>
+                      <div className="custom-control-inline row d-flex flex-row">
+                        <div
+                          className={
+                            lang === "eng"
+                              ? "col text-left"
+                              : "col p-0 m-0 text-right mr-01"
+                          }
+                        >
+                          <i className="fa fa-users"></i>
+                        </div>
+                        {admin() && (
+                          <ContentDrop
+                            handleEdit={this.handleEdit}
+                            itemKey={bestDealers.key}
+                          />
+                        )}
+                      </div>
+                      <div className="text-content">
+                        <h6>
+                          {lang === "eng"
+                            ? bestDealers.value["short_english"]
+                            : bestDealers.value["short_arabic"]}
+                        </h6>
+                        <p>
+                          {lang === "eng"
+                            ? bestDealers.value["long_english"]
+                            : bestDealers.value["long_arabic"]}
+                        </p>
+                      </div>
                     </div>
-                    {admin() && (
-                      <ContentDrop
-                        handleEdit={this.handleEdit}
-                        itemKey={bestDealers.key}
-                      />
-                    )}
-                  </div>
-                  <div className="text-content">
-                    <h6>
-                      {lang === "eng"
-                        ? bestDealers.value["short_english"]
-                        : bestDealers.value["short_arabic"]}
-                    </h6>
-                    <p>
-                      {lang === "eng"
-                        ? bestDealers.value["long_english"]
-                        : bestDealers.value["long_arabic"]}
-                    </p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <section>
-          <div className="more-about-us mb-5">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-6">
-                  <img src="http://placehold.it/555x310" alt="" />
-                </div>
-                <div className="col-md-6">
-                  <div className="right-content">
-                    <span>Lorem ipsum consectetur.</span>
-                    <h4>Who we are, what we do?</h4>
-                    <p>
-                      Thundercats gentrify flannel, raw denim before they sold
-                      out PBRB meggings. Godard stumptown forage, tote bag
-                      narwhal viral Austin actually.
-                      <br />
-                      <br />
-                      Pop-up flannel direct trade, High Life sriracha chia
-                      Pinterest photo booth. Narwhal PBR dreamcatcher, taxidermy
-                      stumptown.
-                    </p>
+            <section>
+              <div className="more-about-us mb-5">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-6">
+                      <img src="http://placehold.it/555x310" alt="" />
+                    </div>
+                    <div className="col-md-6">
+                      <div className="right-content">
+                        <span>Lorem ipsum consectetur.</span>
+                        <h4>Who we are, what we do?</h4>
+                        <p>
+                          Thundercats gentrify flannel, raw denim before they
+                          sold out PBRB meggings. Godard stumptown forage, tote
+                          bag narwhal viral Austin actually.
+                          <br />
+                          <br />
+                          Pop-up flannel direct trade, High Life sriracha chia
+                          Pinterest photo booth. Narwhal PBR dreamcatcher,
+                          taxidermy stumptown.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          {admin() && (
-            <Content
-              itemKey={currentEditKey ? currentEditKey : ""}
-              itemValues={value ? value : ""}
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit && this.handleSubmit}
-            />
-          )}
-        </section>
-        {/* 
+              {admin() && (
+                <Content
+                  itemKey={currentEditKey ? currentEditKey : ""}
+                  itemValues={value ? value : ""}
+                  handleChange={this.handleChange}
+                  handleSubmit={this.handleSubmit && this.handleSubmit}
+                />
+              )}
+            </section>
+            {/* 
       <section>
       <div className="our-clients mb-5">
       <div className="container">
@@ -456,6 +475,15 @@ class About extends Component {
       </div>
       </div>
     </section> */}
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <div className="col text-center mb-5">
+              <i className="fa fa-car gray icon-no-car"></i>
+              <h4 className="mt-4 gray">No items now</h4>
+            </div>
+          </React.Fragment>
+        )}
       </React.Fragment>
     );
   }
