@@ -17,7 +17,7 @@ import ChangePassword from "../components/User/ChangePassword";
 import ForgotPassword from "../components/User/ForgotPassword";
 class App extends Services {
   render() {
-    AOS.init();
+    AOS.init({ delay: 500, duration: 1000 });
     return (
       <BrowserRouter>
         <Reloader />

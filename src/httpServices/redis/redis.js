@@ -11,7 +11,16 @@ export async function addRedis(content) {
       "Content-Type": "application/json",
       "x-auth-token": token
     };
-    const response = await http.post(route + "add", content, {
+    let item = {
+      key: content.key,
+      value: {
+        short_english: content.value.short_english,
+        long_english: content.value.long_english,
+        short_arabic: content.value.short_arabic,
+        long_arabic: content.value.long_arabic
+      }
+    };
+    const response = await http.post(route + "add", item, {
       headers: headers
     });
     const result = handleServerError(response);

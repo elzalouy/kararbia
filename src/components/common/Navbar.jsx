@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import getWords from "../../utils/GetWords.js";
 import handle from "../../middleware/errorHandle";
 import { toast } from "react-toastify";
-
+import "./common.css";
 class Navbar extends Component {
   state = { user: null, lang: "", searchWord: "" };
   async componentDidMount() {

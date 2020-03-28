@@ -145,22 +145,22 @@ $(document).ready(function() {
     }
   });
 
-  // Homepage Banner
-  $(".Modern-Slider").slick({
-    autoplay: true,
-    autoplaySpeed: 10000,
-    speed: 900,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    pauseOnHover: false,
-    dots: true,
-    pauseOnDotsHover: true,
-    cssEase: "linear",
-    fade: true,
-    draggable: false,
-    prevArrow: '<button class="PrevArrow"></button>',
-    nextArrow: '<button class="NextArrow"></button>'
-  });
+  // // Homepage Banner
+  // $(".Modern-Slider").slick({
+  //   autoplay: true,
+  //   autoplaySpeed: 10000,
+  //   speed: 900,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   pauseOnHover: false,
+  //   dots: true,
+  //   pauseOnDotsHover: true,
+  //   cssEase: "linear",
+  //   fade: true,
+  //   draggable: false,
+  //   prevArrow: '<button class="PrevArrow"></button>',
+  //   nextArrow: '<button class="NextArrow"></button>'
+  // });
 
   // Car Details Page Gallery
   $("#single-car").sliderPro({

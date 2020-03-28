@@ -1,7 +1,87 @@
+mark {
+    background-color: transparent !important;
+    color: #f4c23d;
+}
+
+.bold {
+    font-weight: bold;
+}
+
 .zindex-100 {
     z-index: 999999999 !important;
 }
 
 .zindex-0 {
     z-index: -1 !important;
+}
+
+.carousel-caption {
+    bottom: 0 !important;
+    top: 60% !important;
+}
+
+.carousel-item-title {
+    color: #f4c23d !important;
+}
+
+
+.carousel-btn {
+    color: #1E1E1E !important;
+    font-size: 16px !important;
+    font-weight: bolder;
+    background-color: #f4c23d !important;
+    transition: all 0.6s;
+}
+
+.carousel-btn:hover {
+    background-color: white !important;
+}
+
+.carousel-control-prev-icon {
+    bottom: 0 !important;
+    top: 50% !important;
+}
+
+.carousel-control-next-icon {
+    bottom: 0 !important;
+    top: 50% !important;
+}
+
+.modal-content {
+    border-radius: 0 !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .carousel-inner {
+        margin-top: 80px !important;
+        height: 240px !important;
+    }
+
+    .carousel-caption {
+        display: block !important;
+        visibility: visible !important;
+        top: 10% !important;
+    }
+
+    .carousel-item-title {
+        font-size: 28px !important;
+        color: #212529 !important;
+    }
+
+    .carousel-btn {
+        color: #1E1E1E !important;
+        font-size: 12px !important;
+        font-weight: bolder;
+        background-color: #f4c23d !important;
+        transition: all 0.6s;
+    }
+
+    .carousel-control-prev {
+        bottom: 40% !important;
+    }
+
+    .carousel-control-next {
+        bottom: 40% !important;
+    }
+
 }

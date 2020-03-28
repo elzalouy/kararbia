@@ -23,39 +23,8 @@
     background-color: #f4c23d;
 }
 
-.car_image {
-    width: 300px;
-    height: 240px;
-    padding: 5px;
-    position: relative;
-    transition: all 0.5s;
-    border-radius: 2px;
-    padding: 0 !important;
-    margin: 5px !important;
-}
-
-.car_image:hover {
-    opacity: 0.5;
-}
-
-.image-delete {
-    top: 18px;
-    right: 10px;
-    font-size: 18px;
-    position: absolute;
-    background-color: #f4c23d;
-    color: black;
-    border: 0 !important;
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    font-weight: bolder;
-}
-
 .save {
     color: #f4c23d;
-
     font-size: 45px;
     transition: all 0.5s;
     cursor: pointer;
