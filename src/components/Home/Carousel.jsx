@@ -195,9 +195,11 @@ class Carousel extends Component {
                     style={{ opacity: "0.5", width: "100%", height: "720px" }}
                   />
                   <div className="carousel-caption d-none d-md-block pt-5">
-                    <h2 className="bold carousel-item-title">
-                      Please Add new Items
-                    </h2>
+                    {admin() && (
+                      <h2 className="bold carousel-item-title">
+                        Please Add new Items
+                      </h2>
+                    )}
                     <h5 className="text-dark">
                       Check the latest cars on <mark>KarArabia!</mark>
                     </h5>
