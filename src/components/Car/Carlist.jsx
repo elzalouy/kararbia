@@ -23,7 +23,7 @@ class CarList extends Component {
     maxprice: "",
     fuel_type: "",
     transmission: "",
-    body_type: ""
+    body_type: "",
   };
 
   async componentDidMount() {
@@ -43,7 +43,7 @@ class CarList extends Component {
     }
   }
 
-  handleChangePage = handle(page => {
+  handleChangePage = handle((page) => {
     this.setState({ currentPage: page });
   });
 
@@ -63,7 +63,7 @@ class CarList extends Component {
   handleSearch = handle(() => {
     const state = this.state;
 
-    let price = state.cars.map(item => {
+    let price = state.cars.map((item) => {
       return item.price;
     });
     price = _.uniq(price);
@@ -71,7 +71,7 @@ class CarList extends Component {
     state.minprice = state.minprice.length === 0 ? 0 : state.minprice;
     state.maxprice =
       state.maxprice.length === 0 ? price[price.length - 1] : state.maxprice;
-    state.filtered = _.filter(state.cars, s => {
+    state.filtered = _.filter(state.cars, (s) => {
       if (
         (toString(s.name).includes(state.search_word, 0) ||
           toString(s.long_desc).includes(state.search_word, 0) ||
@@ -149,7 +149,7 @@ class CarList extends Component {
                 <div className="col-md-8">
                   <div className="row align-items-center">
                     {cars && cars.length > 0 ? (
-                      cars.map(item => (
+                      cars.map((item) => (
                         <React.Fragment key={item._id}>
                           <div className="col-md-6">
                             <div className="car-item">

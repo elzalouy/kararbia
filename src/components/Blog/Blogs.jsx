@@ -1,222 +1,124 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import getWords from "../../utils/GetWords.js";
-const Bogs = () => {
-  let { words, lang } = getWords();
-  return (
-    <React.Fragment>
-      <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <div
-                className="heading-content-bg wow fadeIn"
-                data-wow-delay="0.75s"
-                data-wow-duration="1s"
-              >
-                <div className="row">
-                  <div
-                    className={
-                      lang === "eng"
-                        ? "heading-content col-md-12"
-                        : "heading-content col-md-12 text-right"
+import BlogHeader from "./BlogHeader.jsx";
+import { getBlogs } from "../../httpServices/blog/blog.js";
+import { toast } from "react-toastify";
+import { Component } from "react";
+import { getDate } from "../../utils/formatDate.js";
+import handle from "../../middleware/errorHandle";
+import { paginate } from "../../utils/paginate";
+import Pagination from "../common/pagination.jsx";
+
+class Blogs extends Component {
+  state = { blogs: [], filtered: [], currentPage: 1, pageSize: 2 };
+  async componentDidMount() {
+    const state = this.state;
+    let blogs = await getBlogs();
+    if (blogs.error) return toast.warn(blogs.error.message);
+    state.blogs = blogs.data;
+    state.filtered = blogs.data;
+    this.setState({ state });
+    this.getPagedData();
+  }
+
+  handleChangePage = handle((page) => {
+    const state = this.state;
+    state.currentPage = page;
+    this.setState({ state });
+    this.renderElements();
+    this.getPagedData();
+  });
+  getPagedData = () => {
+    const { pageSize, currentPage, blogs } = this.state;
+    const state = this.state;
+    state.filtered = paginate(blogs, currentPage, pageSize);
+    this.setState({ state });
+  };
+  componentDidUpdate() {
+    this.renderElements();
+  }
+
+  renderElements = handle(() => {
+    const state = this.state;
+    state.filtered.forEach((item) => {
+      document
+        .getElementById(item._id)
+        .insertAdjacentHTML("afterbegin", item.blog);
+    });
+  });
+  render() {
+    const { filtered: blogs } = this.state;
+    return (
+      <React.Fragment>
+        <BlogHeader to="blogs" title="blogs" />
+        <div className="blog-page mb-5">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-10 offset-md-1">
+                <div className="blog-classic-post">
+                  {blogs && blogs.length > 0 ? (
+                    blogs.map((item) => {
+                      let date = getDate(item.date);
+                      return (
+                        <div className="item blog-item" key={item._id}>
+                          <div className="thumb-content">
+                            <div className="date-post">
+                              <a href={`/blog/${item._id}`}>
+                                {date.day + " " + date.month}
+                              </a>
+                            </div>
+                            <div className="thumb-inner">
+                              <a href={`/blog/${item._id}`}>
+                                <img src={item.image.url} alt="" />
+                              </a>
+                            </div>
+                          </div>
+                          <div className="down-content">
+                            <div id={item._id} className="convert">
+                              {document &&
+                                document.getElementById(item._id) &&
+                                item &&
+                                document
+                                  .getElementById(item._id)
+                                  .insertAdjacentHTML("afterbegin", item.blog)}
+                            </div>
+                          </div>
+                          <div className="text-button pl-3 pb-2">
+                            <a href={`/blog/${item._id}`}>
+                              Continue Reading
+                              <i className="fa fa-arrow-right"></i>
+                            </a>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <React.Fragment>
+                      <div className="text-center">
+                        <i
+                          class="fa fa-file gray icon-no-car"
+                          aria-hidden="true"
+                        ></i>
+                        <h4 className="mt-4 gray">No items now</h4>
+                      </div>
+                    </React.Fragment>
+                  )}
+                  <Pagination
+                    itemsCount={
+                      blogs && blogs.length ? this.state.blogs.length : 0
                     }
-                  >
-                    <p>
-                      <a href="index.html">{words["homepage"]}</a> /{" "}
-                      <em> {words["blog"]}</em>
-                    </p>
-                    <h2>{words["blogs"]}</h2>
-                  </div>
+                    pageSize={this.state.pageSize}
+                    currentPage={this.state.currentPage}
+                    onPageChange={this.handleChangePage}
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </React.Fragment>
+    );
+  }
+}
 
-      <div className="blog-page mb-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-10 offset-md-1">
-              <div className="blog-classic-post">
-                <div className="item">
-                  <div className="thumb-content">
-                    <div className="date-post">
-                      <a href="/blog">20 December</a>
-                    </div>
-                    <div className="thumb-inner">
-                      <a href="/blog">
-                        <img src="http://placehold.it/750x350" alt="" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="down-content">
-                    <a href="/blog">
-                      <h4>Pabst Gastropub Synth Edge</h4>
-                    </a>
-                    <ul>
-                      <li>
-                        <span>
-                          <em>Posted by:</em>
-                          <a href="#">Admin</a>
-                        </span>
-                      </li>
-                      <li>
-                        <span>
-                          <em>Posted on:</em>20/December/2018
-                        </span>
-                      </li>
-                      <li>
-                        <span>
-                          <em>Categories:</em>
-                          <a href="#">Creative</a>,<a href="#"> Graphic</a>
-                        </span>
-                      </li>
-                    </ul>
-                    <p>
-                      Slow-carb listicle PBR, Schlitz mustache keytar beard art
-                      party brunch chia tousled actually. Messenger bag kogi
-                      aesthetic elsent master cleanse. Bespoke Marfa migas
-                      Austin Helvetica American Apparel before they sold out
-                      readymade. Health goth freegan letterpress beard quinoa
-                      try-hard narwhal synth gastropub, tote bag ugh heirloom.
-                    </p>
-                    <div className="text-button">
-                      <a href="/blog">
-                        Continue Reading <i className="fa fa-arrow-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="thumb-content">
-                    <div className="date-post">
-                      <a href="/blog">20 December</a>
-                    </div>
-                    <div className="thumb-inner">
-                      <a href="/blog">
-                        <img src="http://placehold.it/750x350" alt="" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="down-content">
-                    <a href="/blog">
-                      <h4>Pabst Gastropub Synth Edge</h4>
-                    </a>
-                    <ul>
-                      <li>
-                        <span>
-                          <em>Posted by:</em>
-                          <a href="#">Admin</a>
-                        </span>
-                      </li>
-                      <li>
-                        <span>
-                          <em>Posted on:</em>20/December/2018
-                        </span>
-                      </li>
-                      <li>
-                        <span>
-                          <em>Categories:</em>
-                          <a href="#">Creative</a>,<a href="#"> Graphic</a>
-                        </span>
-                      </li>
-                    </ul>
-                    <p>
-                      Slow-carb listicle PBR, Schlitz mustache keytar beard art
-                      party brunch chia tousled actually. Messenger bag kogi
-                      aesthetic elsent master cleanse. Bespoke Marfa migas
-                      Austin Helvetica American Apparel before they sold out
-                      readymade. Health goth freegan letterpress beard quinoa
-                      try-hard narwhal synth gastropub, tote bag ugh heirloom.
-                    </p>
-                    <div className="text-button">
-                      <a href="/blog">
-                        Continue Reading <i className="fa fa-arrow-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="thumb-content">
-                    <div className="date-post">
-                      <a href="/blog">20 December</a>
-                    </div>
-                    <div className="thumb-inner">
-                      <a href="/blog">
-                        <img src="http://placehold.it/750x350" alt="" />
-                      </a>
-                    </div>
-                  </div>
-                  <div className="down-content">
-                    <a href="/blog">
-                      <h4>Pabst Gastropub Synth Edge</h4>
-                    </a>
-                    <ul>
-                      <li>
-                        <span>
-                          <em>Posted by:</em>
-                          <a href="#">Admin</a>
-                        </span>
-                      </li>
-                      <li>
-                        <span>
-                          <em>Posted on:</em>20/December/2018
-                        </span>
-                      </li>
-                      <li>
-                        <span>
-                          <em>Categories:</em>
-                          <a href="#">Creative</a>,<a href="#"> Graphic</a>
-                        </span>
-                      </li>
-                    </ul>
-                    <p>
-                      Slow-carb listicle PBR, Schlitz mustache keytar beard art
-                      party brunch chia tousled actually. Messenger bag kogi
-                      aesthetic elsent master cleanse. Bespoke Marfa migas
-                      Austin Helvetica American Apparel before they sold out
-                      readymade. Health goth freegan letterpress beard quinoa
-                      try-hard narwhal synth gastropub, tote bag ugh heirloom.
-                    </p>
-                    <div className="text-button">
-                      <a href="/blog">
-                        Continue Reading <i className="fa fa-arrow-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="page-numbers">
-                  <div className="pagination-content">
-                    <ul>
-                      <li className="active">
-                        <a href="#">1</a>
-                      </li>
-                      <li>
-                        <a href="#">2</a>
-                      </li>
-                      <li>
-                        <a href="#">3</a>
-                      </li>
-                      <li>
-                        <a href="#">4</a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="fa fa-angle-double-right"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </React.Fragment>
-  );
-};
-
-export default Bogs;
+export default Blogs;

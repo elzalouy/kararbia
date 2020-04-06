@@ -20,8 +20,8 @@ class Features extends Component {
       short_english: "",
       short_arabic: "",
       long_english: "",
-      long_arabic: ""
-    }
+      long_arabic: "",
+    },
   };
   async componentDidMount() {
     try {
@@ -39,7 +39,9 @@ class Features extends Component {
   handleEdit = handle(({ currentTarget: e }) => {
     const state = this.state;
     state.currentEditKey = e.id;
-    state.value = state.content.find(s => s.key === state.currentEditKey).value;
+    state.value = state.content.find(
+      (s) => s.key === state.currentEditKey
+    ).value;
     this.setState({ state });
   });
 
@@ -63,10 +65,12 @@ class Features extends Component {
     let { lang } = getWords();
     const { content, currentEditKey, value } = this.state;
     if (!content || content.length === 0) return null;
-    let buysel = content.find(s => s.key === "Sell & Buy Cars");
-    let carDealerResearch = content.find(s => s.key === "Car Dealer Research");
-    let bestDealers = content.find(s => s.key === "Best Dealers");
-    let worldWideKnown = content.find(s => s.key === "World Wide Known");
+    let buysel = content.find((s) => s.key === "Sell & Buy Cars");
+    let carDealerResearch = content.find(
+      (s) => s.key === "Car Dealer Research"
+    );
+    let bestDealers = content.find((s) => s.key === "Best Dealers");
+    let worldWideKnown = content.find((s) => s.key === "World Wide Known");
     return (
       <section>
         <div className="features-search-section">

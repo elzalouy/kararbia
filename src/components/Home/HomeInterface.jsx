@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { getCars } from "../../httpServices/car/car";
+import { getCarsByQuery } from "../../httpServices/car/car";
 import { toast } from "react-toastify";
 import { deleteCar } from "../../httpServices/car/car";
 class HomeInterface extends Component {
@@ -7,7 +7,7 @@ class HomeInterface extends Component {
   async componentDidMount() {
     try {
       const state = this.state;
-      let { data } = await getCars();
+      let { data } = await getCarsByQuery(3, "date");
       state.cars = data;
       this.setState(state);
     } catch (ex) {

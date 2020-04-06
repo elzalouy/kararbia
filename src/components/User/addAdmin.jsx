@@ -12,21 +12,25 @@ class AddAdmin extends Component {
     searchedUsers: [],
     adminName: "",
     addAdminId: "",
-    user: {}
+    user: {},
+    loading: false,
   };
   handleAddAdmin = handle(
     isAdmin(async () => {
+      this.setState({ loading: true });
       const state = this.state;
       const result = await AddNewAdmin(state.addAdminId, getToken());
-      if (result.error) toast.warn(result.error.message);
-      else window.location.reload();
+      if (result.error) {
+        toast.warn(result.error.message);
+        this.setState({ loading: false });
+      } else window.location.reload();
     })
   );
   handleSelectAdmin = handle(
     isAdmin(async ({ currentTarget: e }) => {
       const state = this.state;
       state.addAdminId = e.id;
-      state.user = state.searchedUsers.find(s => s._id === e.id);
+      state.user = state.searchedUsers.find((s) => s._id === e.id);
       this.setState({ state });
     })
   );
@@ -92,10 +96,10 @@ class AddAdmin extends Component {
                   <ul name="searchedUsers" className="w-100 p-0 m-0" id="">
                     {this.state.searchedUsers &&
                       this.state.searchedUsers.length > 0 &&
-                      this.state.searchedUsers.map(item => (
+                      this.state.searchedUsers.map((item) => (
                         <li
                           key={item._id}
-                          className="item cursor-pointer p-3 shadow w-100 "
+                          className="item cursor-pointer p-3 border border-1 w-100 "
                           style={{ listStyleType: "none" }}
                           id={item._id}
                           onClick={this.handleSelectAdmin}
@@ -111,21 +115,31 @@ class AddAdmin extends Component {
                   <i
                     className="fa fa-times text-right cursor-pointer"
                     aria-hidden="true"
+                    onClick={this.handleRemoveSelected}
                   ></i>
                 </div>
               )}
             </div>
             <div className="modal-footer row justify-content-center border-0">
-              <button className="btn save" onClick={this.handleAddAdmin}>
-                <i
-                  className="fa fa-check-circle p-0 m-0"
-                  aria-hidden="true"
-                ></i>
+              <button
+                className={this.state.loading ? "btn save loading" : "btn save"}
+                disabled={this.state.loading ? true : false}
+                onClick={this.handleAddAdmin}
+              >
+                {this.state.loading ? (
+                  ""
+                ) : (
+                  <i
+                    className="fa fa-check-circle p-0 m-0"
+                    aria-hidden="true"
+                  ></i>
+                )}
               </button>
               <button
                 type="button"
                 className="btn p-0 m-0 close"
                 data-dismiss="modal"
+                disabled={this.state.loading ? true : false}
               >
                 &times;
               </button>

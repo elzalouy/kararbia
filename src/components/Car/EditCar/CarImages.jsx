@@ -8,7 +8,8 @@ const CarImages = ({
   upload,
   handleSaveCar,
   handleCancel,
-  handleDeleteNewImage
+  handleDeleteNewImage,
+  loading,
 }) => {
   return (
     <div className="row p-0 m-0 mt-5  rounded justify-content-center pb-3 bg-white">
@@ -19,7 +20,7 @@ const CarImages = ({
         {state.imagesPreview.length > 0 || state.newImagesPreview.length > 0 ? (
           <div className="col-12 container p-5">
             <div className="row justify-content-center  align-item-center">
-              {state.imagesPreview.map(item => {
+              {state.imagesPreview.map((item) => {
                 return (
                   <React.Fragment
                     key={
@@ -39,7 +40,7 @@ const CarImages = ({
                   </React.Fragment>
                 );
               })}
-              {state.newImagesPreview.map(item => (
+              {state.newImagesPreview.map((item) => (
                 <React.Fragment key={state.newImagesPreview.indexOf(item)}>
                   <div className="position-relative">
                     <img src={item} className="car_image " alt="" />
@@ -70,13 +71,13 @@ const CarImages = ({
             onChange={handleAddImages}
             type="file"
             multiple
-            ref={ref => (upload = ref)}
+            ref={(ref) => (upload = ref)}
             style={{ display: "none" }}
           />
           <i
             className="fa fa-plus cursor-pointer add-icon"
             aria-hidden="true"
-            onClick={e => upload.click()}
+            onClick={(e) => upload.click()}
           ></i>
         </div>
       </div>
@@ -85,18 +86,29 @@ const CarImages = ({
           <div className="col-sm-8"></div>
           <div className="col-2 text-right">
             <button
-              className="save bg-transparent border-0"
+              className={
+                loading
+                  ? "bg-transparent loading"
+                  : "save bg-transparent border-0"
+              }
               onClick={handleSaveCar}
-              disabled={state.disabled}
+              disabled={loading ? true : false}
             >
-              <i className="fa fa-check-circle p-0 m-0" aria-hidden="true"></i>
+              {loading ? (
+                ""
+              ) : (
+                <i
+                  className="fa fa-check-circle p-0 m-0"
+                  aria-hidden="true"
+                ></i>
+              )}
             </button>
           </div>
           <div className="col-2 text-left">
             <button
               className="close bg-warn pt-2"
               onClick={handleCancel}
-              disabled={state.disabled}
+              disabled={loading ? true : false}
             >
               <i className="fa fa-times m-0 p-0" aria-hidden="true"></i>
             </button>

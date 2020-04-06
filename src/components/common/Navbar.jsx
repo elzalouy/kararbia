@@ -131,20 +131,29 @@ class Navbar extends Component {
                     <li>
                       <a href="/contact">{words["contact us"]}</a>
                     </li>
-                    {!user && (
-                      <React.Fragment>
-                        <li>
-                          <a href="/login">{words["login"]}</a>
-                        </li>
-                        <li>
-                          <a href="/register">{words["register"]}</a>
-                        </li>
-                      </React.Fragment>
-                    )}
                     <li>
-                      <a href="#search">
-                        <i className="fa fa-search"></i>
-                      </a>
+                      <a>{words["other"]}</a>
+                      <ul>
+                        <li>
+                          <a>{words["loan car"]}</a>
+                        </li>
+                        <li>
+                          <a>EMI calculator</a>
+                        </li>
+                        <li>
+                          <a>{words["ask question"]}</a>
+                        </li>
+                        {!user && (
+                          <React.Fragment>
+                            <li>
+                              <a href="/login">{words["login"]}</a>
+                            </li>
+                            <li>
+                              <a href="/register">{words["register"]}</a>
+                            </li>
+                          </React.Fragment>
+                        )}
+                      </ul>
                     </li>
                   </ul>
                 </div>

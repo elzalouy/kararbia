@@ -3,6 +3,7 @@ import React from "react";
 import getWords from "../../utils/GetWords";
 const Content = ({ itemValues, itemKey, handleChange, handleSubmit }) => {
   const { words, lang } = getWords();
+  if (!itemValues._id) return null;
   let error = "";
   return (
     <section

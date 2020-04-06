@@ -25,7 +25,7 @@ const RecentCars = ({ cars, handleDeleteCar }) => {
             </div>
             <div className="row justify-content-center">
               {cars && cars.length > 0 ? (
-                cars.map(item => (
+                cars.map((item) => (
                   <div
                     className="col-md-4 col-sm-6 d-flex align-items-stretch"
                     key={item._id}
@@ -37,7 +37,15 @@ const RecentCars = ({ cars, handleDeleteCar }) => {
                         </div>
                         <div className="thumb-inner">
                           <a href={`/car/${item._id}`}>
-                            <img src={item.images[0].url} alt="" />
+                            <img
+                              src={
+                                item &&
+                                item.images &&
+                                item.images[0] &&
+                                item.images[0].url
+                              }
+                              alt=""
+                            />
                           </a>
                         </div>
                       </div>

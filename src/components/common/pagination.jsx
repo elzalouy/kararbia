@@ -14,7 +14,9 @@ const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
             <li
               key={page}
               className={
-                page === currentPage ? "active mb-2 ml-1" : "mb-2 ml-1"
+                page === currentPage
+                  ? "active mb-2 ml-1 cursor-pointer"
+                  : "mb-2 ml-1 cursor-pointer"
               }
             >
               <a onClick={() => onPageChange(page)}>{page}</a>

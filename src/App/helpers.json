@@ -108,13 +108,16 @@
         "feature key": "اسم الميزة",
         "feature value": "قيمة الميزة",
         "edit": "تعديل",
-        "delete": "مسح"
+        "delete": "مسح",
+        "other": "خدمات اخرى",
+        "loan car": "استعير سيارة",
+        "ask question": "اسألنا"
     },
     "eng": {
         "homepage": "homepage",
         "us2": "US",
         "car listing": "car listing",
-        "blogs": "blog",
+        "blogs": "blogs",
         "about us": "About Us",
         "contact us": "contact us",
         "logout": "logout",
@@ -219,6 +222,9 @@
         "feature key": "Feature Key",
         "feature value": "Feature Value",
         "edit": "Edit",
-        "delete": "Delete"
+        "delete": "Delete",
+        "other": "Other",
+        "loan car": "Loan Car",
+        "ask question": "Ask a Question"
     }
 }

@@ -4,7 +4,7 @@ import {
   getRedis,
   updateSubItemImage,
   updateSubItemData,
-  deleteSubItemData
+  deleteSubItemData,
 } from "../../httpServices/redisImage/redisImage";
 import { admin } from "../../httpServices/auth/auth";
 import { toast } from "react-toastify";
@@ -21,7 +21,8 @@ class Carousel extends Component {
     image: {},
     preview: {},
     newItem: { image: null, title: null, link: null },
-    new: false
+    new: false,
+    loading: false,
   };
   async componentDidMount() {
     const result = await getRedis("carousel images");
@@ -33,7 +34,7 @@ class Carousel extends Component {
 
   handleChooseItem = ({ currentTarget: e }) => {
     const state = this.state;
-    const item = state.carousel.items.find(s => s._id === e.id);
+    const item = state.carousel.items.find((s) => s._id === e.id);
     state.item = item;
     this.setState({ state });
   };
@@ -45,30 +46,38 @@ class Carousel extends Component {
   };
 
   handleSaveItem = async () => {
+    this.setState({ loading: true });
     const state = this.state;
     const error = await validateRedisImageItem({
       title: state.item.title,
       link: state.item.link,
-      image: state.item.image
+      image: state.item.image,
     });
-    if (error) toast.error(error.message);
-    else {
+    if (error) {
+      toast.error(error.message);
+      this.setState({ loading: false });
+    } else {
       if (state.image && state.preview && state.new) {
         let result = await updateSubItemImage({
           redisId: state.carousel._id,
           itemId: state.item._id,
-          image: state.image
+          image: state.image,
         });
-        if (result.error) toast.warn(result.error.message);
+        if (result.error) {
+          toast.warn(result.error.message);
+          this.setState({ loading: false });
+        }
       }
       const result = await updateSubItemData({
         redisId: state.carousel._id,
         itemId: state.item._id,
         title: state.item.title,
-        link: state.item.link
+        link: state.item.link,
       });
-      if (result.error) toast.warn(result.error.message);
-      else {
+      if (result.error) {
+        toast.warn(result.error.message);
+        this.setState({ loading: false });
+      } else {
         let index = state.carousel.items.indexOf(state.item);
         state.carousel.items[index] = state.item;
         this.setState({ state });
@@ -100,13 +109,16 @@ class Carousel extends Component {
     this.setState({ state });
   };
   handleDeleteItem = async () => {
+    this.setState({ loading: true });
     const state = this.state;
     const result = await deleteSubItemData({
       redisId: state.carousel._id,
-      itemId: state.item._id
+      itemId: state.item._id,
     });
-    if (result.error) toast.error(result.error.message);
-    else {
+    if (result.error) {
+      toast.error(result.error.message);
+      this.setState({ loading: false });
+    } else {
       window.location.reload();
     }
   };
@@ -126,7 +138,7 @@ class Carousel extends Component {
             style={{ background: "rgb(0, 0, 1)", height: "668px" }}
           >
             {carousel && carousel.items && carousel.items.length > 0 ? (
-              carousel.items.map(item => (
+              carousel.items.map((item) => (
                 <div
                   key={item._id}
                   className={
@@ -246,6 +258,7 @@ class Carousel extends Component {
           </a>
         </div>
         <EditCarouselImage
+          loading={this.state.loading}
           item={this.state.item}
           state={this.state}
           upload={this.upload}
@@ -254,8 +267,11 @@ class Carousel extends Component {
           handleAddNewImage={this.handleAddNewImage}
           handleChangeImage={this.handleChangeImage}
         />
-        <DeleteCarouselItem handleDeleteItem={this.handleDeleteItem} />
-        <AddCarouselItem state={this.state} />
+        <DeleteCarouselItem
+          loading={this.state.loading}
+          handleDeleteItem={this.handleDeleteItem}
+        />
+        <AddCarouselItem />
       </React.Fragment>
     );
   }

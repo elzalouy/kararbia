@@ -8,7 +8,7 @@ import KeyValueItem from "../KeyValueItem";
 import {
   validateKeyValue,
   validateFeature,
-  validateEditCar
+  validateEditCar,
 } from "../../../httpServices/car/carSchema";
 import { editCar, addCarImages } from "../../../httpServices/car/car";
 import RequiredData from "./RequiredData";
@@ -33,8 +33,8 @@ class AddCar extends Component {
     extra_features: [
       {
         title: "Title Here",
-        items: [{ key: "Key Here", value: "Value Here" }]
-      }
+        items: [{ key: "Key Here", value: "Value Here" }],
+      },
     ],
     images: [],
     imagesPreview: [],
@@ -43,15 +43,16 @@ class AddCar extends Component {
     feature: {
       _id: "",
       title: "",
-      items: [{ key: "", value: "" }]
+      items: [{ key: "", value: "" }],
     },
     item: { key: "", value: "" },
     disabled: 0,
     error: {
       feature: { title: "", items: "" },
       item: "",
-      extra_features: ""
-    }
+      extra_features: "",
+    },
+    loading: false,
   };
   async componentDidMount() {
     try {
@@ -77,14 +78,14 @@ class AddCar extends Component {
         state.imagesPreview = data.images;
         state.feature = {
           title: "",
-          items: []
+          items: [],
         };
         state.item = { key: "", value: "" };
         state.disabled = 0;
         state.error = {
           feature: { title: "", items: "" },
           item: "",
-          extra_features: ""
+          extra_features: "",
         };
         this.setState({ state });
       }
@@ -99,15 +100,15 @@ class AddCar extends Component {
   });
   handleChooseFeature = handle(async ({ currentTarget: e }) => {
     const state = this.state;
-    let item = state.extra_features.find(s => s._id === e.id)
-      ? state.extra_features.find(s => s._id === e.id)
+    let item = state.extra_features.find((s) => s._id === e.id)
+      ? state.extra_features.find((s) => s._id === e.id)
       : state.extra_features[e.id];
     state.feature = item;
     this.setState({ state });
   });
   handleDeleteFeature = handle(async ({ currentTarget: e }) => {
     const state = this.state;
-    let item = state.extra_features.find(s => s._id === e.id);
+    let item = state.extra_features.find((s) => s._id === e.id);
     if (!item) item = state.extra_features[e.id];
     let index = state.extra_features.indexOf(item);
     _.remove(state.extra_features, state.extra_features[index]);
@@ -125,7 +126,7 @@ class AddCar extends Component {
   });
   handleChangeItem = handle(async ({ currentTarget: e }) => {
     const state = this.state;
-    let item = state.feature.items.find(s => s._id === e.id);
+    let item = state.feature.items.find((s) => s._id === e.id);
     if (!item) item = state.feature.items[e.id];
     let index = state.feature.items.indexOf(item);
     state.feature.items[index][e.name] = e.value;
@@ -144,7 +145,7 @@ class AddCar extends Component {
   });
   handleAddItem = handle(async () => {
     const state = this.state;
-    let item = state.feature.items.find(s => s.key === "");
+    let item = state.feature.items.find((s) => s.key === "");
     let index = state.feature.items.indexOf(item);
     if (index >= 0) _.remove(state.feature.items, state.feature.items[index]);
     state.feature.items.push(state.item);
@@ -153,11 +154,11 @@ class AddCar extends Component {
   });
   handleAddFeatures = handle(async () => {
     const state = this.state;
-    let item = state.extra_features.find(s => s.title === "Title Here");
+    let item = state.extra_features.find((s) => s.title === "Title Here");
     let index = state.extra_features.indexOf(item);
     if (index >= 0) _.remove(state.extra_features, state.extra_features[index]);
     if (state.feature._id) {
-      item = state.extra_features.find(s => s._id === state.feature._id);
+      item = state.extra_features.find((s) => s._id === state.feature._id);
       index = state.extra_features.indexOf(item);
       state.extra_features[index] = state.feature;
     } else {
@@ -168,7 +169,7 @@ class AddCar extends Component {
     state.error = {
       feature: { title: "", items: "" },
       item: "",
-      extra_features: ""
+      extra_features: "",
     };
     this.setState({ state });
   });
@@ -181,10 +182,10 @@ class AddCar extends Component {
       state.newImages = e.files;
       const files = Array.from(e.files);
       Promise.all(
-        files.map(file => {
+        files.map((file) => {
           return new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.addEventListener("load", ev => {
+            reader.addEventListener("load", (ev) => {
               resolve(ev.target.result);
             });
             reader.addEventListener("error", reject);
@@ -192,12 +193,12 @@ class AddCar extends Component {
           });
         })
       ).then(
-        images => {
-          images.forEach(item => state.newImagesPreview.push(item));
+        (images) => {
+          images.forEach((item) => state.newImagesPreview.push(item));
           state.newImages = Array.from(state.newImages);
           this.setState({ state });
         },
-        error => {
+        (error) => {
           toast.warn(error);
         }
       );
@@ -211,9 +212,12 @@ class AddCar extends Component {
   handleDeleteNewImage = handle(({ currentTarget: e }) => {
     const state = this.state;
     let item = state.newImages[e.id];
-    state.newImages = _.remove(state.newImages, s => s !== item);
+    state.newImages = _.remove(state.newImages, (s) => s !== item);
     item = state.newImagesPreview[e.id];
-    state.newImagesPreview = _.remove(state.newImagesPreview, s => s !== item);
+    state.newImagesPreview = _.remove(
+      state.newImagesPreview,
+      (s) => s !== item
+    );
     this.setState({ state });
   });
 
@@ -221,7 +225,7 @@ class AddCar extends Component {
     const state = this.state;
     state.feature = {
       title: "",
-      items: []
+      items: [],
     };
     state.item = { key: "", value: "" };
     state.error.feature = { title: "", item: "" };
@@ -229,8 +233,9 @@ class AddCar extends Component {
     state.error.extra_features = "";
     this.setState({ state });
   });
-  handleSaveCar = handle(async e => {
+  handleSaveCar = handle(async (e) => {
     e.preventDefault();
+    this.setState({ loading: true });
     const state = this.state;
     let car = {
       name: state.name,
@@ -246,21 +251,24 @@ class AddCar extends Component {
       fuel_type: state.fuel_type,
       status: state.status,
       extra_features: state.extra_features,
-      images: state.images
+      images: state.images,
     };
     let validateresult = await validateEditCar(car);
 
     if (validateresult) {
       toast.warn(validateresult.message);
+      this.setState({ loading: false });
     } else {
       let result = await editCar(car, this.props.match.params.id);
       if (result.error) {
         toast.warn(result.error.message);
+        this.setState({ loading: false });
       } else {
         let images = Array.from(state.newImages);
         let iResult = await addCarImages(images, result.data._id);
         if (iResult.error) {
           toast.warn(iResult.error.message);
+          this.setState({ loading: false });
         } else {
           toast.warn("Successfully added");
           window.location = "/";
@@ -359,6 +367,7 @@ class AddCar extends Component {
             data-wow-duration="1s"
           >
             <CarImages
+              loading={state.loading}
               state={state}
               handleAddImages={this.handleAddImages}
               handleCancel={this.handleCancel}

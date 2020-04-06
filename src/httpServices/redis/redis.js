@@ -9,7 +9,7 @@ export async function addRedis(content) {
     let token = getToken();
     const headers = {
       "Content-Type": "application/json",
-      "x-auth-token": token
+      "x-auth-token": token,
     };
     let item = {
       key: content.key,
@@ -17,11 +17,11 @@ export async function addRedis(content) {
         short_english: content.value.short_english,
         long_english: content.value.long_english,
         short_arabic: content.value.short_arabic,
-        long_arabic: content.value.long_arabic
-      }
+        long_arabic: content.value.long_arabic,
+      },
     };
     const response = await http.post(route + "add", item, {
-      headers: headers
+      headers: headers,
     });
     const result = handleServerError(response);
     if (result) return { data: null, error: result };

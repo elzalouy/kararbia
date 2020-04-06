@@ -13,9 +13,11 @@ import ContactUs from "../components/Contact/Caontact";
 import Logout from "../components/User/Logout";
 import AddCar from "../components/Car/AddCar";
 import EditCar from "../components/Car/EditCar/EditCar";
+import EditBlog from "../components/Blog/editblog";
 import { authed, admin } from "../httpServices/auth/auth";
 // import VerifyMobile from "../components/User/VerifyMobile";
 import ResetForgotPassword from "../components/User/ResetForgotPassword";
+import NewBlog from "../components/Blog/NewBlog";
 class Services extends Component {
   state = {
     Routes: [
@@ -67,7 +69,33 @@ class Services extends Component {
       },
       {
         route: "/blog",
-        Route: <Route path="/blog" component={Blog} key="blig" />
+        Route: <Route path="/blog/:id" component={Blog} key="blig" />
+      },
+      {
+        route: "/newBlog",
+        Route: (
+          <Route
+            path="/newBlog"
+            render={props => {
+              if (admin()) return <NewBlog {...props} />;
+              else return <Redirect to="/" />;
+            }}
+            key="newBlog"
+          />
+        )
+      },
+      {
+        route: "/editBlog",
+        Route: (
+          <Route
+            path="/editBlog/:id"
+            render={props => {
+              if (admin()) return <EditBlog {...props} />;
+              else return <Redirect to="/" />;
+            }}
+            key="editBlog"
+          />
+        )
       },
       {
         route: "/about",

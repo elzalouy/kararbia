@@ -7,7 +7,11 @@ import { toast } from "react-toastify";
 import { addSubItemData } from "../../httpServices/redisImage/redisImage";
 class AddCarouselItem extends Component {
   upload = React.createRef();
-  state = { newItem: { image: null, title: null, link: null }, preview: {} };
+  state = {
+    newItem: { image: null, title: null, link: null },
+    preview: {},
+    loading: false,
+  };
   handleAddNewImage = ({ currentTarget: e }) => {
     const state = this.state;
     state.newItem.image = e.files[0];
@@ -26,19 +30,23 @@ class AddCarouselItem extends Component {
     this.setState({ state });
   };
   handleAddNewItem = async () => {
+    this.setState({ loading: true });
     const state = this.state;
     let item = {
       title: state.newItem.title,
       link: state.newItem.link ? state.newItem.link : "",
-      image: state.newItem.image
+      image: state.newItem.image,
     };
     let result = await validateRedisImageItem(item);
-    if (result) toast.warn(result.message);
-    else {
+    if (result) {
+      toast.warn(result.message);
+      this.setState({ loading: false });
+    } else {
       item.key = "carousel images";
       let response = await addSubItemData(item);
       if (response.error) {
         toast.error(response.error.message);
+        this.setState({ loading: false });
       } else {
         window.location.reload();
       }
@@ -80,12 +88,12 @@ class AddCarouselItem extends Component {
                     <input
                       onChange={this.handleAddNewImage}
                       type="file"
-                      ref={ref => (this.upload = ref)}
+                      ref={(ref) => (this.upload = ref)}
                       style={{ display: "none" }}
                     />
                     <button
                       className="btn pt-0 add-icon"
-                      onClick={e => this.upload.click()}
+                      onClick={(e) => this.upload.click()}
                     >
                       <i className="fa fa-plus " aria-hidden="true"></i>
                     </button>
@@ -108,7 +116,7 @@ class AddCarouselItem extends Component {
                   </React.Fragment>
                 )}
               </div>
-              <div className="col mt-5">
+              <div className="col mt-5 mb-5">
                 <input
                   type="text"
                   placeholder="Title Here"
@@ -134,12 +142,22 @@ class AddCarouselItem extends Component {
                   className="form-control brd-0 my-2"
                 />
                 <button
-                  className="btn btn-warning mx-1"
+                  className={
+                    state.loading
+                      ? "btn btn-warning mx-1 loading"
+                      : "btn btn-warning mx-1"
+                  }
+                  disabled={state.loading ? true : false}
                   onClick={this.handleAddNewItem}
                 >
                   Add
                 </button>
-                <button className="btn btn-danger mx-1">Cancel</button>
+                <button
+                  className="btn btn-danger mx-1"
+                  disabled={state.loading ? true : false}
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </div>

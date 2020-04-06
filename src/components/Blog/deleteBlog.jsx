@@ -1,11 +1,11 @@
 import React from "react";
 import getWords from "../../utils/GetWords";
 
-const DeleteCarouselItem = ({ handleDeleteItem, loading }) => {
+const DeleteBlogItem = ({ handleDeleteItem, loading }) => {
   let { lang } = getWords();
   return (
     <div
-      className="modal fade bd-example-modal-lg deleteitem mt-5 pt-5"
+      className="modal fade bd-example-modal-lg deleteBlog mt-5 pt-5"
       tabIndex="-1"
       role="dialog"
       aria-labelledby="myLargeModalLabel"
@@ -43,7 +43,6 @@ const DeleteCarouselItem = ({ handleDeleteItem, loading }) => {
                 type="button"
                 className="btn btn-danger mx-1"
                 data-dismiss="modal"
-                disabled={loading ? true : false}
               >
                 cancel
               </button>
@@ -55,4 +54,4 @@ const DeleteCarouselItem = ({ handleDeleteItem, loading }) => {
   );
 };
 
-export default DeleteCarouselItem;
+export default DeleteBlogItem;

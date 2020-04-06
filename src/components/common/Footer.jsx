@@ -2,48 +2,118 @@
 import React from "react";
 import getWords from "../../utils/GetWords.js";
 import { Component } from "react";
+import { getRedisItem, addRedis } from "../../httpServices/redis/redis.js";
+import { toast } from "react-toastify";
+import { admin } from "../../httpServices/auth/auth.js";
+import ContentDrop from "./ContentDrop.jsx";
+import Content from "./content.jsx";
+import handle from "../../middleware/errorHandle";
+import { validateServiceSchema } from "../../httpServices/redis/redisSchema.jsx";
+import { getRandomImages } from "../../httpServices/car/car.js";
 class Footer extends Component {
+  state = {
+    redisItem: {
+      key: "",
+      value: {
+        long_arabic: "",
+        long_english: "",
+        short_english: "",
+        short_arabic: "",
+      },
+    },
+    randomImages: [],
+  };
+  async componentDidMount() {
+    const redisItem = await getRedisItem("footer about us");
+    if (redisItem.error) return toast.warn(redisItem.error.message);
+    const randomImages = await getRandomImages(6);
+    if (randomImages.error) toast.warn(randomImages.error);
+    const state = this.state;
+    state.redisItem = redisItem.data;
+    state.randomImages = randomImages.data;
+    this.setState({ state });
+  }
+  handleEdit = handle(({ currentTarget: e }) => {
+    const state = this.state;
+    state.key = e.id;
+    this.setState({ state });
+  });
+
+  handleChange = handle(async ({ currentTarget: e }) => {
+    const state = this.state;
+    state.redisItem.value[e.name] = e.value;
+    this.setState({ state });
+  });
+
+  handleSubmit = handle(async () => {
+    const state = this.state;
+    let content = { key: state.redisItem.key, value: state.redisItem.value };
+    let result = await validateServiceSchema(content);
+    if (result) toast.warn(result.message);
+    else {
+      let addresult = await addRedis(content);
+      if (addresult.error) toast.warn(addresult.error.message);
+      else window.location.reload();
+    }
+  });
   render() {
-    let { words } = getWords();
+    let { words, lang } = getWords();
+    const { redisItem, randomImages } = this.state;
+    if (!redisItem) return null;
     return (
       <footer className="mt-0">
         <div className="container">
-          <div className="row">
+          <div className="row" dir={lang === "eng" ? "ltr" : "rtl"}>
             <div className="col-md-4">
               <div className="footer-item">
                 <div className="about-us">
-                  <h2>{words["about us"]}</h2>
+                  <div className="custom-control-inline">
+                    {lang === "eng" ? (
+                      <React.Fragment>
+                        <h2 className="pr-5">{words["about us"]}</h2>
+                        {admin() && <ContentDrop itemKey={redisItem.key} />}
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        {admin() && <ContentDrop itemKey={redisItem.key} />}
+                        <h2 className="pr-5">{words["about us"]}</h2>
+                      </React.Fragment>
+                    )}
+                  </div>
                   <p>
-                    Irony actually meditation, occupy mumblecore wayfarers
-                    organic pickled 90's. Intelligentsia as actually +1 meh
-                    photo booth.
+                    {lang === "eng" && redisItem && redisItem.value
+                      ? redisItem.value.long_english
+                      : redisItem.value.long_arabic}
                   </p>
                   <ul>
-                    <li>
+                    <li className="mx-1">
                       <a href="#">
                         <i className="fab fa-facebook-f" aria-hidden="true"></i>
                       </a>
                     </li>
-                    <li>
+                    <li className="mx-1">
                       <a href="#">
                         <i className="fab fa-twitter"></i>
                       </a>
                     </li>
-                    <li>
-                      <a href="#">
-                        <i className="fab fa-behance"></i>{" "}
-                      </a>
-                    </li>
-                    <li>
+                    <li className="mx-1">
                       <a href="#">
                         <i className="fab fa-linkedin-in"></i>
                       </a>
                     </li>
-                    <li>
-                      <a href="#">
-                        <i className="fab fa-dribbble    "></i>
-                      </a>
-                    </li>
+                    {/* {admin() && (
+                      <li className="mx-1">
+                        <a
+                          href=""
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#changeSocialMedia"
+                          aria-hidden="false"
+                        >
+                          <i class="fas fa-edit"></i>
+                        </a>
+                      </li>
+                    )} */}
                   </ul>
                 </div>
               </div>
@@ -54,19 +124,16 @@ class Footer extends Component {
                   <h2>{words["what we offer"]}</h2>
                   <ul>
                     <li>
-                      <a href="#">Rent a car now</a>
+                      <a href="/contact">Rent a car now</a>
                     </li>
                     <li>
-                      <a href="#">Search for sale</a>
+                      <a href="/contact">Search for sale</a>
                     </li>
                     <li>
-                      <a href="#">Try search form</a>
+                      <a href="/contact">Try search form</a>
                     </li>
                     <li>
-                      <a href="#">Best daily dealers</a>
-                    </li>
-                    <li>
-                      <a href="#">Weekly lucky person</a>
+                      <a href="/contact">Best daily dealers</a>
                     </li>
                   </ul>
                 </div>
@@ -78,19 +145,16 @@ class Footer extends Component {
                   <h2>{words["need help"]}</h2>
                   <ul>
                     <li>
-                      <a href="#">Modern wheels</a>
+                      <a href="/contact">Modern wheels</a>
                     </li>
                     <li>
-                      <a href="#">Awesome spoilers</a>
+                      <a href="/contact">Awesome spoilers</a>
                     </li>
                     <li>
-                      <a href="#">Dynamic Enetrior</a>
+                      <a href="/contact">Dynamic Enetrior</a>
                     </li>
                     <li>
-                      <a href="#">Save accidents </a>
-                    </li>
-                    <li>
-                      <a href="#">Recorded Racing</a>
+                      <a href="/contact">Save accidents </a>
                     </li>
                   </ul>
                 </div>
@@ -101,36 +165,19 @@ class Footer extends Component {
                 <div className="our-gallery">
                   <h2>{words["our galary"]}</h2>
                   <ul>
-                    <li>
-                      <a href="#">
-                        <img src="https://placehold.it/70x70" alt="" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <img src="https://placehold.it/70x70" alt="" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <img src="https://placehold.it/70x70" alt="" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <img src="https://placehold.it/70x70" alt="" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <img src="https://placehold.it/70x70" alt="" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <img src="https://placehold.it/70x70" alt="" />
-                      </a>
-                    </li>
+                    {randomImages &&
+                      randomImages.length > 0 &&
+                      randomImages.map((item) => (
+                        <li key={randomImages.indexOf(item)}>
+                          <a href="#">
+                            <img
+                              src={item.url}
+                              style={{ height: "70px", width: "70px" }}
+                              alt=""
+                            />
+                          </a>
+                        </li>
+                      ))}
                   </ul>
                 </div>
               </div>
@@ -146,6 +193,14 @@ class Footer extends Component {
             </div>
           </div>
         </div>
+        {admin() && (
+          <Content
+            itemKey={redisItem.key && redisItem.key}
+            itemValues={redisItem.value && redisItem.value}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+          />
+        )}
       </footer>
     );
   }

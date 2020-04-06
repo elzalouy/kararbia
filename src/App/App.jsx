@@ -22,7 +22,7 @@ class App extends Services {
       <BrowserRouter>
         <Reloader />
         <Navbar />
-        <ToastContainer className="mt-3 pt-5" />
+        <ToastContainer className="mt-3 pt-5 zIndex" />
         {admin() && (
           <React.Fragment>
             <RemoveAdmin />
@@ -31,7 +31,7 @@ class App extends Services {
         )}
         {authed() && <ChangePassword />}
         {!authed() && <ForgotPassword />}
-        <Switch>{this.state.Routes.map(item => item.Route)}</Switch>
+        <Switch>{this.state.Routes.map((item) => item.Route)}</Switch>
         <Footer />
       </BrowserRouter>
     );

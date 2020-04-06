@@ -10,7 +10,8 @@ const EditCarouselImage = ({
   handleSaveItem,
   handleChangeImage,
   handleAddNewImage,
-  handleCancel
+  handleCancel,
+  loading,
 }) => {
   let { lang } = getWords();
   return (
@@ -64,12 +65,12 @@ const EditCarouselImage = ({
                           id="profile_photo"
                           onChange={handleAddNewImage}
                           type="file"
-                          ref={ref => (upload = ref)}
+                          ref={(ref) => (upload = ref)}
                           style={{ display: "none" }}
                         />
                         <button
                           className="btn pt-0 add-icon"
-                          onClick={e => upload.click()}
+                          onClick={(e) => upload.click()}
                         >
                           <i className="fa fa-plus " aria-hidden="true"></i>
                         </button>
@@ -111,7 +112,12 @@ const EditCarouselImage = ({
                 className="form-control brd-0 my-2"
               />
               <button
-                className="btn btn-success mx-1"
+                className={
+                  loading
+                    ? "btn btn-success mx-1 loading"
+                    : "btn btn-success mx-1"
+                }
+                disabled={loading ? true : false}
                 onClick={handleSaveItem}
                 type="button"
               >
@@ -122,16 +128,9 @@ const EditCarouselImage = ({
                 type="button"
                 data-dismiss="modal"
                 onClick={handleCancel}
+                disabled={loading ? true : false}
               >
                 Cancel
-              </button>
-              <button
-                className="btn btn-danger mx-1"
-                type="button"
-                data-dismiss="modal"
-                onClick={handleCancel}
-              >
-                Close
               </button>
             </div>
           </div>
