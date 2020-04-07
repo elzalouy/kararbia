@@ -17,10 +17,10 @@ class NewBlog extends Component {
     if (e.id === "h4") state.blog += `<h4>Type your text here</h4>`;
     if (e.id === "h5") state.blog += `<h5>Type your text here</h5>`;
     if (e.id === "link") state.blog += `<a href=''>type a link</a>`;
-    if (e.id === "mark") state.blog += `<marked>Mark Here</marked>`;
-    if (e.id === "bold") state.blog += `<bold>Bold Here</bold>`;
-    if (e.id === "space") state.blog += `<space/>`;
-    if (e.id === "gray") state.blog += "<gray>Type your text here</gray>";
+    if (e.id === "mark") state.blog += `<mark>Mark Here</mark>`;
+    if (e.id === "bold") state.blog += `<pre>Bold Here</pre>`;
+    if (e.id === "space") state.blog += `<br>`;
+    if (e.id === "gray") state.blog += "<span>Type your text here</span>";
     this.setState({ state });
   };
   handleChange = ({ currentTarget: e }) => {

@@ -96,7 +96,7 @@ class Blogs extends Component {
                     <React.Fragment>
                       <div className="text-center">
                         <i
-                          class="fa fa-file gray icon-no-car"
+                          className="fa fa-file gray icon-no-car"
                           aria-hidden="true"
                         ></i>
                         <h4 className="mt-4 gray">No items now</h4>

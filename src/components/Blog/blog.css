@@ -35,7 +35,7 @@
     cursor: pointer;
 }
 
-marked {
+.convert mark {
     background-color: #f7f7f7 !important;
     display: inline-block !important;
     padding: 15px 30px !important;
@@ -47,7 +47,8 @@ marked {
     border-left: 3px solid #f4c23d !important;
 }
 
-bold {
+.convert pre {
+    display: inline !important;
     font-weight: bolder !important;
     margin-right: 5px;
     font-style: normal;
@@ -56,13 +57,13 @@ bold {
     color: #b9b9b9;
 }
 
-space {}
 
-space::before {
+.convert br::before {
     content: "\a0" !important;
 }
 
-gray {
+.convert span {
+    display: inline !important;
     margin-right: 5px;
     font-style: normal;
     font-size: 12px;
@@ -82,7 +83,6 @@ gray {
 .convert h5,
 .convert h6 {
     margin-bottom: 0 !important;
-
 }
 
 .blog-image {

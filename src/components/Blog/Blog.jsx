@@ -11,7 +11,7 @@ class Blog extends Component {
   async componentDidMount() {
     const id = this.props.match.params.id;
     const blog = await getBlogById(id);
-    if (blog.error) window.location.replace = "/404";
+    if (blog.error) window.location = "/404";
     else {
       const state = this.state;
       state.blog = blog.data;
@@ -51,7 +51,7 @@ class Blog extends Component {
                       className="pb-3 blog-image"
                       alt=""
                     />
-                    <div className="down-content" id="convert"></div>
+                    <div className="down-content convert" id="convert"></div>
                   </div>
                   {admin() && blog && (
                     <div className="text-left">
