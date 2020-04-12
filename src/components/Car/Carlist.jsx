@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { admin } from "../../httpServices/auth/auth";
 import getWords from "../../utils/GetWords";
-import { getCars, deleteCar } from "../../httpServices/car/car";
+import { deleteCar, getCarsByQuery } from "../../httpServices/car/car";
 import { toast } from "react-toastify";
 import Pagination from "../common/pagination";
 import { paginate } from "../../utils/paginate";
@@ -27,19 +27,23 @@ class CarList extends Component {
   };
 
   async componentDidMount() {
-    const state = this.state;
-    let result = await getCars();
-    if (result.error) toast.warn(result.error.message);
-    else {
-      state.cars = result.data;
-      state.filtered = result.data;
-      let params = queryString.parse(this.props.location.search);
-      state.brand = params.brand ? params.brand : state.brand;
-      state.model = params.model ? params.model : state.model;
-      state.minprice = params.minprice ? params.minprice : state.minprice;
-      state.maxprice = params.maxprice ? params.maxprice : state.maxprice;
-      this.setState({ state });
-      await this.handleSearch();
+    try {
+      const state = this.state;
+      let result = await getCarsByQuery(0, "-date");
+      if (result.error) toast.warn(result.error.message);
+      else {
+        state.cars = result.data;
+        state.filtered = result.data;
+        let params = queryString.parse(this.props.location.search);
+        state.brand = params.brand ? params.brand : state.brand;
+        state.model = params.model ? params.model : state.model;
+        state.minprice = params.minprice ? params.minprice : state.minprice;
+        state.maxprice = params.maxprice ? params.maxprice : state.maxprice;
+        this.setState({ state });
+        await this.handleSearch();
+      }
+    } catch (ex) {
+      toast.warn(ex);
     }
   }
 
@@ -119,7 +123,7 @@ class CarList extends Component {
                     <div className="heading-content  col-md-12">
                       <p className={lang === "eng" ? "" : "text-right"}>
                         <a href="/home">{words["homepage"]} </a> /{" "}
-                        <em> {words["cars"]}</em> / <em> {words["listing"]}</em>
+                        <em>{words["cars"]}</em> / <em> {words["listing"]}</em>
                       </p>
                       <div className="row" dir={lang === "eng" ? "ltr" : "rtl"}>
                         <h2 className="pt-2 text-right">
@@ -147,12 +151,12 @@ class CarList extends Component {
             <div className="recent-car-content">
               <div className="row">
                 <div className="col-md-8">
-                  <div className="row align-items-center">
+                  <div className="row align-items-start">
                     {cars && cars.length > 0 ? (
                       cars.map((item) => (
                         <React.Fragment key={item._id}>
-                          <div className="col-md-6">
-                            <div className="car-item">
+                          <div className="col-lg-6 ">
+                            <div className="car-item col p-0">
                               <div className="thumb-content">
                                 <div className="car-banner">
                                   <a href={`/car/${item._id}`}>{item.status}</a>

@@ -22,7 +22,7 @@ class ResetForgotPassword extends Component {
     } else {
       let result = await validateNewPassword({
         newPassword: state.newPassword,
-        confirmPassword: state.confirmPassword
+        confirmPassword: state.confirmPassword,
       });
       if (result) state.error = result.message;
       else {

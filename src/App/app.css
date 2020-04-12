@@ -239,3 +239,22 @@
 .zIndex {
     z-index: 99999999 !important;
 }
+
+table {
+    display: table;
+    border-radius: 10px !important;
+    width: 100% !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}
+
+th,
+tr {
+    padding: 15px;
+}
+
+thead {
+    background-color: #f4c23d !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}

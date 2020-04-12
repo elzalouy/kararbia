@@ -111,7 +111,8 @@
         "delete": "مسح",
         "other": "خدمات اخرى",
         "loan car": "استعير سيارة",
-        "ask question": "اسألنا"
+        "ask question": "اسألنا",
+        "car requests": "الطلبات"
     },
     "eng": {
         "homepage": "homepage",
@@ -225,6 +226,7 @@
         "delete": "Delete",
         "other": "Other",
         "loan car": "Loan Car",
-        "ask question": "Ask a Question"
+        "ask question": "Ask a Question",
+        "car requests": "Car Requests"
     }
 }

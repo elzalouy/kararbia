@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import BlogHeader from "./BlogHeader.jsx";
-import { getBlogs } from "../../httpServices/blog/blog.js";
+import { getBlogsByQuery } from "../../httpServices/blog/blog.js";
 import { toast } from "react-toastify";
 import { Component } from "react";
 import { getDate } from "../../utils/formatDate.js";
@@ -13,7 +13,7 @@ class Blogs extends Component {
   state = { blogs: [], filtered: [], currentPage: 1, pageSize: 2 };
   async componentDidMount() {
     const state = this.state;
-    let blogs = await getBlogs();
+    let blogs = await getBlogsByQuery(0, "date");
     if (blogs.error) return toast.warn(blogs.error.message);
     state.blogs = blogs.data;
     state.filtered = blogs.data;

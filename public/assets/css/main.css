@@ -544,6 +544,10 @@ section {
     transition: background 0.5s ease-in-out, height 0.5s ease-in-out
 }
 
+.site-header a {
+    cursor: pointer !important;
+}
+
 .site-header .logo {
     float: left;
     margin-top: 15px;
@@ -590,7 +594,12 @@ section {
 }
 
 .site-header #cssmenu>ul>li {
-    float: left
+    float: left;
+    border-top: 2px solid #f6f6f6 !important;
+}
+
+.site-header #cssmenu>ul>li:hover {
+    border-top: 2px solid #f4c23d !important;
 }
 
 .site-header #cssmenu.align-center>ul {
@@ -612,7 +621,7 @@ section {
 }
 
 .site-header #cssmenu>ul>li>a {
-    padding: 30px 17px;
+    padding: 20px 17px;
     font-size: 14px;
     letter-spacing: 1px;
     text-decoration: none;
@@ -634,7 +643,7 @@ section {
 
 .site-header #cssmenu>ul>li.has-sub>a:after {
     position: absolute;
-    top: 34px;
+    top: 26px;
     right: 11px;
     width: 8px;
     height: 2px;
@@ -645,7 +654,7 @@ section {
 
 .site-header #cssmenu>ul>li.has-sub>a:before {
     position: absolute;
-    top: 31px;
+    top: 23px;
     right: 14px;
     display: block;
     width: 2px;
@@ -660,7 +669,7 @@ section {
 }
 
 .site-header #cssmenu>ul>li.has-sub:hover>a:before {
-    top: 35px;
+    top: 27px;
     height: 0
 }
 
@@ -670,7 +679,7 @@ section {
 }
 
 .site-header #cssmenu.align-right ul ul {
-    text-align: right
+    text-align: right;
 }
 
 .site-header #cssmenu ul ul li {
@@ -705,14 +714,11 @@ section {
     margin-right: 100%
 }
 
-.site-header #cssmenu ul ul li:first-child a {
-    padding: 11px 15px
-}
 
 .site-header #cssmenu ul ul li a {
-    border-bottom: 1px solid #ddd;
-    padding: 10.5px 15px;
-    width: 170px;
+    display: inline-block;
+    padding: 20px 15px 10px 10px;
+    width: 250px;
     font-size: 13px;
     text-decoration: none;
     color: #4a4a4a;
@@ -725,7 +731,7 @@ section {
 
 .site-header #cssmenu ul ul li.last-item>a,
 .site-header #cssmenu ul ul li:last-child>a {
-    border-bottom: 0
+    border-bottom: 0 !important;
 }
 
 .site-header #cssmenu ul ul li:hover>a,
@@ -1499,7 +1505,8 @@ section.top-slider-features .slider-top-features .owl-dots {
 
 .on-grids .car-item .thumb-content,
 .recent-cars .car-item .thumb-content {
-    position: relative
+    position: relative;
+
 }
 
 .on-grids .car-item .thumb-content .car-banner,
@@ -1507,7 +1514,7 @@ section.top-slider-features .slider-top-features .owl-dots {
     position: absolute;
     margin-top: 0px;
     left: 20px;
-    bottom: -18px;
+    bottom: -20px;
     margin-right: 26px
 }
 
@@ -2116,7 +2123,7 @@ section.top-slider-features .slider-top-features .owl-dots {
 }
 
 .latest-news .item .thumb-content {
-    position: relative
+    position: relative;
 }
 
 .latest-news .item .thumb-content .date-post {

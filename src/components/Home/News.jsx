@@ -9,7 +9,7 @@ import handle from "../../middleware/errorHandle";
 class News extends Component {
   state = { blogs: [] };
   async componentDidMount() {
-    const blogs = await getBlogsByQuery(3, "date");
+    const blogs = await getBlogsByQuery(2, "date");
     if (blogs.error) return toast.warn(blogs.error.message);
     const state = this.state;
     state.blogs = blogs.data;
@@ -52,12 +52,12 @@ class News extends Component {
             </div>
           </div>
           <div className="container">
-            <div className="row justify-content-center">
+            <div className="row justify-content-center align-items-center">
               {this.state.blogs && this.state.blogs.length > 0 ? (
                 this.state.blogs.map((item) => {
                   const date = getDate(item.date);
                   return (
-                    <div className="col-md-4" key={item._id}>
+                    <div className="col-md-6" key={item._id}>
                       <div
                         className="item wow fadeIn"
                         data-wow-duration="0.75s"

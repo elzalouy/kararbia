@@ -7,7 +7,7 @@ class HomeInterface extends Component {
   async componentDidMount() {
     try {
       const state = this.state;
-      let { data } = await getCarsByQuery(3, "date");
+      let { data } = await getCarsByQuery(0, "-date");
       state.cars = data;
       this.setState(state);
     } catch (ex) {

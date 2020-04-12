@@ -41,7 +41,7 @@ class Navbar extends Component {
         <React.Fragment>
           <header className="site-header wow fadeIn" data-wow-duration="1s">
             <div id="main-header" className="main-header">
-              <div className="px-5 clearfix pt-2">
+              <div className="px-5 clearfix">
                 <div className="logo">
                   <a href="/"></a>
                 </div>
@@ -92,6 +92,11 @@ class Navbar extends Component {
                                         aria-hidden="false"
                                       >
                                         {words["remove admin"]}
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="/CarRequests">
+                                        {words["car requests"]}
                                       </a>
                                     </li>
                                   </ul>
