@@ -8,6 +8,7 @@ import Gallary from "../common/Gallary/Gallary.jsx";
 import KeyValueItem from "./KeyValueItem.jsx";
 import RequestCar from "./RequestCar.jsx";
 import { httpRequestCar } from "../../httpServices/car/request";
+import { authed } from "../../httpServices/auth/auth.js";
 class SingleCar extends Component {
   state = { car: {}, loading: false };
   async componentDidMount() {
@@ -143,14 +144,16 @@ class SingleCar extends Component {
                         </div>
                         <div className="similar-info">
                           <div className="primary-button cursor-pointer">
-                            <a
-                              type="button"
-                              data-toggle="modal"
-                              data-target=".requestCar"
-                            >
-                              {words["request"]}{" "}
-                              <i className="fa fa-dollar"></i>
-                            </a>
+                            {authed() && (
+                              <a
+                                type="button"
+                                data-toggle="modal"
+                                data-target=".requestCar"
+                              >
+                                {words["request"]}{" "}
+                                <i className="fa fa-dollar"></i>
+                              </a>
+                            )}
                           </div>
                         </div>
                       </div>
