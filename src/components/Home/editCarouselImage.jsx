@@ -35,7 +35,7 @@ const EditCarouselImage = ({
             <div className="text-center w-100 add-icon-overflow">
               <i className="fa fa-car add-icon pt-2" aria-hidden="true"></i>
             </div>
-            <div className="col-md-5 text-center mt-5">
+            <div className="col-lg-5 text-center mt-5">
               <div className="position-relative">
                 {item && item.image && item.image.url && !state.new ? (
                   <React.Fragment>
@@ -94,7 +94,7 @@ const EditCarouselImage = ({
                 )}
               </div>
             </div>
-            <div className="col-md-6 mt-5">
+            <div className="col-lg-6 mt-5">
               <input
                 type="text"
                 placeholder="Title Here"

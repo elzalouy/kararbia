@@ -5,24 +5,24 @@ import { addNewUser } from "../../httpServices/user/user";
 import { toast } from "react-toastify";
 import Handle from "../../middleware/errorHandle";
 import getWords from "../../utils/GetWords";
-// import CountryCodes from "../common/CountryCodes";
+import CountryCodes from "../common/CountryCodes";
 class Register extends Component {
   state = {
     user: {
       email: "",
       name: "",
-      // phone: "",
+      phone: "",
       password: "",
-      confirmPassword: ""
-      // code: ""
+      confirmPassword: "",
+      code: "",
     },
     error: {
       email: null,
       name: null,
       password: null,
-      confirmPassword: null
-    }
-    // code: ""
+      confirmPassword: null,
+    },
+    code: "",
   };
 
   handleChange = Handle(({ currentTarget: e }) => {
@@ -44,30 +44,16 @@ class Register extends Component {
         const result = await addNewUser({
           name: state.user.name,
           email: state.user.email,
+          phone: "+" + state.user.code + state.user.phone,
           password: state.user.password,
-          confirmPassword: state.user.confirmPassword
         });
         if (result.error)
           toast.info(result.error.message, {
             autoClose: true,
-            delay: 500
+            delay: 500,
           });
         else {
-          toast.info(
-            "We have sent a confirmation mail, Check you email please.",
-            {
-              autoClose: true,
-              delay: 500
-            }
-          );
-          state.user = {
-            email: "",
-            name: "",
-            // phone: "",
-            password: "",
-            confirmPassword: ""
-            // code: ""
-          };
+          window.location.replace("/verifyMobile");
         }
       }
     }
@@ -83,14 +69,14 @@ class Register extends Component {
         >
           <div className="container">
             <div className="row">
-              <div className="col-md-12">
+              <div className="col-lg-12">
                 <div
                   className="heading-content-bg wow fadeIn"
                   data-wow-delay="0.75s"
                   data-wow-duration="1s"
                 >
                   <div className="row">
-                    <div className="heading-content col-md-6">
+                    <div className="heading-content col-lg-6">
                       <p>
                         <a href="/home">{words["homepage"]}</a> /{" "}
                         <em> {words["register"]}</em>
@@ -100,7 +86,7 @@ class Register extends Component {
                       </h2>
                     </div>
 
-                    <div className="col-md-4">
+                    <div className="col-lg-4">
                       <div
                         className="search-content wow fadeIn"
                         data-wow-duration="0.75s"
@@ -115,7 +101,7 @@ class Register extends Component {
                         </div>
                         <div className="search-form">
                           <div className="row">
-                            <div className="col-md-12">
+                            <div className="col-lg-12">
                               <div className="input-select mb-3">
                                 <input
                                   type="text"
@@ -132,7 +118,7 @@ class Register extends Component {
                                 )}
                               </div>
                             </div>
-                            <div className="col-md-12">
+                            <div className="col-lg-12">
                               <div className="input-select mb-3">
                                 <input
                                   type="email"
@@ -149,7 +135,7 @@ class Register extends Component {
                                 )}
                               </div>
                             </div>
-                            {/* <div className="col-4">
+                            <div className="col-4">
                               <CountryCodes handleChange={this.handleChange} />
                             </div>
                             <div className="col-8">
@@ -168,8 +154,8 @@ class Register extends Component {
                                   </p>
                                 )}
                               </div>
-                            </div> */}
-                            <div className="col-md-12">
+                            </div>
+                            <div className="col-lg-12">
                               <div className="input-select mb-3">
                                 <input
                                   type="password"
@@ -186,7 +172,7 @@ class Register extends Component {
                                 )}
                               </div>
                             </div>
-                            <div className="col-md-12">
+                            <div className="col-lg-12">
                               <div className="input-select mb-3">
                                 <input
                                   type="password"
@@ -203,7 +189,7 @@ class Register extends Component {
                                 )}
                               </div>
                             </div>
-                            <div className="col-md-12">
+                            <div className="col-lg-12">
                               <div className="secondary-button cursor-pointer">
                                 <a onClick={this.handleSubmit}>
                                   <i className="fa fa-user"></i> &nbsp;{" "}

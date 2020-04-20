@@ -23,10 +23,10 @@ const RecentCars = ({ cars, handleDeleteCar }) => {
                 </div>
               </div>
             </div>
-            <div className="row justify-content-center align-items-start">
+            <div className="row align-items-center align-item-center">
               {cars && cars.length > 0 ? (
                 cars.map((item) => (
-                  <div className="col-md-4 col-sm-6" key={item._id}>
+                  <div className="col-lg-4" key={item._id}>
                     <div className="car-item">
                       <div className="thumb-content">
                         <div className="car-banner">

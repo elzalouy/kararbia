@@ -1,32 +1,40 @@
 import React, { Component } from "react";
 import getWords from "../../utils/GetWords.js";
 import { getRedis, addRedis } from "../../httpServices/redis/redis.js";
+import {
+  getRedis as getRedisImage,
+  updateSubItemImage,
+} from "../../httpServices/redisImage/redisImage";
 import { toast } from "react-toastify";
-import { admin } from "../../httpServices/auth/auth";
 import { validateServiceSchema } from "../../httpServices/redis/redisSchema.jsx";
-import ContentDrop from "../common/ContentDrop.jsx";
-import Content from "../common/content.jsx";
 import handle from "../../middleware/errorHandle";
+import FeatureItem from "../common/FeatureItem.jsx";
+import _ from "lodash";
+import { admin } from "../../httpServices/auth/auth.js";
 class About extends Component {
+  fileUpload = React.createRef();
   state = {
     content: [],
     currentEditKey: "",
-    value: {
-      short_english: "",
-      short_arabic: "",
-      long_english: "",
-      long_arabic: ""
-    }
+    redisImage: {},
+    newImageFile: null,
+    newImagePreview: null,
+    loading: false,
   };
   async componentDidMount() {
     try {
+      const state = this.state;
       const content = await getRedis();
       if (content.error) toast.warn(content.error.message);
       else {
-        const state = this.state;
         state.content = content.data;
-        this.setState({ state });
       }
+      const redisImage = await getRedisImage("about image");
+      if (redisImage.error) toast.warn(redisImage.error.message);
+      else {
+        state.redisImage = redisImage.data;
+      }
+      this.setState({ state });
     } catch (ex) {
       toast.warn(ex);
     }
@@ -34,60 +42,73 @@ class About extends Component {
   handleEdit = handle(({ currentTarget: e }) => {
     const state = this.state;
     state.currentEditKey = e.id;
-    state.value = state.content.find(s => s.key === state.currentEditKey).value;
     this.setState({ state });
   });
 
-  handleChange = handle(async ({ currentTarget: e }) => {
+  handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
-    state.value[e.name] = e.value;
+    let item = state.content.find((s) => s.key === e.name);
+    let index = state.content.indexOf(item);
+    state.content[index].value = e.value;
     this.setState({ state });
   });
   handleSubmit = handle(async () => {
     const state = this.state;
-    let content = { key: state.currentEditKey, value: state.value };
-    console.log("handleSubmit -> content", content);
-    let result = await validateServiceSchema(content);
-    if (result) toast.warn(result.message);
-    else {
-      let addresult = await addRedis(content);
-      if (addresult.error) toast.warn(addresult.error.message);
-      else window.location.reload();
-    }
+    let items = _.filter(state.content, (s) =>
+      s.key.includes(state.currentEditKey)
+    );
+    items.map(async (item) => {
+      let keyval = { key: item.key, value: item.value };
+      const result = validateServiceSchema(keyval);
+      if (result) toast.error(result.message);
+      const response = await addRedis(keyval);
+      if (response.error) toast.warn(response.error.message);
+    });
+    state.currentEditKey = "";
+    this.setState({ state });
   });
+  handleGetRedisItem = (key) => {
+    const item = this.state.content.find((s) => s.key === key);
+    return item && item.value ? item.value : "";
+  };
+  handleCancel = () => {
+    const state = this.state;
+    state.currentEditKey = "";
+    state.newImageFile = state.newImagePreview = null;
+    this.setState({ state });
+  };
+  handleChangeImage = ({ currentTarget: e }) => {
+    const state = this.state;
+    state.newImageFile = e.files[0];
+    state.newImagePreview = URL.createObjectURL(e.files[0]);
+    this.setState({ state });
+  };
+  handleSubmitImage = async () => {
+    this.setState({ loading: true });
+    const state = this.state;
+    let result = await updateSubItemImage({
+      itemId: state.redisImage.items[0]._id,
+      redisId: state.redisImage._id,
+      image: state.newImageFile,
+    });
+    if (result.error) {
+      toast.warn(result.error.message);
+      this.setState({ loading: false });
+    } else {
+      state.newImageFile = state.newImagePreview = null;
+      this.setState({ state });
+      window.location.reload();
+    }
+  };
   render() {
     let { words, lang } = getWords();
-    const { content, currentEditKey, value } = this.state;
-    let buysel =
-      content && content.length > 0
-        ? content.find(s => s.key === "Sell & Buy Cars")
-        : { key: "", value: "" };
-    let defectCars =
-      content && content.length > 0
-        ? content.find(s => s.key === "Defect Cars")
-        : { key: "", value: "" };
-    let roadAsstistant =
-      content && content.length > 0
-        ? content.find(s => s.key === "Road Assistant")
-        : { key: "", value: "" };
-    let carDealerResearch =
-      content && content.length > 0
-        ? content.find(s => s.key === "Car Dealer Research")
-        : { key: "", value: "" };
-    let bestDealers =
-      content && content.length > 0
-        ? content.find(s => s.key === "Best Dealers")
-        : { key: "", value: "" };
-    let worldWideKnown =
-      content && content.length > 0
-        ? content.find(s => s.key === "World Wide Known")
-        : { key: "", value: "" };
+    const { currentEditKey, content, redisImage } = this.state;
     return (
       <React.Fragment>
         <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
           <div className="container">
             <div className="row">
-              <div className="col-md-12">
+              <div className="col-lg-12">
                 <div
                   className="heading-content-bg wow fadeIn"
                   data-wow-delay="0.75s"
@@ -97,8 +118,8 @@ class About extends Component {
                     <div
                       className={
                         lang === "eng"
-                          ? "heading-content col-md-12"
-                          : "heading-content col-md-12 text-right"
+                          ? "heading-content col-lg-12"
+                          : "heading-content col-lg-12 text-right"
                       }
                     >
                       <p>
@@ -115,7 +136,6 @@ class About extends Component {
             </div>
           </div>
         </div>
-
         {content && content.length > 0 ? (
           <React.Fragment>
             <div
@@ -125,251 +145,77 @@ class About extends Component {
             >
               <div className="container">
                 <div className="row">
-                  <div className="col-md-4">
-                    <div
-                      className={
-                        lang === "eng"
-                          ? "service-item wow fadeIn"
-                          : "service-item wow fadeIn text-right"
-                      }
-                      dir={lang === "eng" ? "ltr" : "rtl"}
-                      data-wow-duration="0.75s"
-                    >
-                      <div className="custom-control-inline row d-flex flex-row">
-                        <div
-                          className={
-                            lang === "eng"
-                              ? "col text-left"
-                              : "col p-0 m-0 text-right mr-01"
-                          }
-                        >
-                          <i className="fa fa-car"></i>
-                        </div>
-                        {admin() && (
-                          <ContentDrop
-                            handleEdit={this.handleEdit}
-                            itemKey={buysel.key}
-                          />
-                        )}
-                      </div>
-                      <div className="text-content">
-                        <h6>
-                          {lang === "eng"
-                            ? buysel.value["short_english"]
-                            : buysel.value["short_arabic"]}
-                        </h6>
-                        <p>
-                          {lang === "eng"
-                            ? buysel.value["long_english"]
-                            : buysel.value["long_arabic"]}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="col-lg-4">
+                    <FeatureItem
+                      handleEdit={this.handleEdit}
+                      currentEditKey={currentEditKey}
+                      handleGetRedisItem={this.handleGetRedisItem}
+                      handleChange={this.handleChange}
+                      keyItem="Sell & Buy Cars"
+                      handleSubmit={this.handleSubmit}
+                      handleCancel={this.handleCancel}
+                      icon="fa fa-car"
+                    />
                   </div>
-                  <div className="col-md-4">
-                    <div
-                      className={
-                        lang === "eng"
-                          ? "service-item wow fadeIn"
-                          : "service-item wow fadeIn text-right"
-                      }
-                      dir={lang === "eng" ? "ltr" : "rtl"}
-                      data-wow-duration="0.75s"
-                    >
-                      <div className="custom-control-inline row d-flex flex-row">
-                        <div
-                          className={
-                            lang === "eng"
-                              ? "col text-left"
-                              : "col p-0 m-0 text-right mr-01"
-                          }
-                        >
-                          <i className="fa fa-gear"></i>
-                        </div>
-                        {admin() && (
-                          <ContentDrop
-                            handleEdit={this.handleEdit}
-                            itemKey={defectCars.key}
-                          />
-                        )}
-                      </div>
-                      <div className="text-content">
-                        <h6>
-                          {lang === "eng"
-                            ? defectCars.value["short_english"]
-                            : defectCars.value["short_arabic"]}
-                        </h6>
-                        <p>
-                          {lang === "eng"
-                            ? defectCars.value["long_english"]
-                            : defectCars.value["long_arabic"]}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="col-lg-4">
+                    <FeatureItem
+                      handleEdit={this.handleEdit}
+                      currentEditKey={currentEditKey}
+                      handleGetRedisItem={this.handleGetRedisItem}
+                      handleChange={this.handleChange}
+                      keyItem="Defect Cars"
+                      handleSubmit={this.handleSubmit}
+                      handleCancel={this.handleCancel}
+                      icon="fa fa-gear"
+                    />
                   </div>
-                  <div className="col-md-4">
-                    <div
-                      className={
-                        lang === "eng"
-                          ? "service-item wow fadeIn"
-                          : "service-item wow fadeIn text-right"
-                      }
-                      dir={lang === "eng" ? "ltr" : "rtl"}
-                      data-wow-duration="0.75s"
-                    >
-                      <div className="custom-control-inline row d-flex flex-row">
-                        <div
-                          className={
-                            lang === "eng"
-                              ? "col text-left"
-                              : "col p-0 m-0 text-right mr-01"
-                          }
-                        >
-                          <i className="fa fa-truck"></i>
-                        </div>
-                        {admin() && (
-                          <ContentDrop
-                            handleEdit={this.handleEdit}
-                            itemKey={roadAsstistant.key}
-                          />
-                        )}
-                      </div>
-                      <div className="text-content">
-                        <h6>
-                          {lang === "eng"
-                            ? roadAsstistant.value["short_english"]
-                            : roadAsstistant.value["short_arabic"]}
-                        </h6>
-                        <p>
-                          {lang === "eng"
-                            ? roadAsstistant.value["long_english"]
-                            : roadAsstistant.value["long_arabic"]}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="col-lg-4">
+                    <FeatureItem
+                      handleEdit={this.handleEdit}
+                      currentEditKey={currentEditKey}
+                      handleGetRedisItem={this.handleGetRedisItem}
+                      handleChange={this.handleChange}
+                      keyItem="Road Assistant"
+                      handleSubmit={this.handleSubmit}
+                      handleCancel={this.handleCancel}
+                      icon="fa fa-truck"
+                    />
                   </div>
-                  <div className="col-md-4">
-                    <div
-                      className={
-                        lang === "eng"
-                          ? "service-item wow fadeIn"
-                          : "service-item wow fadeIn text-right"
-                      }
-                      dir={lang === "eng" ? "ltr" : "rtl"}
-                      data-wow-duration="0.75s"
-                    >
-                      <div className="custom-control-inline row d-flex flex-row">
-                        <div
-                          className={
-                            lang === "eng"
-                              ? "col text-left"
-                              : "col p-0 m-0 text-right mr-01"
-                          }
-                        >
-                          <i className="fa fa-search"></i>
-                        </div>
-                        {admin() && (
-                          <ContentDrop
-                            handleEdit={this.handleEdit}
-                            itemKey={carDealerResearch.key}
-                          />
-                        )}
-                      </div>
-                      <div className="text-content">
-                        <h6>
-                          {lang === "eng"
-                            ? carDealerResearch.value["short_english"]
-                            : carDealerResearch.value["short_arabic"]}
-                        </h6>
-                        <p>
-                          {lang === "eng"
-                            ? carDealerResearch.value["long_english"]
-                            : carDealerResearch.value["long_arabic"]}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="col-lg-4">
+                    <FeatureItem
+                      handleEdit={this.handleEdit}
+                      currentEditKey={currentEditKey}
+                      handleGetRedisItem={this.handleGetRedisItem}
+                      handleChange={this.handleChange}
+                      keyItem="Car Dealer Research"
+                      handleSubmit={this.handleSubmit}
+                      handleCancel={this.handleCancel}
+                      icon="fa fa-search"
+                    />
                   </div>
-                  <div className="col-md-4">
-                    <div
-                      className={
-                        lang === "eng"
-                          ? "service-item wow fadeIn"
-                          : "service-item wow fadeIn text-right"
-                      }
-                      dir={lang === "eng" ? "ltr" : "rtl"}
-                      data-wow-duration="0.75s"
-                    >
-                      <div className="custom-control-inline row d-flex flex-row">
-                        <div
-                          className={
-                            lang === "eng"
-                              ? "col text-left"
-                              : "col p-0 m-0 text-right mr-01"
-                          }
-                        >
-                          <i className="fa fa-globe"></i>
-                        </div>
-                        {admin() && (
-                          <ContentDrop
-                            handleEdit={this.handleEdit}
-                            itemKey={worldWideKnown.key}
-                          />
-                        )}
-                      </div>
-                      <div className="text-content">
-                        <h6>
-                          {lang === "eng"
-                            ? worldWideKnown.value["short_english"]
-                            : worldWideKnown.value["short_arabic"]}
-                        </h6>
-                        <p>
-                          {lang === "eng"
-                            ? worldWideKnown.value["long_english"]
-                            : worldWideKnown.value["long_arabic"]}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="col-lg-4">
+                    <FeatureItem
+                      handleEdit={this.handleEdit}
+                      currentEditKey={currentEditKey}
+                      handleGetRedisItem={this.handleGetRedisItem}
+                      handleChange={this.handleChange}
+                      keyItem="World Wide Known"
+                      handleSubmit={this.handleSubmit}
+                      handleCancel={this.handleCancel}
+                      icon="fa fa-globe"
+                    />
                   </div>
-                  <div className="col-md-4">
-                    <div
-                      className={
-                        lang === "eng"
-                          ? "service-item wow fadeIn"
-                          : "service-item wow fadeIn text-right"
-                      }
-                      dir={lang === "eng" ? "ltr" : "rtl"}
-                      data-wow-duration="0.75s"
-                    >
-                      <div className="custom-control-inline row d-flex flex-row">
-                        <div
-                          className={
-                            lang === "eng"
-                              ? "col text-left"
-                              : "col p-0 m-0 text-right mr-01"
-                          }
-                        >
-                          <i className="fa fa-users"></i>
-                        </div>
-                        {admin() && (
-                          <ContentDrop
-                            handleEdit={this.handleEdit}
-                            itemKey={bestDealers.key}
-                          />
-                        )}
-                      </div>
-                      <div className="text-content">
-                        <h6>
-                          {lang === "eng"
-                            ? bestDealers.value["short_english"]
-                            : bestDealers.value["short_arabic"]}
-                        </h6>
-                        <p>
-                          {lang === "eng"
-                            ? bestDealers.value["long_english"]
-                            : bestDealers.value["long_arabic"]}
-                        </p>
-                      </div>
-                    </div>
+                  <div className="col-lg-4">
+                    <FeatureItem
+                      handleEdit={this.handleEdit}
+                      currentEditKey={currentEditKey}
+                      handleGetRedisItem={this.handleGetRedisItem}
+                      handleChange={this.handleChange}
+                      keyItem="best dealers"
+                      handleSubmit={this.handleSubmit}
+                      handleCancel={this.handleCancel}
+                      icon="fa fa-users"
+                    />
                   </div>
                 </div>
               </div>
@@ -379,102 +225,211 @@ class About extends Component {
               <div className="more-about-us mb-5">
                 <div className="container">
                   <div className="row">
-                    <div className="col-md-6">
-                      <img src="http://placehold.it/555x310" alt="" />
+                    <div className="col-lg-6">
+                      {admin() &&
+                      this.state.newImageFile &&
+                      this.state.newImagePreview ? (
+                        <React.Fragment>
+                          <img
+                            src={this.state.newImagePreview}
+                            // style={{ width: "555px", height: "310px" }}
+                            alt=""
+                          />
+                          <button
+                            className={
+                              this.state.loading
+                                ? "btn add-icon pt-0 add-icon-overflow-3 mx-1 loading"
+                                : "btn add-icon pt-0 add-icon-overflow-3 mx-1"
+                            }
+                            onClick={this.handleSubmitImage}
+                          >
+                            <i className="fa fa-check" aria-hidden="true"></i>
+                          </button>
+                          <button
+                            className="btn add-icon bg-danger pt-0 add-icon-overflow-3 mx-1"
+                            onClick={this.handleCancel}
+                          >
+                            <i className="fa fa-times" aria-hidden="true"></i>
+                          </button>
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          <img
+                            src={
+                              redisImage &&
+                              redisImage.items &&
+                              redisImage.items[0] &&
+                              redisImage.items[0].image
+                                ? redisImage.items[0].image.url
+                                : "http://placehold.it/555x310"
+                            }
+                            // style={{ width: "555px", height: "310px" }}
+                            alt=""
+                          />
+                          {admin() && (
+                            <React.Fragment>
+                              <input
+                                onChange={this.handleChangeImage}
+                                type="file"
+                                style={{ display: "none" }}
+                                ref={(ref) => (this.fileUpload = ref)}
+                              />
+                              <button
+                                className="btn add-icon pt-0 add-icon-overflow-3  ml-2"
+                                onClick={(e) => this.fileUpload.click()}
+                              >
+                                <i
+                                  className="fa fa-camera"
+                                  aria-hidden="true"
+                                ></i>
+                              </button>
+                            </React.Fragment>
+                          )}
+                        </React.Fragment>
+                      )}
                     </div>
-                    <div className="col-md-6">
-                      <div className="right-content">
-                        <span>Lorem ipsum consectetur.</span>
-                        <h4>Who we are, what we do?</h4>
-                        <p>
-                          Thundercats gentrify flannel, raw denim before they
-                          sold out PBRB meggings. Godard stumptown forage, tote
-                          bag narwhal viral Austin actually.
-                          <br />
-                          <br />
-                          Pop-up flannel direct trade, High Life sriracha chia
-                          Pinterest photo booth. Narwhal PBR dreamcatcher,
-                          taxidermy stumptown.
-                        </p>
+                    <div className="col-lg-6">
+                      <div
+                        className={
+                          lang === "eng"
+                            ? "right-content text-left"
+                            : "right-content text-right"
+                        }
+                      >
+                        {admin() && currentEditKey.includes("about us long") ? (
+                          <React.Fragment>
+                            <input
+                              type="text"
+                              className="feature-input bg-transparent w-75 "
+                              name={
+                                lang === "eng"
+                                  ? "about us long 1"
+                                  : "'about us long 1 arabic'"
+                              }
+                              value={
+                                lang === "eng"
+                                  ? this.handleGetRedisItem("about us long 1")
+                                  : this.handleGetRedisItem(
+                                      "about us long 1 arabic"
+                                    )
+                              }
+                              onChange={this.handleChange}
+                            />
+                            <input
+                              type="text"
+                              name={
+                                lang === "eng"
+                                  ? "about us long 2"
+                                  : "about us long 2 arabic"
+                              }
+                              value={
+                                lang === "eng"
+                                  ? this.handleGetRedisItem("about us long 2")
+                                  : this.handleGetRedisItem(
+                                      "about us long 2 arabic"
+                                    )
+                              }
+                              className="feature-input bg-transparent w-75 f-20 bold my-4"
+                              onChange={this.handleChange}
+                            />
+                            <textarea
+                              name={
+                                lang === "eng"
+                                  ? "about us long 3"
+                                  : "about us long 3 arabic"
+                              }
+                              cols="10"
+                              rows="5"
+                              value={
+                                lang === "eng"
+                                  ? this.handleGetRedisItem("about us long 3")
+                                  : this.handleGetRedisItem(
+                                      "about us long 3 arabic"
+                                    )
+                              }
+                              onChange={this.handleChange}
+                              className="feature-input w-100 my-2"
+                            ></textarea>
+                            <div className="w-100 custom-control-inline">
+                              <button
+                                className="btn pt-0 add-icon mx-1"
+                                onClick={this.handleSubmit}
+                              >
+                                <i
+                                  className="fa fa-check"
+                                  aria-hidden="true"
+                                ></i>
+                              </button>
+                              <button
+                                className="btn bg-danger pt-0 add-icon mx-1"
+                                onClick={this.handleCancel}
+                              >
+                                <i
+                                  className="fa fa-times"
+                                  aria-hidden="true"
+                                ></i>
+                              </button>
+                            </div>
+                          </React.Fragment>
+                        ) : (
+                          <React.Fragment>
+                            {lang === "eng" ? (
+                              <div className="custom-control-inline m-0">
+                                <span>
+                                  {lang === "eng"
+                                    ? this.handleGetRedisItem("about us long 1")
+                                    : this.handleGetRedisItem(
+                                        "about us long 1 arabic"
+                                      )}
+                                </span>
+                                {admin() && currentEditKey === "" && (
+                                  <i
+                                    className="fas fa-edit cursor-pointer ml-5"
+                                    id="about us long"
+                                    onClick={this.handleEdit}
+                                  ></i>
+                                )}
+                              </div>
+                            ) : (
+                              <div className="custom-control-inline m-0">
+                                {admin() && currentEditKey === "" && (
+                                  <i
+                                    className="fas fa-edit cursor-pointer mr-5"
+                                    id="about us long"
+                                    onClick={this.handleEdit}
+                                  ></i>
+                                )}
+                                <span>
+                                  {lang === "eng"
+                                    ? this.handleGetRedisItem("about us long 1")
+                                    : this.handleGetRedisItem(
+                                        "about us long 1 arabic"
+                                      )}
+                                </span>
+                              </div>
+                            )}
+                            <h4>
+                              {lang === "eng"
+                                ? this.handleGetRedisItem("about us long 2")
+                                : this.handleGetRedisItem(
+                                    "about us long 2 arabic"
+                                  )}
+                            </h4>
+                            <p>
+                              {lang === "eng"
+                                ? this.handleGetRedisItem("about us long 3")
+                                : this.handleGetRedisItem(
+                                    "about us long 3 arabic"
+                                  )}
+                            </p>
+                          </React.Fragment>
+                        )}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              {admin() && (
-                <Content
-                  itemKey={currentEditKey ? currentEditKey : ""}
-                  itemValues={value ? value : ""}
-                  handleChange={this.handleChange}
-                  handleSubmit={this.handleSubmit && this.handleSubmit}
-                />
-              )}
             </section>
-            {/* 
-      <section>
-      <div className="our-clients mb-5">
-      <div className="container">
-      <div className="row">
-      <div className="col-md-12">
-      <div className="section-heading">
-      <div className="icon">
-      <i className="fa fa-users"></i>
-      </div>
-      <div className="text-content">
-      <h2>Our Happy Clients</h2>
-      <span>Here are our happy clients</span>
-      </div>
-      </div>
-      </div>
-      </div>
-      <div className="row">
-      <div className="col-md-12">
-      <div id="owl-clients" className="owl-carousel owl-theme">
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      <div className="item">
-      <img src="http://placehold.it/180x120" alt="" />
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-    </section> */}
           </React.Fragment>
         ) : (
           <React.Fragment>

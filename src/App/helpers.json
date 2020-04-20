@@ -112,12 +112,15 @@
         "other": "خدمات اخرى",
         "loan car": "استعير سيارة",
         "ask question": "اسألنا",
-        "car requests": "الطلبات"
+        "car requests": "الطلبات",
+        "requests": "الطلبات",
+        "contacts": "الاتصالات",
+        "our services": "خدماتنا"
     },
     "eng": {
         "homepage": "homepage",
         "us2": "US",
-        "car listing": "car listing",
+        "car listing": "Cars",
         "blogs": "blogs",
         "about us": "About Us",
         "contact us": "contact us",
@@ -227,6 +230,9 @@
         "other": "Other",
         "loan car": "Loan Car",
         "ask question": "Ask a Question",
-        "car requests": "Car Requests"
+        "car requests": "Car Requests",
+        "requests": "Requests",
+        "contacts": "Contacts",
+        "our services": "Our Services"
     }
 }

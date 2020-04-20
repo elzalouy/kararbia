@@ -2,13 +2,10 @@ import Joi from "joi-browser";
 import { toast } from "react-toastify";
 
 const ServicesSchema = {
-  key: Joi.string().required().min(5).max(70),
-  value: {
-    long_english: Joi.string().max(70),
-    short_english: Joi.string().max(70),
-  },
+  key: Joi.string().required().min(2),
+  value: Joi.string().required().min(2),
 };
-export async function validateServiceSchema(data) {
+export function validateServiceSchema(data) {
   try {
     const result = Joi.validate(data, ServicesSchema);
     if (!result.error) return null;

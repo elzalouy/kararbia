@@ -1956,9 +1956,8 @@ section.top-slider-features .slider-top-features .owl-dots {
     padding-bottom: 0px
 }
 
-.owl-carousel .owl-item img {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px
+.owl-carousel .owl-item img border-top-right-radius: 5px;
+border-top-left-radius: 5px
 }
 
 .similar-car .car-item {

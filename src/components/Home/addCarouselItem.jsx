@@ -155,6 +155,8 @@ class AddCarouselItem extends Component {
                 <button
                   className="btn btn-danger mx-1"
                   disabled={state.loading ? true : false}
+                  type="button"
+                  data-dismiss="modal"
                 >
                   Cancel
                 </button>

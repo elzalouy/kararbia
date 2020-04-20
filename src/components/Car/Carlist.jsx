@@ -113,15 +113,17 @@ class CarList extends Component {
         >
           <div className="container">
             <div className="row">
-              <div className="col-md-12">
+              <div className="col-lg-12">
                 <div
                   className="heading-content-bg wow fadeIn"
                   data-wow-delay="0.75s"
                   data-wow-duration="1s"
                 >
                   <div className="row">
-                    <div className="heading-content  col-md-12">
-                      <p className={lang === "eng" ? "" : "text-right"}>
+                    <div className="heading-content  col-lg-12">
+                      <p
+                        className={lang === "eng" ? "text-left" : "text-right"}
+                      >
                         <a href="/home">{words["homepage"]} </a> /{" "}
                         <em>{words["cars"]}</em> / <em> {words["listing"]}</em>
                       </p>
@@ -150,7 +152,7 @@ class CarList extends Component {
           <div className="container">
             <div className="recent-car-content">
               <div className="row">
-                <div className="col-md-8">
+                <div className="col-lg-8">
                   <div className="row align-items-start">
                     {cars && cars.length > 0 ? (
                       cars.map((item) => (
@@ -248,7 +250,7 @@ class CarList extends Component {
                         </div>
                       </React.Fragment>
                     )}
-                    <div className="col-md-12 mb-5">
+                    <div className="col-lg-12 mb-5">
                       <Pagination
                         itemsCount={
                           cars && cars.length ? this.state.cars.length : 0
@@ -260,14 +262,18 @@ class CarList extends Component {
                     </div>
                   </div>
                 </div>
-                <CarSearch
-                  cars={
-                    this.state.cars && this.state.cars.length && this.state.cars
-                  }
-                  state={this.status}
-                  handleChange={this.handleChange}
-                  handleSearch={this.handleSearch}
-                />
+                <div className="col-lg-4 mb-5">
+                  <CarSearch
+                    cars={
+                      this.state.cars &&
+                      this.state.cars.length &&
+                      this.state.cars
+                    }
+                    state={this.status}
+                    handleChange={this.handleChange}
+                    handleSearch={this.handleSearch}
+                  />
+                </div>
               </div>
             </div>
           </div>

@@ -46,20 +46,20 @@ class SingleCar extends Component {
           <div className="page-heading wow fadeIn" data-wow-duration="0.5s">
             <div className="container">
               <div className="row">
-                <div className="col-md-12">
+                <div className="col-lg-12">
                   <div
                     className="heading-content-bg wow fadeIn"
                     data-wow-delay="0.75s"
                     data-wow-duration="1s"
                   >
                     <div className="row">
-                      <div className="heading-content col-md-12">
-                        <p className={lang === "eng" ? "" : "text-right"}>
+                      <div className="heading-content col-lg-12">
+                        <p>
                           <a href="/home">{words["homepage"]}</a> /{" "}
                           <em> {words["car"]}</em> /{" "}
                           <em> {words["details"]}</em>
                         </p>
-                        <h2 className={lang === "eng" ? "" : "text-right"}>
+                        <h2>
                           {lang === "eng" ? (
                             <React.Fragment>
                               {words["car"]} <em>{words["details"]}</em>
@@ -87,10 +87,10 @@ class SingleCar extends Component {
                 <div className="container">
                   <div className="recent-car-content brd-2">
                     <div className="row">
-                      <div className="col-md-6">
+                      <div className="col-lg-6">
                         <Gallary images={car.images} />
                       </div>
-                      <div className="col-md-6">
+                      <div className="col-lg-6">
                         <div className="car-details">
                           <h4>
                             {car.name} - {car.model}
@@ -98,7 +98,7 @@ class SingleCar extends Component {
                           <span>${car.price}</span>
                           <p>{car.short_desc}</p>
                           <div className="row w-100">
-                            <ul className="car-info col-md-6">
+                            <ul className="car-info col-lg-6">
                               <li>
                                 <i
                                   className="flaticon flaticon-road"
@@ -122,7 +122,7 @@ class SingleCar extends Component {
                                 <p>{car.fuel_type}</p>
                               </li>
                             </ul>
-                            <ul className="car-info col-md-6">
+                            <ul className="car-info col-lg-6">
                               <li>
                                 <i className="fas fa-palette f-18"></i>
                                 <p>{car.color}</p>

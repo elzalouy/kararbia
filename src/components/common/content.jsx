@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import getWords from "../../utils/GetWords";
-const Content = ({ itemValues, itemKey, handleChange, handleSubmit }) => {
+const Content = ({ items, handleEditItems, handleChange, handleSubmit }) => {
   const { words, lang } = getWords();
-  if (!itemValues._id) return null;
+  if (!items || items.length === 0) return null;
   let error = "";
   return (
     <section
@@ -18,6 +18,11 @@ const Content = ({ itemValues, itemKey, handleChange, handleSubmit }) => {
     >
       <div className="modal-dialog">
         <div className="modal-content border-0 brd-0">
+          <div className="text-center w-100 add-icon-overflow">
+            <button className="btn add-icon pt-0">
+              <i className="fa fa-car" aria-hidden="true"></i>
+            </button>
+          </div>
           <div
             className="modal-header border-0"
             dir={lang === "eng" ? "ltr" : "rtl"}
@@ -28,40 +33,36 @@ const Content = ({ itemValues, itemKey, handleChange, handleSubmit }) => {
           </div>
           <div className="modal-body border-0">
             <React.Fragment>
-              <input
-                type="text"
-                name="short_english"
-                value={itemValues["short_english"]}
-                onChange={handleChange}
-                className="form-control brd-0 mb-2"
-                placeholder="Short English Title"
-              />
-              <input
-                type="text"
-                name="short_arabic"
-                value={itemValues["short_arabic"]}
-                onChange={handleChange}
-                className="form-control brd-0 mb-2"
-                placeholder="Short English Title"
-              />
-              <textarea
-                name="long_english"
-                value={itemValues["long_english"]}
-                onChange={handleChange}
-                cols="3"
-                rows="3"
-                className="form-control brd-0 mb-2"
-                placeholder="write your english description"
-              />
-              <textarea
-                name="long_arabic"
-                value={itemValues["long_arabic"]}
-                onChange={handleChange}
-                cols="3"
-                rows="3"
-                className="form-control brd-0 mb-2"
-                placeholder="write your english description"
-              />
+              {items &&
+                items.length > 0 &&
+                items.map((item) => {
+                  if (item.inputType === "input")
+                    return (
+                      <input
+                        type="text"
+                        key={item.key}
+                        name={item.key}
+                        id={item.key}
+                        value={item.value}
+                        onChange={handleChange}
+                        className="form-control brd-0 mb-2"
+                        placeholder={item.placeholder}
+                      />
+                    );
+                  if (item.inputType === "textarea")
+                    return (
+                      <textarea
+                        key={item.key}
+                        name={item.key}
+                        id={item.key}
+                        cols="3"
+                        rows="3"
+                        className="form-control brd-0 mb-2"
+                        placeholder={item.placeholder}
+                      ></textarea>
+                    );
+                  else return null;
+                })}
               {error && (
                 <p className="text-warning">
                   <i class="fa fa-question-circle pr-2" aria-hidden="true"></i>

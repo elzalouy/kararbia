@@ -15,9 +15,11 @@ class VerifyMobile extends Component {
     channel: "",
     code: "",
     status: "send",
-    confirmCode: ""
+    confirmCode: "",
   };
-  componentDidMount() {}
+  componentDidMount() {
+    toast.warn("We send a confirmation mail, please check and confirm");
+  }
   handleChange = handle(({ currentTarget: e }) => {
     const state = this.state;
     state[e.name] = e.value;

@@ -25,6 +25,21 @@
     margin-top: -20px !important;
 }
 
+.add-icon-overflow-1 {
+    position: relative;
+    margin-top: -40px !important;
+}
+
+.add-icon-overflow-2 {
+    position: relative;
+    margin-top: -60px !important;
+}
+
+.add-icon-overflow-3 {
+    position: relative;
+    margin-top: -80px !important;
+}
+
 .add-icon {
     color: #1e1e1e;
     background-color: #f4c23d;
@@ -160,6 +175,18 @@
     font-size: 18px !important;
 }
 
+.f-20 {
+    font-size: 20px !important;
+}
+
+.f-24 {
+    font-size: 24px !important;
+}
+
+.f-32 {
+    font-size: 32px !important;
+}
+
 .modal {
     z-index: 9999999 !important;
 }
@@ -257,4 +284,9 @@ thead {
     background-color: #f4c23d !important;
     border-top-right-radius: 10px !important;
     border-bottom-left-radius: 10px !important;
+}
+
+.feature-input {
+    border: 0 !important;
+    border-bottom: 2px solid #f4c23d !important;
 }

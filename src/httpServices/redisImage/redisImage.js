@@ -19,14 +19,14 @@ export async function updateSubItemImage(item) {
   try {
     let token = getToken();
     const headers = {
-      "x-auth-token": token
+      "x-auth-token": token,
     };
     const data = new FormData();
     data.append("redisId", item.redisId);
     data.append("itemId", item.itemId);
     data.append("image", item.image);
     const response = await http.put(route + "updateSubItemImage", data, {
-      headers: headers
+      headers: headers,
     });
     const result = handleServerError(response);
     if (result) return { data: null, error: result };
@@ -39,10 +39,10 @@ export async function updateSubItemData(data) {
   try {
     const token = getToken();
     const headers = {
-      "x-auth-token": token
+      "x-auth-token": token,
     };
     const response = await http.put(route + "updateSubItemData", data, {
-      headers: headers
+      headers: headers,
     });
     const result = handleServerError(response);
     if (result) return { data: null, error: result };
@@ -55,7 +55,7 @@ export async function deleteSubItemData(data) {
   try {
     const token = getToken();
     const headers = {
-      "x-auth-token": token
+      "x-auth-token": token,
     };
     const response = await http.delete(
       route + "deleteItem/" + data.redisId + "/" + data.itemId,
@@ -71,7 +71,7 @@ export async function deleteSubItemData(data) {
 export async function addSubItemData(data) {
   const token = getToken();
   const headers = {
-    "x-auth-token": token
+    "x-auth-token": token,
   };
   const item = new FormData();
   item.append("image", data.image);
@@ -79,7 +79,7 @@ export async function addSubItemData(data) {
   item.append("link", data.link);
   item.append("key", data.key);
   const response = await http.post(route + "addItem", item, {
-    headers: headers
+    headers: headers,
   });
   const result = handleServerError(response);
   if (result) return { data: null, error: result };

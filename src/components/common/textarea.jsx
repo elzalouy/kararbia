@@ -1,11 +1,12 @@
 import React from "react";
-const Input = ({ type, word, value, name, changeValue, Class, ...props }) => {
+const TextArea = ({ word, value, name, changeValue, Class, ...props }) => {
   return (
     <React.Fragment>
       <label className="p-0 mb-1">{word}</label>
-      <input
+      <textarea
         {...props}
-        type={type}
+        rows="3"
+        cols="3"
         name={name}
         value={value}
         onChange={changeValue}
@@ -16,4 +17,4 @@ const Input = ({ type, word, value, name, changeValue, Class, ...props }) => {
   );
 };
 
-export default Input;
+export default TextArea;

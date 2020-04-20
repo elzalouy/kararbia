@@ -148,10 +148,9 @@ class Carousel extends Component {
                   }
                 >
                   <img
-                    className="d-block"
+                    className="d-block carousel-image"
                     src={item.image.url}
                     alt="First slide"
-                    style={{ opacity: "0.5", width: "100%", height: "720px" }}
                   />
                   <div className="carousel-caption d-none d-md-block">
                     <h2 className="bold carousel-item-title">{item.title}</h2>

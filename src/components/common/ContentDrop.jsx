@@ -12,7 +12,7 @@ const ContentDrop = ({ itemKey, handleEdit }) => {
     >
       <span
         className={
-          itemKey === "footer about us"
+          itemKey === "about us description"
             ? "fa fa-ellipsis-h ellipsis f-18 cursor-pointer text-white"
             : "fa fa-ellipsis-h ellipsis f-18 cursor-pointer"
         }
@@ -29,10 +29,9 @@ const ContentDrop = ({ itemKey, handleEdit }) => {
       >
         <a
           className="dropdown-item"
+          id={itemKey}
+          onClick={handleEdit}
           type="button"
-          data-toggle="modal"
-          data-target="#changecontent"
-          aria-hidden="false"
         >
           Change Content
         </a>

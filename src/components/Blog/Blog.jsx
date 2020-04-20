@@ -43,7 +43,7 @@ class Blog extends Component {
         <div className="blog-page mb-5">
           <div className="container">
             <div className="row">
-              <div className="col-md-8">
+              <div className="col-lg-8">
                 <div className="single-post">
                   <div className="item">
                     <img

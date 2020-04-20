@@ -37,7 +37,7 @@ class News extends Component {
           <div className="container">
             <div className="latest-news-content">
               <div className="row">
-                <div className="col-md-12">
+                <div className="col-lg-12">
                   <div className="section-heading">
                     <div className="icon">
                       <i className="fa fa-file"></i>
@@ -57,7 +57,7 @@ class News extends Component {
                 this.state.blogs.map((item) => {
                   const date = getDate(item.date);
                   return (
-                    <div className="col-md-6" key={item._id}>
+                    <div className="col-lg-6" key={item._id}>
                       <div
                         className="item wow fadeIn"
                         data-wow-duration="0.75s"

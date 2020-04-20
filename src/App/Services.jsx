@@ -9,16 +9,17 @@ import Blog from "../components/Blog/Blog";
 import About from "../components/About/About";
 import Login from "../components/User/Login";
 import Register from "../components/User/Register";
-import ContactUs from "../components/Contact/Caontact";
+import ContactUs from "../components/Contact/Contact";
 import Logout from "../components/User/Logout";
 import AddCar from "../components/Car/AddCar";
 import EditCar from "../components/Car/EditCar/EditCar";
 import EditBlog from "../components/Blog/editblog";
 import { authed, admin } from "../httpServices/auth/auth";
-// import VerifyMobile from "../components/User/VerifyMobile";
+import VerifyMobile from "../components/User/VerifyMobile";
 import ResetForgotPassword from "../components/User/ResetForgotPassword";
 import NewBlog from "../components/Blog/NewBlog";
 import AllRequests from "../components/Car/AllRequests";
+import ContactsList from "../components/Contact/contactsList";
 class Services extends Component {
   state = {
     Routes: [
@@ -106,19 +107,32 @@ class Services extends Component {
         route: "/contact",
         Route: <Route path="/contact" component={ContactUs} key="contact" />,
       },
-      // {
-      //   route: "/verifyMobile",
-      //   Route: (
-      //     <Route
-      //       key="verifyMobile"
-      //       path="/verifyMobile"
-      //       render={props => {
-      //         if (!authed()) return <VerifyMobile {...props} />;
-      //         else return <Redirect to="/home" />;
-      //       }}
-      //     />
-      //   )
-      // },
+      {
+        route: "/contactList",
+        Route: (
+          <Route
+            path="/contactList"
+            key="contactList"
+            render={(props) => {
+              if (admin()) return <ContactsList {...props} />;
+              else return <Redirect to="/" />;
+            }}
+          />
+        ),
+      },
+      {
+        route: "/verifyMobile",
+        Route: (
+          <Route
+            key="verifyMobile"
+            path="/verifyMobile"
+            render={(props) => {
+              if (!authed()) return <VerifyMobile {...props} />;
+              else return <Redirect to="/home" />;
+            }}
+          />
+        ),
+      },
       {
         route: "/ResetPassword/:token",
         Route: (

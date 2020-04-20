@@ -1,26 +1,23 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import getWords from "../../utils/GetWords";
 import { getDate } from "../../utils/formatDate";
-import sortBy from "../../utils/sortBy";
 import {
-  httpGetAllRequests,
-  httpDeleteRequest,
-  httpDeleteList,
-} from "../../httpServices/car/request";
+  deleteContact,
+  getContacts,
+  deleteContactList,
+} from "../../httpServices/contact/contact";
 import { toast } from "react-toastify";
-const _ = require("lodash");
-class AllRequests extends Component {
-  state = {
-    requests: [],
-    sortBy: "name",
-    asc: "asc",
-    checked: [],
-  };
+import _ from "lodash";
+import sortBy from "../../utils/sortBy";
+import ContactItem from "./contactItem";
+class ContactsList extends Component {
+  state = { contacts: [], asc: true, sortBy: "date", checked: [] };
   async componentDidMount() {
     const state = this.state;
-    let reuslt = await httpGetAllRequests();
-    if (reuslt.error) toast.warn(reuslt.error.message);
-    state.requests = reuslt.data;
+    let reuslt = await getContacts();
+    if (reuslt.error) toast.warn("There are no contacts now");
+    state.contacts = reuslt.data;
     this.setState({ state });
   }
   handleSortItems = ({ currentTarget: e }) => {
@@ -30,20 +27,20 @@ class AllRequests extends Component {
     this.setState({ state });
   };
   handleDeleteItem = async ({ currentTarget: e }) => {
-    const result = await httpDeleteRequest(e.id);
+    const result = await deleteContact(e.id);
     if (result.error) toast.warn(result.error.message);
     else {
       const state = this.state;
-      _.remove(state.requests, (s) => s._id === e.id);
+      _.remove(state.contacts, (s) => s._id === e.id);
       this.setState({ state });
     }
   };
   handleDeleteList = async () => {
-    const result = await httpDeleteList(this.state.checked);
+    const result = await deleteContactList(this.state.checked);
     if (result.error) toast.warn(result.error.message);
     else {
       const state = this.state;
-      _.remove(state.requests, (s) => state.checked.includes(s._id));
+      _.remove(state.contacts, (s) => state.checked.includes(s._id));
       state.checked = [];
       this.setState({ state });
     }
@@ -56,17 +53,16 @@ class AllRequests extends Component {
     this.setState({ state });
   };
   render() {
+    const state = this.state;
+    const { words, lang } = getWords();
     let heads = [
       { key: "name", value: "User Name" },
-      { key: "phone", value: "Phone" },
       { key: "email", value: "Email" },
       { key: "date", value: "Date" },
-      { key: "car_id", value: "Request" },
+      { key: "mesage", value: "Contact Message" },
       { key: "select", value: "Select" },
     ];
-    const { lang, words } = getWords();
-    const state = this.state;
-    const requests = sortBy(state.requests, state.sortBy, state.asc);
+    const contacts = sortBy(state.contacts, state.sortBy, state.asc);
     return (
       <React.Fragment>
         <div className="bg-gray pb-5">
@@ -86,14 +82,14 @@ class AllRequests extends Component {
                       <div className="heading-content  col-md-12">
                         <p>
                           <a href="/home">{words["homepage"]} </a> /{" "}
-                          <em> {words["cars"]}</em> /{" "}
-                          <em> {words["car requests"]}</em>
+                          <em> {words["contact"]}</em> /{" "}
+                          <em> {words["requests"]}</em>
                         </p>
                         <div
                           className="row"
                           dir={lang === "eng" ? "ltr" : "rtl"}
                         >
-                          <h2 className="pt-2">{words["car requests"]}</h2>
+                          <h2 className="pt-2">{words["contacts"]}</h2>
                         </div>
                       </div>
                     </div>
@@ -103,7 +99,7 @@ class AllRequests extends Component {
             </div>
           </div>
           <div className="container">
-            {requests && requests.length > 0 ? (
+            {contacts && contacts.length > 0 ? (
               <React.Fragment>
                 <table className="table-hover table-striped overflow-hidden shadow table-responsive-lg">
                   <thead>
@@ -111,40 +107,40 @@ class AllRequests extends Component {
                       {heads &&
                         heads.length > 0 &&
                         heads.map((item) => (
-                          <th className="text-center" key={item.key}>
+                          <th key={item.key} className="text-center">
                             {item.value}{" "}
-                            {item.key !== "car_id" && item.key !== "select" && (
-                              <i
-                                className="btn fa fa-sort cursor-pointer"
-                                aria-hidden="true"
-                                id={item.key}
-                                onClick={this.handleSortItems}
-                              ></i>
-                            )}
+                            {item.key !== "message" &&
+                              item.key !== "select" && (
+                                <i
+                                  className="btn fa fa-sort cursor-pointer"
+                                  aria-hidden="true"
+                                  id={item.key}
+                                  onClick={this.handleSortItems}
+                                ></i>
+                              )}
                           </th>
                         ))}
                     </tr>
                   </thead>
                   <tbody>
-                    {requests.map((item) => {
+                    {contacts.map((item) => {
                       let date = getDate(item.date);
                       return (
-                        <tr key={requests.indexOf(item)}>
+                        <tr key={contacts.indexOf(item)}>
                           <td className="pl-2 text-center">{item.name} </td>
-                          <td>{item.phone}</td>
                           <td className="text-center">{item.email}</td>
                           <td className="text-center">
-                            {" "}
                             {`${date.year}/${date.month}/${date.day}`}
                           </td>
-                          <td className="text-center py-1">
-                            <a
-                              href={`/car/${item.car_id}`}
+                          <td className="py-1 text-center">
+                            <button
                               className="btn add-icon pt-0"
-                              target="blank"
+                              type="button"
+                              data-toggle="modal"
+                              data-target="#ContactItem"
                             >
-                              <i className="fa fa-car" aria-hidden="true"></i>
-                            </a>
+                              <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </button>
                             <button
                               className="btn add-icon bg-danger pt-0 mx-1"
                               onClick={this.handleDeleteItem}
@@ -152,6 +148,7 @@ class AllRequests extends Component {
                             >
                               <i className="fa fa-trash" aria-hidden="true"></i>
                             </button>
+                            <ContactItem item={item} />
                           </td>
                           <td className="text-center">
                             <input
@@ -187,7 +184,7 @@ class AllRequests extends Component {
               <React.Fragment>
                 <div className="col text-center">
                   <i className="fa fa-car gray icon-no-car"></i>
-                  <h4 className="mt-4 gray">No Requests now</h4>
+                  <h4 className="mt-4 gray">No Contacts now</h4>
                 </div>
               </React.Fragment>
             )}
@@ -198,4 +195,4 @@ class AllRequests extends Component {
   }
 }
 
-export default AllRequests;
+export default ContactsList;

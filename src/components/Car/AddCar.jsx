@@ -148,7 +148,6 @@ class AddCar extends Component {
     const state = this.state;
     state.disabled = true;
     this.setState({ state });
-    console.log("handleSaveCar -> state.kilometers", state.kilometers);
     let car = {
       name: state.name,
       model: state.model,

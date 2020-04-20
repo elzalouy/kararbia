@@ -21,7 +21,7 @@ const BlogHeader = ({ title, to }) => {
                       : "heading-content col-md-12 text-right"
                   }
                 >
-                  <p>
+                  <p className={lang === "eng" ? "text-left" : "text-right"}>
                     <a href="/">{words["homepage"]}</a> / <em> {words[to]}</em>
                   </p>
                   <div className="row" dir={lang === "eng" ? "ltr" : "rtl"}>

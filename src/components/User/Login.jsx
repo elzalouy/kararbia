@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 class Login extends Component {
   state = {
     user: { email: "", password: "" },
-    error: ""
+    error: "",
   };
   handleChange = Handle(({ currentTarget: e }) => {
     const state = this.state;
@@ -18,7 +18,7 @@ class Login extends Component {
     const state = this.state;
     const { error } = await login(state.user);
     if (!error) window.location.reload();
-    // if (error.key === "mobile") window.location = "/verifyMobile";
+    if (error.key === "mobile") window.location = "/verifyMobile";
     else toast.warn(error.message);
     this.setState({ state });
   });
@@ -33,7 +33,7 @@ class Login extends Component {
         >
           <div className="container">
             <div className="row">
-              <div className="col-md-12">
+              <div className="col-lg-12">
                 <div
                   className="heading-content-bg wow fadeIn"
                   data-wow-delay="0.75s"
@@ -43,7 +43,7 @@ class Login extends Component {
                     className={lang === "eng" ? "row" : "row text-right"}
                     dir={lang === "eng" ? "ltr" : "rtl"}
                   >
-                    <div className="heading-content col-md-6">
+                    <div className="heading-content col-lg-6">
                       <p>
                         <a href="/home">{words["homepage"]}</a> /{" "}
                         <em> {words["login"]}</em>
@@ -53,7 +53,7 @@ class Login extends Component {
                       </h2>
                     </div>
 
-                    <div className="col-md-4">
+                    <div className="col-lg-4">
                       <div
                         className="search-content wow fadeIn"
                         data-wow-duration="0.75s"
@@ -68,7 +68,7 @@ class Login extends Component {
                         </div>
                         <div className="search-form">
                           <div className="row">
-                            <div className="col-md-12">
+                            <div className="col-lg-12">
                               <div className="input-select">
                                 <input
                                   type="email"
@@ -80,7 +80,7 @@ class Login extends Component {
                                 />
                               </div>
                             </div>
-                            <div className="col-md-12">
+                            <div className="col-lg-12">
                               <div className="input-select mb-5">
                                 <input
                                   type="password"

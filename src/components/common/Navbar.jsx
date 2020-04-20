@@ -99,6 +99,11 @@ class Navbar extends Component {
                                         {words["car requests"]}
                                       </a>
                                     </li>
+                                    <li>
+                                      <a href="/contactList">
+                                        {words["contacts"]}
+                                      </a>
+                                    </li>
                                   </ul>
                                 </li>
                               </React.Fragment>
@@ -120,7 +125,6 @@ class Navbar extends Component {
                         </li>
                       </React.Fragment>
                     )}
-
                     <li>
                       <a href="/home">{words["homepage"]}</a>
                     </li>
@@ -137,7 +141,7 @@ class Navbar extends Component {
                       <a href="/contact">{words["contact us"]}</a>
                     </li>
                     <li>
-                      <a>{words["other"]}</a>
+                      <a>{words["our services"]}</a>
                       <ul>
                         <li>
                           <a>{words["loan car"]}</a>
