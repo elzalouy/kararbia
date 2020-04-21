@@ -23,7 +23,7 @@ const RecentCars = ({ cars, handleDeleteCar }) => {
                 </div>
               </div>
             </div>
-            <div className="row align-items-center align-item-center">
+            <div className="row align-items-center justify-content-center">
               {cars && cars.length > 0 ? (
                 cars.map((item) => (
                   <div className="col-lg-4" key={item._id}>

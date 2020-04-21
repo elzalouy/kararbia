@@ -63,6 +63,9 @@ class AddAdmin extends Component {
         style={{ opacity: 1, zIndex: 9999, transition: "all 0.9s" }}
       >
         <div className="modal-dialog">
+          <div className="text-center w-100 add-icon-overflow">
+            <i className="fa fa-car add-icon" aria-hidden="true"></i>
+          </div>
           <div className="modal-content border-0 brd-0">
             <div
               className="modal-header border-0"

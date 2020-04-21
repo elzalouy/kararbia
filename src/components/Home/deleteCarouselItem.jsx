@@ -22,7 +22,7 @@ const DeleteCarouselItem = ({ handleDeleteItem, loading }) => {
             dir={lang === "eng" ? "ltr" : "rtl"}
           >
             <div className="text-center w-100 add-icon-overflow">
-              <i className="fa fa-car add-icon pt-2" aria-hidden="true"></i>
+              <i className="fa fa-car add-icon" aria-hidden="true"></i>
             </div>
             <div className="col text-center">
               <h5>

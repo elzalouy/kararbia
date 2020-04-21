@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../components/common/Navbar";
-import Reloader from "../components/common/preloader";
 import Services from "./Services";
 import Footer from "../components/common/Footer";
 import AOS from "aos";
@@ -14,16 +13,26 @@ import { admin, authed } from "../httpServices/auth/auth";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "react-toastify/dist/ReactToastify.css";
 import "aos/dist/aos.css";
-import "./custom";
 import "./app.css";
 import "./main.css";
 class App extends Services {
+  componentDidMount() {
+    setTimeout(() => {
+      let element = document.getElementById("preloader");
+      if (element) element.style.display = "none";
+    }, 2000);
+  }
   render() {
     AOS.init({ delay: 500, duration: 1000 });
     return (
       <BrowserRouter>
-        <script src="./custom.js"></script>
-        <Reloader />
+        <div className="preloader" id="preloader">
+          <div className="preloader-bounce">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
         <Navbar />
         <ToastContainer className="mt-3 pt-5 zIndex" />
         {admin() && (

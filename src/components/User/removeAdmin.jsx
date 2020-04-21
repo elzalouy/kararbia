@@ -12,7 +12,7 @@ class RemoveAdmin extends Component {
     searchedAdmins: [],
     removeAdminId: "",
     adminName: "",
-    user: {}
+    user: {},
   };
   async componentDidMount() {
     try {
@@ -37,14 +37,16 @@ class RemoveAdmin extends Component {
     isAdmin(async ({ currentTarget: e }) => {
       const state = this.state;
       state.removeAdminId = e.id;
-      state.user = state.searchedAdmins.find(s => s._id === e.id);
+      state.user = state.searchedAdmins.find((s) => s._id === e.id);
       this.setState({ state });
     })
   );
   handleSearchAdmin = handle(
     isAdmin(async ({ currentTarget: e }) => {
       const state = this.state;
-      let searched = state.searchedAdmins.filter(s => s.name.includes(e.value));
+      let searched = state.searchedAdmins.filter((s) =>
+        s.name.includes(e.value)
+      );
       state.searchedAdmins = searched;
       this.setState({ state });
     })
@@ -65,6 +67,9 @@ class RemoveAdmin extends Component {
       >
         <div className="modal-dialog">
           <div className="modal-content border-0 brd-0">
+            <div className="text-center w-100 add-icon-overflow">
+              <i className="fa fa-car add-icon" aria-hidden="true"></i>
+            </div>
             <div
               className="modal-header border-0"
               dir={lang === "eng" ? "ltr" : "rtl"}
@@ -99,7 +104,7 @@ class RemoveAdmin extends Component {
                   <ul name="searchedAdmins" id="">
                     {this.state.searchedAdmins &&
                       this.state.searchedAdmins.length > 0 &&
-                      this.state.searchedAdmins.map(item => (
+                      this.state.searchedAdmins.map((item) => (
                         <li
                           key={item._id}
                           className="item cursor-pointer p-3 shadow w-100 "

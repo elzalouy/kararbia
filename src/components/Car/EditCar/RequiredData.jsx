@@ -11,8 +11,10 @@ const RequiredData = ({ words, lang, state, handleChange }) => {
       }
       dir={lang === "eng" ? "ltr" : "rtl"}
     >
-      <div className="text-center w-100 add-icon-overflow">
-        <i className="fa fa-car add-icon" aria-hidden="true"></i>
+      <div className=" text-center w-100 add-icon-overflow">
+        <button className="btn add-icon pt-0">
+          <i className=" fa fa-car" aria-hidden="true"></i>
+        </button>
       </div>
       <div className="col-md-5 pt-5">
         <Input
