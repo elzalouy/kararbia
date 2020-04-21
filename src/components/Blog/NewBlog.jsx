@@ -35,7 +35,7 @@ class NewBlog extends Component {
       let index = this.refs.blogarea.selectionStart;
       state.blog = [
         state.blog.slice(0, index),
-        "</br>",
+        "<br>",
         state.blog.slice(index),
       ].join("");
       this.setState({ state });
