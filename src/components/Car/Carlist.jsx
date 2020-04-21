@@ -153,7 +153,7 @@ class CarList extends Component {
             <div className="recent-car-content">
               <div className="row">
                 <div className="col-lg-8">
-                  <div className="row align-items-start">
+                  <div className="row align-items-center justify-content-center">
                     {cars && cars.length > 0 ? (
                       cars.map((item) => (
                         <React.Fragment key={item._id}>

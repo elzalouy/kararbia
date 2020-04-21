@@ -344,8 +344,8 @@ section {
 }
 
 .page-heading {
-    background-image: url(../images/header.jpg);
     background-position: center center;
+    background-image: url(../images/page_heading_bg.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
@@ -501,7 +501,12 @@ section {
 }
 
 .scrolled-header .logo {
-    background-image: url(../images/Logo_size_01.png) !important
+    background-image: url(../images/Logofinal.png) !important
+}
+
+.logo img {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .scrolled-header #cssmenu>ul>li>a {
@@ -550,11 +555,10 @@ section {
 
 .site-header .logo {
     float: left;
-    margin-top: 15px;
-    background-image: url(../images/Logo_size_01.png);
+    margin-top: 5px !important;
     background-repeat: no-repeat;
-    width: 180px;
-    height: 40px
+    width: 120px !important;
+    height: 40px !important;
 }
 
 .site-header #cssmenu {
@@ -821,10 +825,9 @@ only screen and (min-resolution:192dpi) and (max-width:1024px) {
     }
 
     .site-header .logo {
-        float: left;
-        padding: 15px 0px 44px 0px;
-        display: inline-block;
-        background-image: url(../images/Logo_size_01.png)
+
+        padding: 0px 0px 0px 0px !important;
+        display: inline-block !important;
     }
 
     .site-header #cssmenu.align-center>ul {
@@ -1956,9 +1959,6 @@ section.top-slider-features .slider-top-features .owl-dots {
     padding-bottom: 0px
 }
 
-.owl-carousel .owl-item img border-top-right-radius: 5px;
-border-top-left-radius: 5px
-}
 
 .similar-car .car-item {
     margin-bottom: 30px;

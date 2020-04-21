@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import getWords from "../../utils/GetWords.js";
 import handle from "../../middleware/errorHandle";
 import { toast } from "react-toastify";
+import logo from "../../images/Logofinal.png";
 import "./common.css";
 class Navbar extends Component {
   state = { user: null, lang: "", searchWord: "" };
@@ -42,9 +43,9 @@ class Navbar extends Component {
           <header className="site-header wow fadeIn" data-wow-duration="1s">
             <div id="main-header" className="main-header">
               <div className="px-5 clearfix">
-                <div className="logo">
-                  <a href="/"></a>
-                </div>
+                <a className="logo" href="/">
+                  <img src={logo} className="w-100 h-100" alt="" />
+                </a>
                 <div id="cssmenu" className="align-right">
                   <ul>
                     <li className="active">
