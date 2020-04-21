@@ -36,7 +36,7 @@ class EditBlog extends Component {
     if (e.id === "link") state.blog += `<a href=''>type a link</a>`;
     if (e.id === "mark") state.blog += `<mark>Mark Here</mark>`;
     if (e.id === "bold") state.blog += `<pre>Bold Here</pre>`;
-    if (e.id === "space") state.blog += `<br>`;
+    if (e.id === "space") state.blog += `&nbsp;`;
     if (e.id === "gray") state.blog += "<span>Type your text here</span>";
     this.setState({ state });
   };
@@ -52,7 +52,7 @@ class EditBlog extends Component {
       let index = this.refs.blogarea.selectionStart;
       state.blog = [
         state.blog.slice(0, index),
-        "</br>",
+        "<br>",
         state.blog.slice(index),
       ].join("");
       this.setState({ state });
