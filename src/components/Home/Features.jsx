@@ -54,8 +54,10 @@ class Features extends Component {
     this.setState({ state });
   });
   handleGetRedisItem = (key) => {
-    const item = this.state.content.find((s) => s.key === key);
-    return item && item.value ? item.value : "";
+    if (this.state.content && this.state.content.length > 0) {
+      const item = this.state.content.find((s) => s.key === key);
+      return item && item.value ? item.value : "";
+    } else return "";
   };
   handleCancel = () => {
     const state = this.state;

@@ -124,7 +124,6 @@ class Carousel extends Component {
   };
   render() {
     const { carousel } = this.state;
-    if (!carousel) return null;
     return (
       <React.Fragment>
         <div

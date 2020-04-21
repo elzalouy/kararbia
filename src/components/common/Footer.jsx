@@ -62,8 +62,11 @@ class Footer extends Component {
   });
   handleGetRedisItem = (key) => {
     const state = this.state;
-    const item = _.find(state.redis, (s) => s.key === key);
-    return item && item.value ? item.value : "";
+    if (state.redis && state.redis.length > 0) {
+      const item = _.find(state.redis, (s) => s.key === key);
+      return item && item.value ? item.value : "";
+    }
+    return "";
   };
   handleCancel = () => {
     const state = this.state;

@@ -24,22 +24,12 @@ class ContactUs extends Component {
       let email = await getRedisItem("contacts email");
       let description = await getRedisItem("contacts description");
       let arabicDescription = await getRedisItem("contacts description arabic");
-      if (
-        phone.error ||
-        description.error ||
-        email.error ||
-        arabicDescription.error
-      )
-        toast.warn(
-          "something wrong happened while loading contact information"
-        );
-      else {
-        state.ContactRedis.push(phone.data);
-        state.ContactRedis.push(email.data);
+      if (phone && phone.data) state.ContactRedis.push(phone.data);
+      if (email && email.data) state.ContactRedis.push(email.data);
+      if (description && description.data)
         state.ContactRedis.push(description.data);
+      if (arabicDescription && arabicDescription.data)
         state.ContactRedis.push(arabicDescription.data);
-        this.setState({ state });
-      }
     } catch (ex) {
       toast.warn("something wrong happened while loading contact information");
     }
@@ -73,8 +63,10 @@ class ContactUs extends Component {
   });
 
   handleGetRedisItem = (key) => {
-    const item = this.state.ContactRedis.find((s) => s.key === key);
-    return item && item.value ? item.value : "";
+    if (this.state.ContactRedis && this.state.ContactRedis.length > 0) {
+      const item = this.state.ContactRedis.find((s) => s.key === key);
+      return item && item.value ? item.value : "";
+    } else return "";
   };
   handleEdit = handle(({ currentTarget: e }) => {
     const state = this.state;
