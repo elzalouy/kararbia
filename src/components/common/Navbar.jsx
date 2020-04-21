@@ -40,7 +40,10 @@ class Navbar extends Component {
     return (
       <React.Fragment>
         <React.Fragment>
-          <header className="site-header wow fadeIn" data-wow-duration="1s">
+          <header
+            className="site-header wow fadeIn fixed-top"
+            data-wow-duration="1s"
+          >
             <div id="main-header" className="main-header">
               <div className="px-5 clearfix">
                 <a className="logo" href="/">

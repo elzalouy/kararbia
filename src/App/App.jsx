@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "aos/dist/aos.css";
 import "./app.css";
 import "./main.css";
+import "./custom";
 class App extends Services {
   componentDidMount() {
     setTimeout(() => {

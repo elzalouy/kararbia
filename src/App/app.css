@@ -97,6 +97,11 @@
     border-radius: 100% !important;
 }
 
+.fixed-top {
+    top: 0 !important;
+    position: fixed !important;
+}
+
 .fixed-bottom {
     position: relative;
 }
