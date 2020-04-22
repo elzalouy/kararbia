@@ -104,13 +104,13 @@ class SingleCar extends Component {
                               <li>
                                 <i
                                   aria-hidden="true"
-                                  class="fas fa-road f-18"
+                                  className="fas fa-road f-18"
                                 ></i>
                                 <p>{car.kilometers}</p>
                               </li>
                               <li>
                                 <i
-                                  class="fas fa-tachometer-alt f-18"
+                                  className="fas fa-tachometer-alt f-18"
                                   aria-hidden="true"
                                 ></i>
                                 <p>{car.speed}</p>
