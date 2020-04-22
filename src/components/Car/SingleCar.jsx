@@ -9,6 +9,8 @@ import KeyValueItem from "./KeyValueItem.jsx";
 import RequestCar from "./RequestCar.jsx";
 import { httpRequestCar } from "../../httpServices/car/request";
 import { authed } from "../../httpServices/auth/auth.js";
+import cardoor from "../../images/car-door.png";
+import gearImg from "../../images/gear.png";
 class SingleCar extends Component {
   state = { car: {}, loading: false };
   async componentDidMount() {
@@ -101,14 +103,14 @@ class SingleCar extends Component {
                             <ul className="car-info col-lg-6">
                               <li>
                                 <i
-                                  className="flaticon flaticon-road"
                                   aria-hidden="true"
+                                  class="fas fa-road f-18"
                                 ></i>
                                 <p>{car.kilometers}</p>
                               </li>
                               <li>
                                 <i
-                                  className="flaticon flaticon-speed"
+                                  class="fas fa-tachometer-alt f-18"
                                   aria-hidden="true"
                                 ></i>
                                 <p>{car.speed}</p>
@@ -128,11 +130,23 @@ class SingleCar extends Component {
                                 <p>{car.color}</p>
                               </li>
                               <li>
-                                <i className="flaticon flaticon-shift"></i>
+                                <i>
+                                  <img
+                                    src={gearImg}
+                                    alt=""
+                                    className="w-75 h-75"
+                                  />
+                                </i>
                                 <p>{car.transmission}</p>
                               </li>
                               <li>
-                                <i className="flaticon flaticon-car"></i>
+                                <i>
+                                  <img
+                                    src={cardoor}
+                                    alt=""
+                                    className="w-75 h-75"
+                                  />
+                                </i>
                                 <p>{car.doors}</p>
                               </li>
                               <li>
