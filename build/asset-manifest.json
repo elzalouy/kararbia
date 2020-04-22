@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7d77e742.chunk.css",
+    "main.js": "/static/js/main.e900dd02.chunk.js",
+    "runtime-main.js": "/static/js/runtime-main.b790a20e.js",
+    "static/css/2.fd64c8ee.chunk.css": "/static/css/2.fd64c8ee.chunk.css",
+    "static/js/2.2c1ee07b.chunk.js": "/static/js/2.2c1ee07b.chunk.js",
+    "index.html": "/index.html",
+    "precache-manifest.e0d26fe2b0cac22daab4778bd1524163.js": "/precache-manifest.e0d26fe2b0cac22daab4778bd1524163.js",
+    "service-worker.js": "/service-worker.js",
+    "static/js/2.2c1ee07b.chunk.js.LICENSE.txt": "/static/js/2.2c1ee07b.chunk.js.LICENSE.txt",
+    "static/media/404.png": "/static/media/404.a8e6a1d1.png",
+    "static/media/404Bg.jpg": "/static/media/404Bg.5e3d5bfb.jpg",
+    "static/media/main.css": "/static/media/page_heading_bg.9be8c24d.jpg",
+    "static/media/camera.svg": "/static/media/camera.16e35662.svg",
+    "static/media/car.svg": "/static/media/car.2560b73f.svg",
+    "static/media/all.css": "/static/media/fa-solid-900.cdfec5cf.woff",
+    "static/media/phoneimg.svg": "/static/media/phoneimg.9c24f330.svg",
+    "static/media/sms.svg": "/static/media/sms.fa152639.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b790a20e.js",
+    "static/css/2.fd64c8ee.chunk.css",
+    "static/js/2.2c1ee07b.chunk.js",
+    "static/css/main.7d77e742.chunk.css",
+    "static/js/main.e900dd02.chunk.js"
+  ]
+}
